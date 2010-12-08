@@ -18,7 +18,8 @@ alias bclc='echo "10 i 2 o $(date +"%H%M"|cut -b 1,2,3,4 --output-delimiter=" ")
 alias twi='bti -A friends'
 
 # random command from commandlinefu
-alias cmfu='lynx --dump http://www.commandlinefu.com/commands/random/plaintext | grep .'
+#alias cmfu='lynx --dump http://www.commandlinefu.com/commands/random/plaintext | grep .'
+alias cmfu='wget -qO - http://www.commandlinefu.com/commands/random/plaintext | sed -n "1d; /./p"'
 
 # quit terminal
 alias ':q'='exit'

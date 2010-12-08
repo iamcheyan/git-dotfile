@@ -6,9 +6,6 @@ if has('autocmd')
 " 清除所有的自动命令，以方便调试
 au!
 
-" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
-set shellslash
-
 " 对于后缀为“.asm”的文件，认为其是微软的 Macro Assembler 格式
 " autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 endif
@@ -18,15 +15,18 @@ filetype plugin on
 
 " 为特定文件类型载入相关缩进文件
 filetype indent on
-" colorscheme night
-" colorscheme molokai
+"colorscheme molokai
 colorscheme diablo3
+
+" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
+set shellslash
 
 " 语法样式开启
 syntax on
 
-" 设置字体大小
-set guifont=Monaco
+" 设置字体
+" Monaco, Menlo, Panic Sans, Lucida Console
+set guifont=Menlo
 
 " 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
 " set encoding=utf-8
@@ -56,7 +56,7 @@ au BufRead,BufNewFile *.txt setlocal ft=txt
 au BufRead,BufNewFile *  setfiletype txt
 
 " 不需要保持和 vi 非常兼容
-" set nocompatible
+set nocompatible
 
 " 执行 Vim 缺省提供的 .vimrc 文件的示例，包含了打开语法加亮显示等最常用的功能
 " source $VIMRUNTIME/vimrc_example.vim
@@ -69,6 +69,7 @@ set whichwrap+=<,>,h,l
 
 " 在输入命令时列出匹配项目，也就是截图底部的效果
 set wildmenu
+set wildmode=list:longest
 
 " 打开自动缩,继承前一行的缩进注释进
 set autoindent
@@ -78,6 +79,28 @@ set fdm=manual
 
 " 显示行号（否：nonumber）
 set number
+
+" changes line number column to display how far away each line is from the
+" current one (Vim 7.3 feature)
+"set relativenumber
+
+" map leader to comma(default is backslash)
+let mapleader = ","
+" strip all trailing whitespace in the current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
+nnoremap <leader>q gqip
+" CSS properties sorted
+nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
+" open up ~/.vimrc file in a vertically split window
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+" open a new vertical split and switch over to it
+nnoremap <leader>w <C-w>v<C-w>l
+" Rainbows!
+nmap <leader>R :RainbowParenthesesToggle<CR>
+
+" 在终端输出一个相对平滑的更新
+set ttyfast
 
 " 显示光标的坐标
 set ruler
