@@ -146,6 +146,15 @@ function tweet {
  echo "$*" | bti
 }
 
+
+function vasa {
+ if [ ! "$*" ]; then
+   echo 'Nothing to tweet!'
+   return 1
+ fi
+ echo "$* #vasa" | bti
+}
+
 # bti completion
 source ~/.bash_completion.d/bti-bashcompletion
 

@@ -15,6 +15,7 @@ filetype plugin on
 
 " 为特定文件类型载入相关缩进文件
 filetype indent on
+
 "colorscheme molokai
 colorscheme diablo3
 
@@ -273,9 +274,10 @@ vmap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
 nmap <C-s> :w<CR>:echo expand("%f") . " saved."<CR>
 
 " ctrl + n
-imap <C-n> <esc>:enew!<CR>
-nmap <C-n> :enew!<CR>
-vmap <C-n> <esc>:enew!<CR>
+"imap <C-n> <esc>:enew!<CR>
+"nmap <C-n> :enew!<CR>
+"vmap <C-n> <esc>:enew!<CR>
+
 " ctrl + c
 vmap <C-c> "+y
 " 把缺省的Ctrl – X + O 改为 F4
