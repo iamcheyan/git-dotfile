@@ -319,13 +319,12 @@ let g:acp_mappingDriven = 1
 :inoremap ] <c-r>=ClosePair(']')<CR>
 :inoremap < <><ESC>i
 :inoremap > <c-r>=ClosePair('>')<CR>
-
-function ClosePair(char)
-if getline('.')[col('.') - 1] == a:char
-return "\<Right>"
-else
-return a:char
-endif
+function! ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
 endf
 
 
@@ -407,6 +406,9 @@ endif
 " 自动打开或关闭fcitx
 autocmd InsertLeave * set imdisable
 autocmd InsertLeave * set noimdisable
+
+" CSS3 语法支持
+au BufRead,BufNewFile *.css set ft=css syntax=css3
 
 "当.vimrc改变时，自动重载
 autocmd! bufwritepost vimrc source ~/.vimrc
