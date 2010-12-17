@@ -2,13 +2,14 @@
 
 " 判断系统是否具有“自动命令”（autocmd）的支持
 if has('autocmd')
-
-" 清除所有的自动命令，以方便调试
-au!
-
-" 对于后缀为“.asm”的文件，认为其是微软的 Macro Assembler 格式
-" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+    " 清除所有的自动命令，以方便调试
+    au!
+    " autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 endif
+
+" Pathogen 插件管理
+filetype off
+call pathogen#runtime_append_all_bundles()
 
 " 载入文件类型插件
 filetype plugin on
@@ -85,35 +86,19 @@ set number
 " current one (Vim 7.3 feature)
 "set relativenumber
 
-" map leader to comma(default is backslash)
-let mapleader = ","
-" strip all trailing whitespace in the current file
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
-nnoremap <leader>q gqip
-" CSS properties sorted
-nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
-" open up ~/.vimrc file in a vertically split window
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-" open a new vertical split and switch over to it
-nnoremap <leader>w <C-w>v<C-w>l
-" Rainbows!
-nmap <leader>R :RainbowParenthesesToggle<CR>
-
 " 在终端输出一个相对平滑的更新
 set ttyfast
 
 " 显示光标的坐标
 set ruler
 
-" 不自动换行(否：wrap)
-set nowrap
+" Backups
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap//   " swap files
+set backup                        " enable backups
+"set nobackup
+"set noswapfile
 
-" 缺省不产生备份文件
-set nobackup
-
-" 不要生成swap文件
-set noswapfile
 " set bufhidden=hide
 
 " 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
@@ -160,7 +145,11 @@ set showcmd
 
 " 设置窗口大小
 set lines=30
-set columns=100
+set textwidth=79
+set columns=85
+
+" 不自动换行(否：wrap)
+set nowrap
 
 " 初始窗口的位置
 winpos 252 42
@@ -193,23 +182,11 @@ set guioptions-=m
 " 隐藏工具栏
 set guioptions-=T
 
-" 设置F2呼出菜单栏
-function! ToggleMenuBar()
-    echo "ToggleMenuBar"
-    if &guioptions =~# 'm'
-        set guioptions-=m
-    else
-        set guioptions+=m
-    endif
-endfunction
-imap <silent> <C-F12> <C-O>:call ToggleMenuBar()<CR>
-map <silent> <C-F12> :call ToggleMenuBar()<CR>
-
 " 设置工作目录
 function! CHANGE_CURR_DIR()
-let _dir = expand("%:p:h")
-exec "cd " . _dir
-unlet _dir
+    let _dir = expand("%:p:h")
+    exec "cd " . _dir
+    unlet _dir
 endfunction
 autocmd BufEnter * call CHANGE_CURR_DIR()
 
@@ -252,9 +229,8 @@ nmap <silent> <C-down> <C-W><down>
 
 
 " Textmate alt-p & alt+l {{{
-inoremap <M-p> params[:]<left>
-inoremap <M-j> session[:]<left>
-inoremap <M-l> <space>=><space>
+inoremap <M-k> ->
+inoremap <M-j> <space>=><space>
 inoremap <M->> <%=<space><space>%><left><left><left>
 " shift+alt+l 选择行
 inoremap <M-L> <C-O><home>v<S-end>
@@ -306,19 +282,73 @@ vmap <C-o> <esc>:e
 nmap <C-o> :e
 " }}}
 
+" map leader to comma(default is backslash)
+let mapleader = ","
+
+" strip all trailing whitespace in the current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
+nnoremap <leader>q gqip
+
+" CSS properties sorted
+nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
+
+" Edit vim stuff.
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
+
+" open a new vertical split and switch over to it
+nnoremap <leader>w <C-w>v<C-w>l
+
+" Rainbows!
+nmap <leader>R :RainbowParenthesesToggle<CR>
+
+" Ack
+map <leader>a :Ack 
+
+" Yankring
+nnoremap <silent> <leader>y :YRShow<cr>
+
+" Camel Case Motion
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " 自动完成设置 禁止在插入模式移动的时候出现 Complete 提示
 let g:acp_mappingDriven = 1
 
-" 括号补全
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {}<ESC>i
-:inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap < <><ESC>i
-:inoremap > <c-r>=ClosePair('>')<CR>
+" 括号和引号补全 {{{
+"inoremap ( ()<ESC>i
+inoremap ( <c-r>=OpenPair('(')<CR>
+inoremap ) <c-r>=ClosePair(')')<CR>
+"inoremap { {}<ESC>i
+inoremap { <c-r>=OpenPair('{')<CR>
+inoremap } <c-r>=ClosePair('}')<CR>
+"inoremap [ []<ESC>i
+inoremap [ <c-r>=OpenPair('[')<CR>
+inoremap ] <c-r>=ClosePair(']')<CR>
+"inoremap < <><ESC>i
+inoremap < <c-r>=OpenPair('<')<CR>
+inoremap > <c-r>=ClosePair('>')<CR>
+function! OpenPair(char)
+    let PAIRs = {
+                \ '{' : '}',
+                \ '[' : ']',
+                \ '(' : ')',
+                \ '<' : '>'
+                \}
+    let ol = len(split(getline('.'), a:char, 1))-1
+    let cl = len(split(getline('.'), PAIRs[a:char], 1))-1
+    if ol==cl
+        return a:char . PAIRs[a:char] . "\<Left>"
+    else
+        return a:char
+    endif
+endfunction
 function! ClosePair(char)
     if getline('.')[col('.') - 1] == a:char
         return "\<Right>"
@@ -327,34 +357,74 @@ function! ClosePair(char)
     endif
 endf
 
+inoremap ' <c-r>=CompleteQuote("'")<CR>
+inoremap " <c-r>=CompleteQuote('"')<CR>
+function! CompleteQuote(quote)
+    let ql = len(split(getline('.'), a:quote, 1))-1
+    " a:quote length is odd.
+    if (ql%2)==1
+        return a:quote
+    elseif getline('.')[col('.') - 1] == a:quote
+        return "\<Right>"
+    else
+        return a:quote . a:quote . "\<Left>"
+    endif
+endfunction
+" }}}
+
+" 自动打开或关闭fcitx
+autocmd InsertLeave * set imdisable
+autocmd InsertLeave * set noimdisable
+
+" CSS3 语法支持
+au BufRead,BufNewFile *.css set ft=css syntax=css3
+
+au BufNewFile,BufRead *.m*down set filetype=markdown
+au BufNewFile,BufRead *.m*down nnoremap <leader>1 yypVr=
+au BufNewFile,BufRead *.m*down nnoremap <leader>2 yypVr-
+au BufNewFile,BufRead *.m*down nnoremap <leader>3 I### <ESC>
+
+au BufNewFile,BufRead *.vim set foldmethod=marker
+
+" Make selecting inside an HTML tag less dumb
+nnoremap Vit vitVkoj
+nnoremap Vat vatV
 
 " 检查当前文件代码语法(php){{{
 function! CheckSyntax()
- if &filetype!="php"
-  echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
-  return
- endif
- if &filetype=="php"
-  " Check php syntax
-  setlocal makeprg=\"php\"\ -l\ -n\ -d\ html_errors=off
-  " Set shellpipe
-  setlocal shellpipe=>
-  " Use error format for parsing PHP error output
-  setlocal errorformat=%m\ in\ %f\ on\ line\ %l
- endif
- execute "silent make %"
- set makeprg=make
- execute "normal :"
- execute "copen"
+    if &filetype!="php"
+        echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
+        return
+    endif
+    if &filetype=="php"
+        " Check php syntax
+        setlocal makeprg=\"php\"\ -l\ -n\ -d\ html_errors=off
+        " Set shellpipe
+        setlocal shellpipe=>
+        " Use error format for parsing PHP error output
+        setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+    endif
+    execute "silent make %"
+    set makeprg=make
+    execute "normal :"
+    execute "copen"
 endfunction
-au filetype php map <C-F6> :call CheckSyntax()<CR>
+au filetype php map <F6> :call CheckSyntax()<CR>
 " }}}
 
 " php字典补全
-au FileType php setlocal dict+=$VIM/vimfiles/dict/php_funclist.txt
+if has("win32")
+    au FileType php setlocal dict+=$VIM/vimfiles/dict/php_funclist.txt
+else
+    au FileType php setlocal dict+=~/.vim/dict/php_funclist.txt
+endif
 
 " Python 补全
-let g:pydiction_location = '$VIM/vimfiles/ftplugin/pydiction/complete-dict'
+if has("win32")
+    let g:pydiction_location = '$VIM/vimfiles/ftplugin/pydiction/complete-dict'
+else
+    let g:pydiction_location = '~/.vim/ftplugin/pydiction/complete-dict'
+endif
 let g:pydiction_menu_height = 20
 
 " 自动在退出编辑模式（InsertLeave）时保存 php 和 python 文件
@@ -384,10 +454,6 @@ let g:user_zen_settings = {
 let g:user_zen_expandabbr_key = '<c-e>'    "设置为ctrl+e展开
 let g:use_zen_complete_tag = 1
 
-" Viki
-au BufRead,BufNewFile *.viki set ft=viki
-let g:vikiUseParentSuffix = 1
-
 " gVim Fullscreen
 if has('gui_running') && has("win32")
     map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
@@ -402,13 +468,6 @@ vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR>
 if has('gui_running') && has("win32")
     cd D:\360data\重要数据\桌面
 endif
-
-" 自动打开或关闭fcitx
-autocmd InsertLeave * set imdisable
-autocmd InsertLeave * set noimdisable
-
-" CSS3 语法支持
-au BufRead,BufNewFile *.css set ft=css syntax=css3
 
 "当.vimrc改变时，自动重载
 autocmd! bufwritepost vimrc source ~/.vimrc

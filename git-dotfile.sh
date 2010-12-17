@@ -1,6 +1,6 @@
 #!/bin/bash
-mkdir ~/git-dotfile
-cd ~/git-dotfile
+mkdir ~/.git-dotfile
+cd ~/.git-dotfile
 git init
 mv ~/.vim  vim
 mv ~/.vimrc vimrc

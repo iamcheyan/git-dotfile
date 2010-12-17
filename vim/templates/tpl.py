@@ -1,7 +1,7 @@
-#!/usr/bin/python
-# -*- coding:utf-8 -*-
+#!/usr/bin/env python
+# vim:fileencoding=utf-8
 # @Author: <T_AUTHOR> <<T_AUTHOR_EMAIL>>
-# @name: <T_FILENAME>
+# @Name: <T_FILENAME>
 # @Date: <T_CREATE_DATE>
 
 <T_CURSOR>
