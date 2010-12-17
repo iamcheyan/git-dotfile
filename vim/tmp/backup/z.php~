@@ -1,0 +1,30 @@
+<?php
+
+echo "<pre>";
+
+$curl = curl_init();
+
+curl_setopt($curl, CURLOPT_URL, 'http://www.douban.com/');
+
+var_dump($curl) . "\n--- CURLOPT_URL --- \n";
+
+curl_setopt($curl, CURLOPT_HEADER, 1);
+
+var_dump($curl) . "\n--- CURLOPT_HEADER --- \n";
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+var_dump($curl) . "\n--- CURLOPT_RETURNTRANSFER ---\n";
+
+$data = curl_exec($curl);
+
+var_dump($data) . "\n--- data ---\n";
+
+curl_close($curl);
+
+var_dump($curl);
+var_dump
+
+echo "</pre>";
+
+?>
