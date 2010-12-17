@@ -10,6 +10,7 @@ endif
 " Pathogen 插件管理
 filetype off
 call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 " 载入文件类型插件
 filetype plugin on
