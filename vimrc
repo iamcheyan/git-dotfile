@@ -278,9 +278,6 @@ nnoremap <C-y> <C-R>
 " ctrl + v
 nnoremap <C-v> "+gp
 inoremap <C-v> <C-O>"+gp
-" ctrl + f
-imap <C-f> <esc>:/
-nmap <C-f> :/
 " ctrl + r
 imap <C-h> <esc>:%s/
 vmap <C-h> <esc>:%s/
@@ -398,6 +395,12 @@ au BufNewFile,BufRead *.vim set foldmethod=marker
 " Make selecting inside an HTML tag less dumb
 nnoremap Vit vitVkoj
 nnoremap Vat vatV
+" ci[ 删除一对 [] 中的所有字符并进入插入模式
+" ci( 删除一对 () 中的所有字符并进入插入模式
+" ci< 删除一对 <> 中的所有字符并进入插入模式
+" ci{ 删除一对 {} 中的所有字符并进入插入模式
+" cit 删除一对 HTML/XML 的标签内部的所有字符并进入插入模式
+" ci” ci’ ci` 删除一对引号字符 (” 或 ‘ 或 `) 中所有字符并进入插入模式
 
 " 检查当前文件代码语法(php){{{
 function! CheckSyntax()
