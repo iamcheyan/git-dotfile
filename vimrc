@@ -403,6 +403,10 @@ nnoremap Vat vatV
 " cit 删除一对 HTML/XML 的标签内部的所有字符并进入插入模式
 " ci” ci’ ci` 删除一对引号字符 (” 或 ‘ 或 `) 中所有字符并进入插入模式
 
+" 让选中内容变成搜索项
+vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
+vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
+
 " 检查当前文件代码语法(php){{{
 function! CheckSyntax()
     if &filetype!="php"
@@ -473,9 +477,8 @@ if has('gui_running') && has("win32")
     imap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 endif
 
-" 让选中内容变成搜索项
-vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
-vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
+" Ack can be used as a replacement for 99% of the uses of grep.
+let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " Windows 默认保存位置
 if has('gui_running') && has("win32")
