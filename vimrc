@@ -148,8 +148,8 @@ set lines=30
 set textwidth=79
 set columns=85
 
-" 不自动换行(否：wrap)
-set nowrap
+" 自动换行(否：nowrap)
+set wrap
 
 " 初始窗口的位置
 winpos 252 42
@@ -227,6 +227,15 @@ imap <silent> <C-down> <esc><C-W><down>
 vmap <silent> <C-down> <esc><C-W><down>
 nmap <silent> <C-down> <C-W><down>
 
+" Use the damn hjkl keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+
+" And make them fucking work, too.
+nnoremap j gj
+nnoremap k gk
 
 " Textmate alt-p & alt+l {{{
 inoremap <M-k> ->
