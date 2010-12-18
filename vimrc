@@ -12,6 +12,8 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
+"call system("notify-send " . v:version)
+
 " 载入文件类型插件
 filetype plugin on
 
@@ -85,7 +87,11 @@ set number
 
 " changes line number column to display how far away each line is from the
 " current one (Vim 7.3 feature)
-"set relativenumber
+set relativenumber
+
+" create <FILENAME>.un~ files whenever you edit a file, undo previous actions
+" even after you close and reopen a file.
+set undofile
 
 " 在终端输出一个相对平滑的更新
 set ttyfast
