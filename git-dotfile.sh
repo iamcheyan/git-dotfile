@@ -18,7 +18,9 @@ echo "\t\tln -fs \`pwd\`/vimperator ~/.vimperator/" >> Makefile
 echo "\t\tln -fs \`pwd\`/vimperatorrc ~/.vimperatorrc" >> Makefile
 echo "\t\tln -fs \`pwd\`/vromerc ~/.vromerc" >> Makefile
 echo "\t\tln -fs \`pwd\`/bashrc ~/.bashrc" >> Makefile
+echo "\t\tln -fs \`pwd\`/inputrc ~/.inputrc" >> Makefile
 echo "\t\tln -fs \`pwd\`/bash_aliases ~/.bash_aliases" >> Makefile
+echo "\t\tln -fs \`pwd\`/touchpad.sh ~/.touchpad.sh" >> Makefile
 
 # initialize your dotfile env
 make init
