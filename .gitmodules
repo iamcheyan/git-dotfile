@@ -40,3 +40,6 @@
 [submodule "vim/bundle/manpageview"]
 	path = vim/bundle/manpageview
 	url = git://github.com/vim-scripts/ManPageView.git
+[submodule "vim/bundle/cscope_macros"]
+	path = vim/bundle/cscope_macros
+	url = git://github.com/vim-scripts/cscope_macros.vim.git
