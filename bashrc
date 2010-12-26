@@ -25,7 +25,7 @@ export PATH="$PATH:/opt/lampp/bin:/var/lib/gems/1.8/bin";
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
-HISTIGNORE="ls:pwd:cd:clear:vim:fg:bg:jobs:top"
+HISTIGNORE="ls:pwd:cd:clear:vim:gvim:fg:bg:jobs:top"
 
 # append to the history file, don't overwrite it
 shopt -s histappend

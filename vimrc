@@ -92,6 +92,7 @@ set relativenumber
 " create <FILENAME>.un~ files whenever you edit a file, undo previous actions
 " even after you close and reopen a file.
 set undofile
+set undodir=~/.vim/tmp/undo// " undos
 
 " 在终端输出一个相对平滑的更新
 set ttyfast
@@ -205,6 +206,10 @@ imap <silent> <F8> <esc>:BufExplorer<CR>
 nmap <silent> <F8> :BufExplorer<CR>
 " }}}
 
+" Taglist shortcuts
+imap <silent> <F9> <esc>:TlistToggle<CR>
+nmap <silent> <F9> :TlistToggle<CR>
+
 " CTRL-[ and CTRL-] indent and unindent blocks {{{
 "  inoremap <C-[> <C-O><LT><LT>
 " inoremap <C-]> <C-O><GT><GT>
@@ -283,8 +288,8 @@ nnoremap <C-z> u
 inoremap <C-y> <C-O><C-R>
 nnoremap <C-y> <C-R>
 " ctrl + v
-nnoremap <C-v> "+gp
-inoremap <C-v> <C-O>"+gp
+nnoremap <C-v> "+gP
+inoremap <C-v> <C-O>"+gP
 " ctrl + r
 imap <C-h> <esc>:%s/
 vmap <C-h> <esc>:%s/
@@ -322,6 +327,10 @@ map <leader>a :Ack
 
 " Yankring
 nnoremap <silent> <leader>y :YRShow<cr>
+
+" CommandT
+nmap <silent> <leader>t :CommandT<CR>
+
 
 " Camel Case Motion
 omap <silent> iw <Plug>CamelCaseMotion_iw
@@ -485,6 +494,17 @@ endif
 
 " Ack can be used as a replacement for 99% of the uses of grep.
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+" 如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Show_One_File = 1
+" 不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1
+
+" PHPDoc conform document generator
+au FileType php source ~/.vim/plugin/php-doc.vim 
+au FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
+au FileType php nnoremap <C-P> :call PhpDocSingle()<CR> 
+au FileType php vnoremap <C-P> :call PhpDocRange()<CR>
 
 " Windows 默认保存位置
 if has('gui_running') && has("win32")

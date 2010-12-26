@@ -43,3 +43,6 @@
 [submodule "vim/bundle/cscope_macros"]
 	path = vim/bundle/cscope_macros
 	url = git://github.com/vim-scripts/cscope_macros.vim.git
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
+	url = git://github.com/vim-scripts/Command-T.git
