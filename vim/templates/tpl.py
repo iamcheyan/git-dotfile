@@ -4,4 +4,3 @@
 # @Name: <T_FILENAME>
 # @Date: <T_CREATE_DATE>
 
-<T_CURSOR>

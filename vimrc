@@ -160,7 +160,7 @@ set columns=85
 set wrap
 
 " 初始窗口的位置
-winpos 252 42
+"winpos 252 42
 
 " 行间距，如果默认值太小，代码会非常纠结
 set linespace=4
