@@ -4,7 +4,7 @@
 "http://pchu.blogbus.com/logs/36870556.html
 
 "设置路径
-set runtimepath=/home/vayn/.vimperator
+set runtimepath=~/.vimperator
 
 "Mappings
 "先把麻烦的东西拿掉
@@ -55,7 +55,7 @@ inoremap <C-x> <C-v><C-x>
 "Options
 set guioptions=TBr
 set titlestring='Serene Paraselene'
-set popups=2
+set popups=resized
 set complete=lfbs
 
 "PassThrough gmail and greader
@@ -69,13 +69,6 @@ noremap <C-y> <C-v><C-y>
 
 "还原 ctrl-l 跳到标签栏的快捷键
 noremap <C-l> <C-v><C-l>
-
-"Commands
-"noimg可以减少流量，nojs用于调控一些不听话的网页
-command noimg set! permissions.default.image=2
-command ysimg set! permissions.default.image=1
-command nojs set! javascript.enabled=false
-command ysjs set! javascript.enabled=true
 
 "齐全的next和previous
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
@@ -99,4 +92,3 @@ map <C-w> :js wiki_selected_text() <CR>
 
 "google-search.js
 map s :gsearch!<Space>
-
