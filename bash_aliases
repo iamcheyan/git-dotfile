@@ -14,8 +14,8 @@ alias dct='dictcn.py'
 # binary clock
 alias bclc='echo "10 i 2 o $(date +"%H%M"|cut -b 1,2,3,4 --output-delimiter=" ") f"|dc|tac|xargs printf "%04d\n"|tr "01" ".*"'
 
-# tweet timeline
-alias twi='bti -A friends'
+# copy line in cli
+alias copy='xsel -b -i'
 
 # random command from commandlinefu
 #alias cmfu='lynx --dump http://www.commandlinefu.com/commands/random/plaintext | grep .'

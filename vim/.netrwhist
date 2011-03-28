@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/vayn/.mutt'
-let g:netrw_dirhist_2='/home/vayn/sr23abbr'
-let g:netrw_dirhist_3='/opt/lampp/htdocs'
-let g:netrw_dirhist_4='/home/vayn/begin_err'
-let g:netrw_dirhist_5='/home/vayn/.git-dotfile/vim/bundle/snipmate/snippets'
-let g:netrw_dirhist_6='/home/vayn/xml_parse'
-let g:netrw_dirhist_7='/home/vayn/news_reader'
-let g:netrw_dirhist_8='/home/vayn/socket_chat'
-let g:netrw_dirhist_9='/home/vayn/remote_edit'
+let g:netrw_dirhist_cnt =0

@@ -131,14 +131,16 @@ function! TemplateReplTags()
 	else
 		let s:fn = expand("%:t")
 	endif
-	sil! execute sl.','.el."s/<T_FILENAME>/".s:fn."/g"
-	unlet s:fn
+    sil! execute sl.','.el."s/<T_FILENAME>/".s:fn."/g"
+    unlet s:fn
+    sil! execute sl.','.el."s/<T_FILEPATH>/".escape(expand("%:p"), '/')."/g"
 	let s:curpos = search("<T_CURSOR>", 'W')
 	if !empty(s:curpos)
 		call cursor(s:curpos)
-		sil! execute "normal df>"
-		sil! execute "startinsert"
+        sil! execute "normal df>"
+		" sil! execute "startinsert"
 	endif
+    unlet s:curpos
+    sil! execute sl.','.el."s/<T_CURSOR>/"."/g"
+    sil! execute '$-1,$s/\n\n//g'
 endfunction
-
-

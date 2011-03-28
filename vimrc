@@ -153,11 +153,11 @@ set showcmd
 
 " 设置窗口大小
 set lines=30
-set textwidth=79
+" set textwidth=79
 set columns=85
 
 " 自动换行(否：nowrap)
-set wrap
+set wrap display=lastline
 
 " 初始窗口的位置
 "winpos 252 42
@@ -289,7 +289,7 @@ inoremap <C-y> <C-O><C-R>
 nnoremap <C-y> <C-R>
 " ctrl + v
 nnoremap <C-v> "+gP
-inoremap <C-v> <C-O>"+gP
+"inoremap <C-v> <C-O>"+gP
 " ctrl + r
 imap <C-h> <esc>:%s/
 vmap <C-h> <esc>:%s/
@@ -499,6 +499,9 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 let Tlist_Show_One_File = 1
 " 不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow = 1
+
+" neocomplcache ¿?¿?
+let g:neocomplcache_enable_at_startup = 1
 
 " PHPDoc conform document generator
 au FileType php source ~/.vim/plugin/php-doc.vim 
