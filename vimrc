@@ -22,6 +22,7 @@ filetype indent on
 
 "colorscheme molokai
 if has('gui_running')
+    set background=dark
     colorscheme solarized
 else
     colorscheme diablo3
