@@ -1,4 +1,6 @@
+.gitignore
 Makefile
 *~
 *.swp
 tags
+/vimperator/info/
