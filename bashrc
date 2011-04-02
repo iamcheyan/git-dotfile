@@ -153,7 +153,7 @@ function vasa {
         echo 'Nothing to tweet!'
         return 1
     fi
-    gd $*
+    # gd $*
     echo "$* #vasa" | bti
 }
 

@@ -21,7 +21,11 @@ filetype plugin on
 filetype indent on
 
 "colorscheme molokai
-colorscheme diablo3
+if has('gui_running')
+    colorscheme solarized
+else
+    colorscheme diablo3
+endif
 
 " Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -141,8 +145,8 @@ if has("win32")
 else
   set fileencoding=utf-8
 endif
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
+" source $VIMRUNTIME/delmenu.vim
+" source $VIMRUNTIME/menu.vim
 language messages zh_CN.utf-8
 
 " 设置文件格式为unix
@@ -500,8 +504,28 @@ let Tlist_Show_One_File = 1
 " 不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow = 1
 
-" neocomplcache ¿?¿?
+
+" Use neocomplcache
 let g:neocomplcache_enable_at_startup = 1
+
+" Use smartcase
+let g:neocomplcache_enable_smart_case = 1
+
+" AutoComplPop like behavior.
+let g:neocomplcache_enable_auto_select = 1
+
+" Recommended key-mappings.
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#smart_close_popup()
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
 
 " PHPDoc conform document generator
 au FileType php source ~/.vim/plugin/php-doc.vim 
