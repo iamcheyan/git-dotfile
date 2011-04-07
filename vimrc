@@ -21,12 +21,12 @@ filetype plugin on
 filetype indent on
 
 "colorscheme molokai
-if has('gui_running')
-    set background=dark
-    colorscheme solarized
-else
+" if has('gui_running')
+    " set background=dark
+    " colorscheme solarized
+" else
     colorscheme diablo3
-endif
+" endif
 
 " Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -465,8 +465,8 @@ endif
 let g:pydiction_menu_height = 20
 
 " 自动在退出编辑模式（InsertLeave）时保存 php 和 python 文件
-au InsertLeave *.php write
-au InsertLeave *.py write
+" au InsertLeave *.php write
+" au InsertLeave *.py write
 
 " 开启 python 语法高亮
 let python_highlight_all = 1
