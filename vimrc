@@ -258,19 +258,27 @@ nnoremap k gk
 inoremap <M-k> ->
 inoremap <M-j> <space>=><space>
 inoremap <M->> <%=<space><space>%><left><left><left>
+
 " shift+alt+l 选择行
 inoremap <M-L> <C-O><home>v<S-end>
 nnoremap <M-L> <home>v<S-end>
+
 " shift+alt+k 删除行
 inoremap <M-K> <C-O><home>v<S-end><del>
 nnoremap <M-K> <home>v<s-end><del>
+
 " ctrl + c,a,v,x,z
 nnoremap <BS> d
+
 " ctrl + a
 noremap <C-A> ggVG
 inoremap <C-A> <C-O>ggVG
-" ctrl + s
 
+" 使用 colorpicker 程序获取颜色值(hex/rgba)
+inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
+nmap cac :call Lilydjwg_changeColor()<CR>
+
+" ctrl + s
 imap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
 vmap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
 nmap <C-s> :w<CR>:echo expand("%f") . " saved."<CR>
