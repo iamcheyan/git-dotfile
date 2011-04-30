@@ -21,12 +21,12 @@ filetype plugin on
 filetype indent on
 
 "colorscheme molokai
-" if has('gui_running')
-    " set background=dark
-    " colorscheme solarized
-" else
+if has('gui_running')
     colorscheme diablo3
-" endif
+else
+    set background=dark
+    colorscheme solarized
+endif
 
 " Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -42,9 +42,9 @@ set guifont=Menlo
 " set encoding=utf-8
 
 " 设置缩进
-set sw=4
-set ts=4
-set softtabstop=4
+set sw=2
+set ts=2
+set softtabstop=2
 set expandtab
 
 " 设置模板

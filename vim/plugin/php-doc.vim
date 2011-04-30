@@ -79,7 +79,7 @@ let g:pdv_cfg_Type = "mixed"
 let g:pdv_cfg_Package = ""
 let g:pdv_cfg_Version = "$id$"
 let g:pdv_cfg_Author = "Vincent \"Vayn\" T. <vayn@vayn.de>"
-let g:pdv_cfg_Copyright = "2009-2010 @Vayn.de"
+let g:pdv_cfg_Copyright = "2010-2011 @Vayn.de"
 let g:pdv_cfg_License = "PHP Version 3.0 {@link http://www.php.net/license/3_0.txt}"
 
 let g:pdv_cfg_ReturnVal = "void"

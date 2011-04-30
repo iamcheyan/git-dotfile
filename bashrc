@@ -172,9 +172,13 @@ mkdir -p -m 0700 /dev/cgroup/cpu/user/$$ > /dev/null 2>&1
 echo $$ > /dev/cgroup/cpu/user/$$/tasks
 echo "1" > /dev/cgroup/cpu/user/$$/notify_on_release
 fi
+
 ### chsdir start ###
 . $HOME/bin/chs_completion
 PATH=$PATH:$HOME/bin
 #export CHSDIR="{'n':'l'}"
 complete -o filenames -F _filedir_xspec file
 ### chsdir finish. ###
+
+# autojump
+source /etc/profile.d/autojump.bash
