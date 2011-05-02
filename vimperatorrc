@@ -1,22 +1,9 @@
 "设置路径
 set runtimepath=~/.vimperator
 
-"Mappings
-"先把麻烦的东西拿掉
-map A <Nop>
-map <C-q> <Nop>
-map <C-o> <Nop>
-map <C-i> <Nop>
-map <C-z> <Nop>
-map <C-p> <Nop>
-
-"再把页面浏览、标签页跳转和历史跳转绑定到顺手的地方，右手万岁！
+"把页面浏览、标签页跳转和历史跳转绑定到顺手的地方
 noremap j 3j
 noremap k 3k
-"noremap j <C-d>
-"noremap k <C-u>
-"noremap J 2j
-"noremap K 2k
 noremap h gT
 noremap l gt
 noremap H h
@@ -30,28 +17,28 @@ map <C-.> :tabm<CR>
 
 "想办法再减少按键频率
 noremap s <C-c>
-noremap S gf
 noremap <C-n> gb
 noremap <C-N> gB
 
-"解决全选、复制、粘帖、剪切和撤销与vimperator冲突的问题
-noremap <C-V> <C-v>
-noremap <C-Z> <C-z>
-noremap <C-c> <C-v><C-c>
-noremap <C-a> <C-v><C-a>
-cnoremap <C-c> <C-v><C-c>
-cnoremap <C-v> <C-v><C-v>
-cnoremap <C-x> <C-v><C-x>
-inoremap <C-a> <C-v><C-a>
-inoremap <C-c> <C-v><C-c>
-inoremap <C-v> <C-v><C-v>
-inoremap <C-x> <C-v><C-x>
+" 把剪贴板的URL贴至新标签上
+noremap pp P
+" 把选中的URL直接跳转至新标签
+noremap po YP
+" 取消载入
+map <C-d> :stop<CR>
 
 "Options
 set toolbars=none,tabs,bookmarks,navigation
 set titlestring='Serene Paraselene'
 set popups=resized
 set complete=lfbs
+
+"" 加载plugins目录下的脚本
+loadplugins
+
+"" Gmail和Greader的后台打开标签设置
+autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=false
+autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=true
 
 "PassThrough gmail and greader
 autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|chrome\:\/\/brief\/content\/brief\.xul).*/.test(buffer.URL)
@@ -69,5 +56,3 @@ noremap <C-l> <C-v><C-l>
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
 set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
 
-"google-search.js
-map s :gsearch!<Space>

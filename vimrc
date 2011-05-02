@@ -1,26 +1,26 @@
-" Last Change: 2010-10-13 20:17:06
+"" Last Change: 2010-10-13 20:17:06
 
-" 判断系统是否具有“自动命令”（autocmd）的支持
+"" 判断系统是否具有“自动命令”（autocmd）的支持
 if has('autocmd')
     " 清除所有的自动命令，以方便调试
     au!
     " autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 endif
 
-" Pathogen 插件管理
+"" Pathogen 插件管理
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-"call system("notify-send " . v:version)
+""call system("notify-send " . v:version)
 
-" 载入文件类型插件
+"" 载入文件类型插件
 filetype plugin on
 
-" 为特定文件类型载入相关缩进文件
+"" 为特定文件类型载入相关缩进文件
 filetype indent on
 
-"colorscheme molokai
+""colorscheme molokai
 if has('gui_running')
     colorscheme diablo3
 else
@@ -28,26 +28,26 @@ else
     colorscheme solarized
 endif
 
-" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
+"" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
 
-" 语法样式开启
+"" 语法样式开启
 syntax on
 
-" 设置字体
-" Monaco, Menlo, Panic Sans, Lucida Console
+"" 设置字体
+"" Monaco, Menlo, Panic Sans, Lucida Console
 set guifont=Menlo
 
-" 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
-" set encoding=utf-8
+"" 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
+"" set encoding=utf-8
 
-" 设置缩进
-set sw=2
-set ts=2
-set softtabstop=2
+"" 设置缩进
+set sw=4
+set ts=4
+set softtabstop=4
 set expandtab
 
-" 设置模板
+"" 设置模板
 let g:template_load = 1
 let g:template_tags_replacing = 1
 let g:T_AUTHOR = "Vayn a.k.a. VT"
@@ -55,90 +55,90 @@ let g:T_AUTHOR_EMAIL = "vayn@vayn.de"
 let g:T_AUTHOR_WEBSITE = "http://elnode.com"
 let g:T_DATE_FORMAT = "%c"
 
-" history文件中需要记录的行数
+"" history文件中需要记录的行数
 set history=100
 
-" 带有如下符号的单词不要被换行分割
+"" 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
 
-" 高亮显示普通txt文件（需要txt.vim脚本）
+"" 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile *.txt setlocal ft=txt
 au BufRead,BufNewFile *  setfiletype txt
 
-" 不需要保持和 vi 非常兼容
+"" 不需要保持和 vi 非常兼容
 set nocompatible
 
-" 执行 Vim 缺省提供的 .vimrc 文件的示例，包含了打开语法加亮显示等最常用的功能
-" source $VIMRUNTIME/vimrc_example.vim
+"" 执行 Vim 缺省提供的 .vimrc 文件的示例，包含了打开语法加亮显示等最常用的功能
+"" source $VIMRUNTIME/vimrc_example.vim
 
-" 使backspace正常处理indent, eol, start等
+"" 使backspace正常处理indent, eol, start等
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 
-" 允许backspace和光标键跨越行边界
+"" 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
 
-" 在输入命令时列出匹配项目，也就是截图底部的效果
+"" 在输入命令时列出匹配项目，也就是截图底部的效果
 set wildmenu
 set wildmode=list:longest
 
-" 打开自动缩,继承前一行的缩进注释进
+"" 打开自动缩,继承前一行的缩进注释进
 set autoindent
 
-" 默认情况下手动折叠 foldmethod
+"" 默认情况下手动折叠 foldmethod
 set fdm=manual
 
-" 显示行号（否：nonumber）
+"" 显示行号（否：nonumber）
 set number
 
-" changes line number column to display how far away each line is from the
-" current one (Vim 7.3 feature)
+"" changes line number column to display how far away each line is from the
+"" current one (Vim 7.3 feature)
 set relativenumber
 
-" create <FILENAME>.un~ files whenever you edit a file, undo previous actions
-" even after you close and reopen a file.
+"" create <FILENAME>.un~ files whenever you edit a file, undo previous actions
+"" even after you close and reopen a file.
 set undofile
 set undodir=~/.vim/tmp/undo// " undos
 
-" 在终端输出一个相对平滑的更新
+"" 在终端输出一个相对平滑的更新
 set ttyfast
 
-" 显示光标的坐标
+"" 显示光标的坐标
 set ruler
 
-" Backups
+"" Backups
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap//   " swap files
 set backup                        " enable backups
-"set nobackup
-"set noswapfile
+""set nobackup
+""set noswapfile
 
-" set bufhidden=hide
+"" set bufhidden=hide
 
-" 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
+"" 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
 set showmatch
 
-" 匹配括号的规则，增加针对html的<>
+"" 匹配括号的规则，增加针对html的<>
 set matchpairs=(:),{:},[:],<:>
 
-" 匹配括号高亮的时间（单位是十分之一秒）
+"" 匹配括号高亮的时间（单位是十分之一秒）
 set matchtime=1
 
-" 搜索时不区分大小写
-" set ignorecase
+"" 搜索时不区分大小写
+"" set ignorecase
 
-" 在搜索时，输入的词句的逐字符高亮（类似firefox的搜索）
+"" 在搜索时，输入的词句的逐字符高亮（类似firefox的搜索）
 set incsearch
 
-" 搜索高亮
+"" 搜索高亮
 set hlsearch
 
-" 不要闪烁
+"" 不要闪烁
 set novisualbell
 
-" 正确地处理中文字符的折行和拼接
+"" 正确地处理中文字符的折行和拼接
 set formatoptions+=mM
 
-" 文件 UTF-8 编码
+"" 文件 UTF-8 编码
 set encoding=utf-8
 set fileencodings=utf-8,chinese,latin-1
 if has("win32")
@@ -146,56 +146,56 @@ if has("win32")
 else
   set fileencoding=utf-8
 endif
-" source $VIMRUNTIME/delmenu.vim
-" source $VIMRUNTIME/menu.vim
+"" source $VIMRUNTIME/delmenu.vim
+"" source $VIMRUNTIME/menu.vim
 language messages zh_CN.utf-8
 
-" 设置文件格式为unix
+"" 设置文件格式为unix
 set fileformat=unix
 
-" 开启命令显示
+"" 开启命令显示
 set showcmd
 
-" 设置窗口大小
+"" 设置窗口大小
 set lines=30
-" set textwidth=79
+"" set textwidth=79
 set columns=85
 
-" 自动换行(否：nowrap)
+"" 自动换行(否：nowrap)
 set wrap display=lastline
 
-" 初始窗口的位置
-"winpos 252 42
+"" 初始窗口的位置
+""winpos 252 42
 
-" 行间距，如果默认值太小，代码会非常纠结
+"" 行间距，如果默认值太小，代码会非常纠结
 set linespace=4
 
-" 启动的时候不显示那个援助索马里儿童的提示
+"" 启动的时候不显示那个援助索马里儿童的提示
 set shortmess=atI
 
-" 导出 html 设置
+"" 导出 html 设置
 let html_use_css = 1
 let html_number_lines = 0
 let use_xhtml = 1
 
-" 隐藏底部滚动条
+"" 隐藏底部滚动条
 set guioptions-=b
 
-" 隐藏右边滚动条
+"" 隐藏右边滚动条
 set guioptions-=R
 set guioptions-=r
 
-" 隐藏左边滚动条
+"" 隐藏左边滚动条
 set guioptions-=l
 set guioptions-=L
 
-" 隐藏菜单栏
+"" 隐藏菜单栏
 set guioptions-=m
 
-" 隐藏工具栏
+"" 隐藏工具栏
 set guioptions-=T
 
-" 设置工作目录
+"" 设置工作目录
 function! CHANGE_CURR_DIR()
     let _dir = expand("%:p:h")
     exec "cd " . _dir
@@ -203,34 +203,34 @@ function! CHANGE_CURR_DIR()
 endfunction
 autocmd BufEnter * call CHANGE_CURR_DIR()
 
-" NERDTree插件的快捷键
+"" NERDTree插件的快捷键
 imap <silent> <F7> <esc>:NERDTreeToggle<CR>
 nmap <silent> <F7> :NERDTreeToggle<CR>
-" BufExplorer 快捷键 {{{
+"" BufExplorer 快捷键 {{{
 imap <silent> <F8> <esc>:BufExplorer<CR>
 nmap <silent> <F8> :BufExplorer<CR>
-" }}}
+"" }}}
 
-" Taglist shortcuts
+"" Taglist shortcuts
 imap <silent> <F9> <esc>:TlistToggle<CR>
 nmap <silent> <F9> :TlistToggle<CR>
 
-" CTRL-[ and CTRL-] indent and unindent blocks {{{
-"  inoremap <C-[> <C-O><LT><LT>
-" inoremap <C-]> <C-O><GT><GT>
-"  nnoremap <C-[> <LT><LT>
-"  nnoremap <C-]> <GT><GT>
-"  vnoremap <C-[> <LT>
-"  vnoremap <C-]> <GT>
-" }}}
+"" CTRL-[ and CTRL-] indent and unindent blocks {{{
+""  inoremap <C-[> <C-O><LT><LT>
+"" inoremap <C-]> <C-O><GT><GT>
+""  nnoremap <C-[> <LT><LT>
+""  nnoremap <C-]> <GT><GT>
+""  vnoremap <C-[> <LT>
+""  vnoremap <C-]> <GT>
+"" }}}
 
-" NERD Commenter {{{
+"" NERD Commenter {{{
 let NERDSpaceDelims = 1
 map <M-/> <Plug>NERDCommenterToggle
 imap <M-/> <C-O><Plug>NERDCommenterToggle
-" }}}
+"" }}}
 
-" 窗口区域切换,F5 后 ↑↓←→  来切换
+"" 窗口区域切换,F5 后 ↑↓←→  来切换
 imap <silent> <C-left> <esc><C-W><left>
 vmap <silent> <C-left> <esc><C-W><left>
 nmap <silent> <C-left> <C-W><left>
@@ -244,108 +244,104 @@ imap <silent> <C-down> <esc><C-W><down>
 vmap <silent> <C-down> <esc><C-W><down>
 nmap <silent> <C-down> <C-W><down>
 
-" Use the damn hjkl keys
+"" Use the damn hjkl keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
-" And make them fucking work, too.
+"" And make them fucking work, too.
 nnoremap j gj
 nnoremap k gk
 
-" Textmate alt-p & alt+l {{{
+"" Textmate alt-p & alt+l {{{
 inoremap <M-k> ->
 inoremap <M-j> <space>=><space>
 inoremap <M->> <%=<space><space>%><left><left><left>
 
-" shift+alt+l 选择行
+"" shift+alt+l 选择行
 inoremap <M-L> <C-O><home>v<S-end>
 nnoremap <M-L> <home>v<S-end>
 
-" shift+alt+k 删除行
+"" shift+alt+k 删除行
 inoremap <M-K> <C-O><home>v<S-end><del>
 nnoremap <M-K> <home>v<s-end><del>
 
-" ctrl + c,a,v,x,z
+"" ctrl + c,a,v,x,z
 nnoremap <BS> d
 
-" ctrl + a
-noremap <C-A> ggVG
-inoremap <C-A> <C-O>ggVG
-
-" 使用 colorpicker 程序获取颜色值(hex/rgba)
+"" 使用 colorpicker 程序获取颜色值(hex/rgba)
 inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
 nmap cac :call Lilydjwg_changeColor()<CR>
 
-" ctrl + s
+"" ctrl + s
 imap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
 vmap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
 nmap <C-s> :w<CR>:echo expand("%f") . " saved."<CR>
 
-" ctrl + n
-"imap <C-n> <esc>:enew!<CR>
-"nmap <C-n> :enew!<CR>
-"vmap <C-n> <esc>:enew!<CR>
+"" ctrl + n
+""imap <C-n> <esc>:enew!<CR>
+""nmap <C-n> :enew!<CR>
+""vmap <C-n> <esc>:enew!<CR>
 
-" ctrl + c
+"" ctrl + c
 vmap <C-c> "+y
-" 把缺省的Ctrl – X + O 改为 F4
+"" 把缺省的Ctrl – X + O 改为 F4
 imap <F4> <C-X><C-O>
-" ctrl + x
+"" ctrl + x
 vmap <C-x> "+x
-" ctrl + z
+"" ctrl + z
 inoremap <C-z> <C-O>u
 nnoremap <C-z> u
-" ctrl + y
+"" ctrl + y
 inoremap <C-y> <C-O><C-R>
 nnoremap <C-y> <C-R>
-" ctrl + v
+"" ctrl + v
 nnoremap <C-v> "+gP
-"inoremap <C-v> <C-O>"+gP
-" ctrl + r
+""inoremap <C-v> <C-O>"+gP
+"" ctrl + r
 imap <C-h> <esc>:%s/
 vmap <C-h> <esc>:%s/
 nmap <C-h> :%s/
-" ctrl + o
+"" ctrl + o
 imap <C-o> <C-O>:e
 vmap <C-o> <esc>:e
 nmap <C-o> :e
-" }}}
+"" }}}
 
-" map leader to comma(default is backslash)
+"" map leader to comma(default is backslash)
 let mapleader = ","
 
-" strip all trailing whitespace in the current file
+"" strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
+"" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
 nnoremap <leader>q gqip
 
-" CSS properties sorted
+"" CSS properties sorted
 nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
 
-" Edit vim stuff.
+"" Edit vim stuff.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
 
-" open a new vertical split and switch over to it
+"" open a new vertical split and switch over to it
 nnoremap <leader>w <C-w>v<C-w>l
 
-" Rainbows!
+"" Rainbows!
 nmap <leader>R :RainbowParenthesesToggle<CR>
 
-" Ack
+"" Ack
 map <leader>a :Ack 
 
-" Yankring
+"" Yankring
 nnoremap <silent> <leader>y :YRShow<cr>
 
-" CommandT
+"" CommandT
 nmap <silent> <leader>t :CommandT<CR>
 
 
-" Camel Case Motion
+"" Camel Case Motion
 omap <silent> iw <Plug>CamelCaseMotion_iw
 xmap <silent> iw <Plug>CamelCaseMotion_iw
 omap <silent> ib <Plug>CamelCaseMotion_ib
@@ -353,20 +349,20 @@ xmap <silent> ib <Plug>CamelCaseMotion_ib
 omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
 
-" 自动完成设置 禁止在插入模式移动的时候出现 Complete 提示
+"" 自动完成设置 禁止在插入模式移动的时候出现 Complete 提示
 let g:acp_mappingDriven = 1
 
-" 括号和引号补全 {{{
-"inoremap ( ()<ESC>i
+"" 括号和引号补全 {{{
+""inoremap ( ()<ESC>i
 inoremap ( <c-r>=OpenPair('(')<CR>
 inoremap ) <c-r>=ClosePair(')')<CR>
-"inoremap { {}<ESC>i
+""inoremap { {}<ESC>i
 inoremap { <c-r>=OpenPair('{')<CR>
 inoremap } <c-r>=ClosePair('}')<CR>
-"inoremap [ []<ESC>i
+""inoremap [ []<ESC>i
 inoremap [ <c-r>=OpenPair('[')<CR>
 inoremap ] <c-r>=ClosePair(']')<CR>
-"inoremap < <><ESC>i
+""inoremap < <><ESC>i
 inoremap < <c-r>=OpenPair('<')<CR>
 inoremap > <c-r>=ClosePair('>')<CR>
 function! OpenPair(char)
@@ -405,13 +401,13 @@ function! CompleteQuote(quote)
         return a:quote . a:quote . "\<Left>"
     endif
 endfunction
-" }}}
+"" }}}
 
-" 自动打开或关闭fcitx
+"" 自动打开或关闭fcitx
 autocmd InsertLeave * set imdisable
 autocmd InsertLeave * set noimdisable
 
-" CSS3 语法支持
+"" CSS3 语法支持
 au BufRead,BufNewFile *.css set ft=css syntax=css3
 
 au BufNewFile,BufRead *.m*down set filetype=markdown
@@ -421,21 +417,21 @@ au BufNewFile,BufRead *.m*down nnoremap <leader>3 I### <ESC>
 
 au BufNewFile,BufRead *.vim set foldmethod=marker
 
-" Make selecting inside an HTML tag less dumb
+"" Make selecting inside an HTML tag less dumb
 nnoremap Vit vitVkoj
 nnoremap Vat vatV
-" ci[ 删除一对 [] 中的所有字符并进入插入模式
-" ci( 删除一对 () 中的所有字符并进入插入模式
-" ci< 删除一对 <> 中的所有字符并进入插入模式
-" ci{ 删除一对 {} 中的所有字符并进入插入模式
-" cit 删除一对 HTML/XML 的标签内部的所有字符并进入插入模式
-" ci” ci’ ci` 删除一对引号字符 (” 或 ‘ 或 `) 中所有字符并进入插入模式
+"" ci[ 删除一对 [] 中的所有字符并进入插入模式
+"" ci( 删除一对 () 中的所有字符并进入插入模式
+"" ci< 删除一对 <> 中的所有字符并进入插入模式
+"" ci{ 删除一对 {} 中的所有字符并进入插入模式
+"" cit 删除一对 HTML/XML 的标签内部的所有字符并进入插入模式
+"" ci” ci’ ci` 删除一对引号字符 (” 或 ‘ 或 `) 中所有字符并进入插入模式
 
-" 让选中内容变成搜索项
+"" 让选中内容变成搜索项
 vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
 vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
 
-" 检查当前文件代码语法(php){{{
+"" 检查当前文件代码语法(php){{{
 function! CheckSyntax()
     if &filetype!="php"
         echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
@@ -455,16 +451,16 @@ function! CheckSyntax()
     execute "copen"
 endfunction
 au filetype php map <F6> :call CheckSyntax()<CR>
-" }}}
+"" }}}
 
-" php字典补全
+"" php字典补全
 if has("win32")
     au FileType php setlocal dict+=$VIM/vimfiles/dict/php_funclist.txt
 else
     au FileType php setlocal dict+=~/.vim/dict/php_funclist.txt
 endif
 
-" Python 补全
+"" Python 补全
 if has("win32")
     let g:pydiction_location = '$VIM/vimfiles/ftplugin/pydiction/complete-dict'
 else
@@ -472,14 +468,14 @@ else
 endif
 let g:pydiction_menu_height = 20
 
-" 自动在退出编辑模式（InsertLeave）时保存 php 和 python 文件
-" au InsertLeave *.php write
-" au InsertLeave *.py write
+"" 自动在退出编辑模式（InsertLeave）时保存 php 和 python 文件
+"" au InsertLeave *.php write
+"" au InsertLeave *.py write
 
-" 开启 python 语法高亮
+"" 开启 python 语法高亮
 let python_highlight_all = 1
 
-" zencoding 设置
+"" zencoding 设置
 let g:user_zen_settings = {
  \ 'php' : {
  \    'extends' : 'html',
@@ -499,53 +495,61 @@ let g:user_zen_settings = {
 let g:user_zen_expandabbr_key = '<c-e>'    "设置为ctrl+e展开
 let g:use_zen_complete_tag = 1
 
-" gVim Fullscreen
+"" gVim Fullscreen
 if has('gui_running') && has("win32")
     map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
     imap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 endif
 
-" Ack can be used as a replacement for 99% of the uses of grep.
+"" Ack can be used as a replacement for 99% of the uses of grep.
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
-" 如果taglist窗口是最后一个窗口，则退出vim
+"" 如果taglist窗口是最后一个窗口，则退出vim
 let Tlist_Show_One_File = 1
-" 不同时显示多个文件的tag，只显示当前文件的
+"" 不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow = 1
 
 
-" Use neocomplcache
+"" Use neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1
 
-" Use smartcase
-let g:neocomplcache_enable_smart_case = 1
+"" Use underbar completion
+let g:neocomplcache_enable_underbar_completion = 1 
 
-" AutoComplPop like behavior.
+"" AutoComplPop like behavior.
 let g:neocomplcache_enable_auto_select = 1
 
-" Recommended key-mappings.
-" <C-h>, <BS>: close popup and delete backword char.
+"" Recommended key-mappings.
+"" <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#smart_close_popup()
 
-" Enable omni completion.
+"" Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"" }}}
 
-
-" PHPDoc conform document generator
+"" PHPDoc conform document generator {{{
 au FileType php source ~/.vim/plugin/php-doc.vim 
 au FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
 au FileType php nnoremap <C-P> :call PhpDocSingle()<CR> 
 au FileType php vnoremap <C-P> :call PhpDocRange()<CR>
+"" }}}
 
-" Windows 默认保存位置
+"" make
+autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
+"" simple compile
+autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -g\\\ -Wall\\\ -o\\\ ".expand("%:r")."\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
+"" execute bin which is compiled by source
+autocmd FileType cpp,c nmap <F5> :exe "!./".expand("%:r")<Left>
+
+"" Windows 默认保存位置
 if has('gui_running') && has("win32")
     cd D:\360data\重要数据\桌面
 endif
 
-"当.vimrc改变时，自动重载
+""当.vimrc改变时，自动重载
 autocmd! bufwritepost vimrc source ~/.vimrc
