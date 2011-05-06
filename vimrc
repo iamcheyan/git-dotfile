@@ -542,7 +542,7 @@ au FileType php vnoremap <C-P> :call PhpDocRange()<CR>
 "" make
 autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
 "" simple compile
-autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -std=c99\\\ -g\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
+autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -g\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
 "" execute bin which is compiled by source
 autocmd FileType cpp,c nmap <F5> :exe "!./".expand("%:r").".bin"<Left>
 
