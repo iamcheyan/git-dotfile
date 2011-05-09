@@ -1,14 +1,14 @@
-[submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
-	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/camelcasemotion"]
 	path = vim/bundle/camelcasemotion
 	url = git://github.com/vim-scripts/camelcasemotion.git
-[submodule "vim/bundle/l9"]
-	path = vim/bundle/l9
+[submodule "vim/bundle/L9"]
+	path = vim/bundle/L9
 	url = git://github.com/vim-scripts/L9.git
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/bundle/nerdcommenter
@@ -25,17 +25,17 @@
 [submodule "vim/bundle/taglist"]
 	path = vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
-[submodule "vim/bundle/zencoding"]
-	path = vim/bundle/zencoding
+[submodule "vim/bundle/ZenCoding"]
+	path = vim/bundle/ZenCoding
 	url = git://github.com/vim-scripts/ZenCoding.vim.git
-[submodule "vim/bundle/manpageview"]
-	path = vim/bundle/manpageview
+[submodule "vim/bundle/ManPageView"]
+	path = vim/bundle/ManPageView
 	url = git://github.com/vim-scripts/ManPageView.git
 [submodule "vim/bundle/cscope_macros"]
 	path = vim/bundle/cscope_macros
 	url = git://github.com/vim-scripts/cscope_macros.vim.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
+[submodule "vim/bundle/Command-T"]
+	path = vim/bundle/Command-T
 	url = git://github.com/vim-scripts/Command-T.git
 [submodule "vim/bundle/pyflakes"]
 	path = vim/bundle/pyflakes
@@ -46,8 +46,8 @@
 [submodule "vim/bundle/neocomplcache"]
 	path = vim/bundle/neocomplcache
 	url = git://github.com/Shougo/neocomplcache.git
-[submodule "vim/bundle/solarized"]
-	path = vim/bundle/solarized
+[submodule "vim/bundle/vim-colors-solarized"]
+	path = vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/bundle/cascading"]
 	path = vim/bundle/cascading
@@ -55,3 +55,6 @@
 [submodule "vim/bundle/colorizer"]
 	path = vim/bundle/colorizer
 	url = git://github.com/lilydjwg/colorizer.git
+[submodule "vim/bundle/rainbow"]
+	path = vim/bundle/rainbow
+	url = git://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git
