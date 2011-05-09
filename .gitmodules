@@ -58,7 +58,3 @@
 [submodule "vim/bundle/colorizer"]
     path = vim/bundle/colorizer
     url = git://github.com/lilydjwg/colorizer.git
-[submodule "vim/bundle/rainbow"]
-    path = vim/bundle/rainbow
-    url = git://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git
-    ignore = untracked
