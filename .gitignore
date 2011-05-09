@@ -4,3 +4,5 @@ Makefile
 *.swp
 tags
 /vimperator/info/
+doc/tags
+doc/tags-cn
