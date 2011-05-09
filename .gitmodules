@@ -1,64 +1,64 @@
 [submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+    path = vim/bundle/vim-fugitive
+    url = git://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/ack"]
-	path = vim/bundle/ack
-	url = git://github.com/mileszs/ack.vim.git
+    path = vim/bundle/ack
+    url = git://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/L9"]
-	path = vim/bundle/L9
-	url = git://github.com/vim-scripts/L9.git
+    path = vim/bundle/L9
+    url = git://github.com/vim-scripts/L9.git
     ignore = untracked
 [submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
+    path = vim/bundle/nerdcommenter
+    url = git://github.com/scrooloose/nerdcommenter.git
 [submodule "vim/bundle/nerdtree"]
-	path = vim/bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
+    path = vim/bundle/nerdtree
+    url = git://github.com/scrooloose/nerdtree.git
 [submodule "vim/bundle/pydoc"]
-	path = vim/bundle/pydoc
-	url = git://github.com/vim-scripts/pydoc.vim.git
+    path = vim/bundle/pydoc
+    url = git://github.com/vim-scripts/pydoc.vim.git
 [submodule "vim/bundle/snipmate"]
-	path = vim/bundle/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
+    path = vim/bundle/snipmate
+    url = git://github.com/msanders/snipmate.vim.git
     ignore = untracked
 [submodule "vim/bundle/taglist"]
-	path = vim/bundle/taglist
-	url = git://github.com/vim-scripts/taglist.vim.git
+    path = vim/bundle/taglist
+    url = git://github.com/vim-scripts/taglist.vim.git
     ignore = untracked
 [submodule "vim/bundle/ZenCoding"]
-	path = vim/bundle/ZenCoding
-	url = git://github.com/vim-scripts/ZenCoding.vim.git
+    path = vim/bundle/ZenCoding
+    url = git://github.com/vim-scripts/ZenCoding.vim.git
     ignore = untracked
 [submodule "vim/bundle/ManPageView"]
-	path = vim/bundle/ManPageView
-	url = git://github.com/vim-scripts/ManPageView.git
+    path = vim/bundle/ManPageView
+    url = git://github.com/vim-scripts/ManPageView.git
     ignore = untracked
 [submodule "vim/bundle/cscope_macros"]
-	path = vim/bundle/cscope_macros
-	url = git://github.com/vim-scripts/cscope_macros.vim.git
+    path = vim/bundle/cscope_macros
+    url = git://github.com/vim-scripts/cscope_macros.vim.git
 [submodule "vim/bundle/Command-T"]
-	path = vim/bundle/Command-T
-	url = git://github.com/vim-scripts/Command-T.git
+    path = vim/bundle/Command-T
+    url = git://github.com/vim-scripts/Command-T.git
     ignore = untracked
 [submodule "vim/bundle/pyflakes"]
-	path = vim/bundle/pyflakes
-	url = git://github.com/vim-scripts/pyflakes.vim.git
+    path = vim/bundle/pyflakes
+    url = git://github.com/vim-scripts/pyflakes.vim.git
 [submodule "vim/bundle/tabular"]
-	path = vim/bundle/tabular
-	url = git://github.com/godlygeek/tabular.git
+    path = vim/bundle/tabular
+    url = git://github.com/godlygeek/tabular.git
 [submodule "vim/bundle/neocomplcache"]
-	path = vim/bundle/neocomplcache
-	url = git://github.com/Shougo/neocomplcache.git
+    path = vim/bundle/neocomplcache
+    url = git://github.com/Shougo/neocomplcache.git
 [submodule "vim/bundle/vim-colors-solarized"]
-	path = vim/bundle/vim-colors-solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
+    path = vim/bundle/vim-colors-solarized
+    url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/bundle/cascading"]
-	path = vim/bundle/cascading
-	url = git://github.com/c9s/cascading.vim.git
+    path = vim/bundle/cascading
+    url = git://github.com/c9s/cascading.vim.git
 [submodule "vim/bundle/colorizer"]
-	path = vim/bundle/colorizer
-	url = git://github.com/lilydjwg/colorizer.git
+    path = vim/bundle/colorizer
+    url = git://github.com/lilydjwg/colorizer.git
 [submodule "vim/bundle/rainbow"]
-	path = vim/bundle/rainbow
-	url = git://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git
+    path = vim/bundle/rainbow
+    url = git://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git
     ignore = untracked
