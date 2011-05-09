@@ -1,0 +1,8 @@
+*~
+*.swp
+Makefile
+tags
+doc/tags
+doc/tags-cn
+/vimperator/info
+/undodir/
