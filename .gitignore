@@ -1,8 +1,8 @@
-.gitignore
-Makefile
 *~
 *.swp
+Makefile
 tags
-/vimperator/info/
 doc/tags
 doc/tags-cn
+vimperator/info/
+/undodir/

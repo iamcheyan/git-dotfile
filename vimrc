@@ -97,7 +97,9 @@ set relativenumber
 "" create <FILENAME>.un~ files whenever you edit a file, undo previous actions
 "" even after you close and reopen a file.
 set undofile
-set undodir=~/.vim/tmp/undo// " undos
+set undodir=~/.vim/undodir
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 "" 在终端输出一个相对平滑的更新
 set ttyfast
@@ -106,9 +108,9 @@ set ttyfast
 set ruler
 
 "" Backups
-set backupdir=~/.vim/tmp/backup// " backups
-set directory=~/.vim/tmp/swap//   " swap files
-set backup                        " enable backups
+set backupdir=~/.vim/tmp/backup " backups
+set directory=~/.vim/tmp/swap   " swap files
+set backup                      " enable backups
 ""set nobackup
 ""set noswapfile
 
@@ -267,17 +269,7 @@ nnoremap <M-L> <home>v<S-end>
 inoremap <M-K> <C-O><home>v<S-end><del>
 nnoremap <M-K> <home>v<s-end><del>
 
-"" ctrl + c,a,v,x,z
 nnoremap <BS> d
-
-"" 使用 colorpicker 程序获取颜色值(hex/rgba)
-inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
-nmap cac :call Lilydjwg_changeColor()<CR>
-
-"" ctrl + s
-imap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
-vmap <C-s> <esc>:w<CR>:echo expand("%f") . " saved."<CR>
-nmap <C-s> :w<CR>:echo expand("%f") . " saved."<CR>
 
 "" ctrl + n
 ""imap <C-n> <esc>:enew!<CR>
@@ -309,6 +301,10 @@ vmap <C-o> <esc>:e
 nmap <C-o> :e
 "" }}}
 
+"" 使用 colorpicker 程序获取颜色值(hex/rgba)
+inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
+nmap cac :call Lilydjwg_changeColor()<CR>
+
 "" map leader to comma(default is backslash)
 let mapleader = ","
 
@@ -328,26 +324,15 @@ nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
 "" open a new vertical split and switch over to it
 nnoremap <leader>w <C-w>v<C-w>l
 
-"" Rainbows!
+" Rainbows!
 nmap <leader>R :RainbowParenthesesToggle<CR>
 
 "" Ack
-map <leader>a :Ack 
-
-"" Yankring
-nnoremap <silent> <leader>y :YRShow<cr>
+map <leader>a :Ack
 
 "" CommandT
 nmap <silent> <leader>t :CommandT<CR>
 
-
-"" Camel Case Motion
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 "" 自动完成设置 禁止在插入模式移动的时候出现 Complete 提示
 let g:acp_mappingDriven = 1
