@@ -524,6 +524,18 @@ au FileType php nnoremap <C-P> :call PhpDocSingle()<CR>
 au FileType php vnoremap <C-P> :call PhpDocRange()<CR>
 "" }}}
 
+"" mru {{{
+if has("win32") || has("win64")
+  let MRU_File = '$VIM/vimfiles/vim_mru_files'
+else
+  let MRU_File = '~/.vim/mru_files'
+endif
+let MRU_Max_Entries = 2000
+let MRU_Exclude_Files = '\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/'
+"  加载菜单太耗时
+let MRU_Add_Menu = 0
+"" }}}
+
 "" make
 autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
 "" simple compile

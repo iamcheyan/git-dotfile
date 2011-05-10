@@ -36,10 +36,6 @@
 [submodule "vim/bundle/cscope_macros"]
     path = vim/bundle/cscope_macros
     url = git://github.com/vim-scripts/cscope_macros.vim.git
-[submodule "vim/bundle/Command-T"]
-    path = vim/bundle/Command-T
-    url = git://github.com/vim-scripts/Command-T.git
-    ignore = untracked
 [submodule "vim/bundle/pyflakes"]
     path = vim/bundle/pyflakes
     url = git://github.com/vim-scripts/pyflakes.vim.git
@@ -58,3 +54,6 @@
 [submodule "vim/bundle/colorizer"]
     path = vim/bundle/colorizer
     url = git://github.com/lilydjwg/colorizer.git
+[submodule "vim/bundle/lusty"]
+	path = vim/bundle/lusty
+	url = git://github.com/vim-scripts/LustyExplorer.git
