@@ -1,4 +1,4 @@
-"" Last Change: 2010-10-13 20:17:06
+"" Last Change: 2012年 05月 12日 星期四 07:05:37 CST
 
 "" 判断系统是否具有“自动命令”（autocmd）的支持
 if has('autocmd')
@@ -22,7 +22,7 @@ filetype indent on
 
 ""colorscheme molokai
 if has('gui_running')
-    colorscheme diablo3
+    colorscheme solarized
 else
     set background=dark
     colorscheme solarized
@@ -295,10 +295,6 @@ nnoremap <C-v> "+gP
 imap <C-h> <esc>:%s/
 vmap <C-h> <esc>:%s/
 nmap <C-h> :%s/
-"" ctrl + o
-imap <C-o> <C-O>:e
-vmap <C-o> <esc>:e
-nmap <C-o> :e
 "" }}}
 
 "" 使用 colorpicker 程序获取颜色值(hex/rgba)
@@ -497,6 +493,9 @@ let Tlist_Exit_OnlyWindow = 1
 
 "" Use neocomplcache {{{
 let g:neocomplcache_enable_at_startup = 1
+
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
 
 "" Use underbar completion
 let g:neocomplcache_enable_underbar_completion = 1 
