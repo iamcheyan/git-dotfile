@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/home/vayn/.vimperator'
 let g:netrw_dirhist_2='/home/vayn/notes/linux/bash/Advanced_Bash_Scripting_Guide/第三部分.进阶/Commands/7)'
 let g:netrw_dirhist_3='/home/vayn/notes/linux/bash/Advanced_Bash_Scripting_Guide/第三部分.进阶/Commands/8)'
 let g:netrw_dirhist_4='/home/vayn/.vimperator'
+let g:netrw_dirhist_5='/usr/local/bin'

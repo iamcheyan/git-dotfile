@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export TERM="gnome-256color"
 export LANG="zh_CN.UTF-8";
 export LC_CTYPE="zh_CN.UTF-8";
 export LC_NUMERIC="zh_CN.UTF-8";

@@ -20,13 +20,7 @@ filetype plugin on
 "" 为特定文件类型载入相关缩进文件
 filetype indent on
 
-""colorscheme molokai
-if has('gui_running')
-    colorscheme solarized
-else
-    set background=dark
-    colorscheme solarized
-endif
+colorscheme diablo3
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -77,7 +71,7 @@ set backspace=indent,eol,start whichwrap+=<,>,[,]
 "" 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
 
-"" 在输入命令时列出匹配项目，也就是截图底部的效果
+"" 在输入命令时列出匹配项目
 set wildmenu
 set wildmode=list:longest
 
@@ -111,7 +105,6 @@ set ruler
 set backupdir=~/.vim/tmp/backup " backups
 set directory=~/.vim/tmp/swap   " swap files
 set backup                      " enable backups
-""set nobackup
 ""set noswapfile
 
 "" set bufhidden=hide
@@ -199,7 +192,7 @@ set guioptions-=T
 
 "" 设置工作目录
 function! CHANGE_CURR_DIR()
-    let _dir = expand("%:p:h")
+    let _dir = escape(expand("%:p:h"),' ')
     exec "cd " . _dir
     unlet _dir
 endfunction
@@ -224,12 +217,6 @@ nmap <silent> <F9> :TlistToggle<CR>
 ""  nnoremap <C-]> <GT><GT>
 ""  vnoremap <C-[> <LT>
 ""  vnoremap <C-]> <GT>
-"" }}}
-
-"" NERD Commenter {{{
-let NERDSpaceDelims = 1
-map <M-/> <Plug>NERDCommenterToggle
-imap <M-/> <C-O><Plug>NERDCommenterToggle
 "" }}}
 
 "" 窗口区域切换,F5 后 ↑↓←→  来切换
@@ -282,12 +269,10 @@ vmap <C-c> "+y
 imap <F4> <C-X><C-O>
 "" ctrl + x
 vmap <C-x> "+x
-"" ctrl + z
-inoremap <C-z> <C-O>u
-nnoremap <C-z> u
-"" ctrl + y
-inoremap <C-y> <C-O><C-R>
-nnoremap <C-y> <C-R>
+
+inoremap <C-u> <C-o>u
+inoremap <C-r> <C-o><C-r>
+
 "" ctrl + v
 nnoremap <C-v> "+gP
 ""inoremap <C-v> <C-O>"+gP
@@ -325,9 +310,6 @@ nmap <leader>R :RainbowParenthesesToggle<CR>
 
 "" Ack
 map <leader>a :Ack
-
-"" CommandT
-nmap <silent> <leader>t :CommandT<CR>
 
 
 "" 自动完成设置 禁止在插入模式移动的时候出现 Complete 提示
@@ -527,7 +509,7 @@ au FileType php vnoremap <C-P> :call PhpDocRange()<CR>
 if has("win32") || has("win64")
   let MRU_File = '$VIM/vimfiles/vim_mru_files'
 else
-  let MRU_File = '~/.vim/mru_files'
+  let MRU_File = '~/.vim/tmp/mru_files'
 endif
 let MRU_Max_Entries = 2000
 let MRU_Exclude_Files = '\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/'
@@ -538,7 +520,7 @@ let MRU_Add_Menu = 0
 "" make
 autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
 "" simple compile
-autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -g\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
+autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -std=gnu99\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
 "" execute bin which is compiled by source
 autocmd FileType cpp,c nmap <F5> :exe "!./".expand("%:r").".bin"<Left>
 
