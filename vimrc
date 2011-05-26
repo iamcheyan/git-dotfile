@@ -50,7 +50,7 @@ let g:T_AUTHOR_WEBSITE = "http://elnode.com"
 let g:T_DATE_FORMAT = "%c"
 
 "" history文件中需要记录的行数
-set history=100
+set history=1000
 
 "" 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
@@ -79,7 +79,8 @@ set wildmode=list:longest
 set autoindent
 
 "" 默认情况下手动折叠 foldmethod
-set fdm=manual
+set fdm=syntax
+set foldclose=all
 
 "" 显示行号（否：nonumber）
 set number
@@ -153,19 +154,19 @@ set showcmd
 
 "" 设置窗口大小
 set lines=30
-"" set textwidth=79
 set columns=85
+set textwidth=79
 
-"" 自动换行(否：nowrap)
+"" 自动换行
 set wrap display=lastline
 
 "" 初始窗口的位置
 ""winpos 252 42
 
-"" 行间距，如果默认值太小，代码会非常纠结
+"" 行间距
 set linespace=4
 
-"" 启动的时候不显示那个援助索马里儿童的提示
+"" 启动的时候不显示intro
 set shortmess=atI
 
 "" 导出 html 设置
@@ -529,5 +530,3 @@ if has('gui_running') && has("win32")
     cd D:\360data\重要数据\桌面
 endif
 
-""当.vimrc改变时，自动重载
-autocmd! bufwritepost vimrc source ~/.vimrc
