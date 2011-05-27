@@ -58,9 +58,6 @@ set query_format="%4c %t %-40.40a %-40.40n %?e?(%e)?"
 # PGP Setting
 source ~/.mutt/gpg.rc
 
-# Colorscheme
-source mutt-colors-solarized-dark-256.muttrc
-
 # Gmail-style keyboard shortcuts
 macro index,pager rd "<enter-command>unset trash\n <delete-message>" "Gmail archive message" 
 macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[GMail]/Bin\"\n <delete-message>" "Gmail delete message" 
