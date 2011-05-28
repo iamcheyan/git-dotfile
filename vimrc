@@ -2,9 +2,8 @@
 
 "" 判断系统是否具有“自动命令”（autocmd）的支持
 if has('autocmd')
-    " 清除所有的自动命令，以方便调试
-    au!
-    " autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+  " 清除所有的自动命令，以方便调试
+  au!
 endif
 
 "" Pathogen 插件管理
@@ -20,7 +19,14 @@ filetype plugin on
 "" 为特定文件类型载入相关缩进文件
 filetype indent on
 
-colorscheme diablo3
+if has('gui_running')
+  colorscheme diablo3
+else
+  set background=dark
+  colorscheme solarized
+  let g:solarized_termcolors = 256
+  let g:solarized_contrast = "normal"
+endif
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -35,9 +41,9 @@ set guifont="Menlo"
 "" set encoding=utf-8
 
 "" 设置缩进
-set sw=4
-set ts=4
-set softtabstop=4
+set sw=2
+set ts=2
+set softtabstop=2
 set expandtab
 
 "" 设置模板
@@ -104,7 +110,7 @@ set ruler
 "" Backups
 set backupdir=~/.vim/tmp/backup " backups
 set directory=~/.vim/tmp/swap   " swap files
-set backup                      " enable backups
+set backup            " enable backups
 ""set noswapfile
 
 "" set bufhidden=hide
@@ -157,7 +163,7 @@ set columns=85
 set textwidth=79
 
 "" 自动换行
-set wrap display=lastline
+set wrap dy=lastline
 
 "" 初始窗口的位置
 ""winpos 252 42
@@ -184,7 +190,7 @@ set guioptions-=r
 set guioptions-=l
 set guioptions-=L
 
-"" 隐藏菜单栏
+"" 隐藏菜单和
 set guioptions-=m
 
 "" 隐藏工具栏
@@ -192,9 +198,9 @@ set guioptions-=T
 
 "" 设置工作目录
 function! CHANGE_CURR_DIR()
-    let _dir = escape(expand("%:p:h"),' ')
-    exec "cd " . _dir
-    unlet _dir
+  let _dir = escape(expand("%:p:h"),' ')
+  exec "cd " . _dir
+  unlet _dir
 endfunction
 autocmd BufEnter * call CHANGE_CURR_DIR()
 
@@ -209,15 +215,6 @@ nmap <silent> <F8> :BufExplorer<CR>
 "" Taglist shortcuts
 imap <silent> <F9> <esc>:TlistToggle<CR>
 nmap <silent> <F9> :TlistToggle<CR>
-
-"" CTRL-[ and CTRL-] indent and unindent blocks {{{
-""  inoremap <C-[> <C-O><LT><LT>
-"" inoremap <C-]> <C-O><GT><GT>
-""  nnoremap <C-[> <LT><LT>
-""  nnoremap <C-]> <GT><GT>
-""  vnoremap <C-[> <LT>
-""  vnoremap <C-]> <GT>
-"" }}}
 
 "" 窗口区域切换,F5 后 ↑↓←→  来切换
 imap <silent> <C-left> <esc><C-W><left>
@@ -243,25 +240,7 @@ nnoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-"" Textmate alt-p & alt+l {{{
-inoremap <M-k> ->
-inoremap <M-j> <space>=><space>
-inoremap <M->> <%=<space><space>%><left><left><left>
-
-"" shift+alt+l 选择行
-inoremap <M-L> <C-O><home>v<S-end>
-nnoremap <M-L> <home>v<S-end>
-
-"" shift+alt+k 删除行
-inoremap <M-K> <C-O><home>v<S-end><del>
-nnoremap <M-K> <home>v<s-end><del>
-
 nnoremap <BS> d
-
-"" ctrl + n
-""imap <C-n> <esc>:enew!<CR>
-""nmap <C-n> :enew!<CR>
-""vmap <C-n> <esc>:enew!<CR>
 
 "" ctrl + c
 vmap <C-c> "+y
@@ -270,9 +249,6 @@ imap <F4> <C-X><C-O>
 "" ctrl + x
 vmap <C-x> "+x
 
-inoremap <C-u> <C-o>u
-inoremap <C-r> <C-o><C-r>
-
 "" ctrl + v
 nnoremap <C-v> "+gP
 ""inoremap <C-v> <C-O>"+gP
@@ -280,7 +256,6 @@ nnoremap <C-v> "+gP
 imap <C-h> <esc>:%s/
 vmap <C-h> <esc>:%s/
 nmap <C-h> :%s/
-"" }}}
 
 "" 使用 colorpicker 程序获取颜色值(hex/rgba)
 inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
@@ -306,14 +281,11 @@ nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
 nnoremap <leader>w <C-w>v<C-w>l
 
 " Rainbows!
-nmap <leader>R :RainbowParenthesesToggle<CR>
+nmap <leader>r :RainbowParenthesesToggle<CR>
 
 "" Ack
 map <leader>a :Ack
 
-
-"" 自动完成设置 禁止在插入模式移动的时候出现 Complete 提示
-let g:acp_mappingDriven = 1
 
 "" 括号和引号补全 {{{
 ""inoremap ( ()<ESC>i
@@ -329,40 +301,40 @@ inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap < <c-r>=OpenPair('<')<CR>
 inoremap > <c-r>=ClosePair('>')<CR>
 function! OpenPair(char)
-    let PAIRs = {
-                \ '{' : '}',
-                \ '[' : ']',
-                \ '(' : ')',
-                \ '<' : '>'
-                \}
-    let ol = len(split(getline('.'), a:char, 1))-1
-    let cl = len(split(getline('.'), PAIRs[a:char], 1))-1
-    if ol==cl
-        return a:char . PAIRs[a:char] . "\<Left>"
-    else
-        return a:char
-    endif
+  let PAIRs = {
+        \ '{' : '}',
+        \ '[' : ']',
+        \ '(' : ')',
+        \ '<' : '>'
+        \}
+  let ol = len(split(getline('.'), a:char, 1))-1
+  let cl = len(split(getline('.'), PAIRs[a:char], 1))-1
+  if ol==cl
+    return a:char . PAIRs[a:char] . "\<Left>"
+  else
+    return a:char
+  endif
 endfunction
 function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
+  if getline('.')[col('.') - 1] == a:char
+    return "\<Right>"
+  else
+    return a:char
+  endif
 endf
 
 inoremap ' <c-r>=CompleteQuote("'")<CR>
 inoremap " <c-r>=CompleteQuote('"')<CR>
 function! CompleteQuote(quote)
-    let ql = len(split(getline('.'), a:quote, 1))-1
-    " a:quote length is odd.
-    if (ql%2)==1
-        return a:quote
-    elseif getline('.')[col('.') - 1] == a:quote
-        return "\<Right>"
-    else
-        return a:quote . a:quote . "\<Left>"
-    endif
+  let ql = len(split(getline('.'), a:quote, 1))-1
+  " a:quote length is odd.
+  if (ql%2)==1
+    return a:quote
+  elseif getline('.')[col('.') - 1] == a:quote
+    return "\<Right>"
+  else
+    return a:quote . a:quote . "\<Left>"
+  endif
 endfunction
 "" }}}
 
@@ -396,38 +368,38 @@ vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR>
 
 "" 检查当前文件代码语法(php){{{
 function! CheckSyntax()
-    if &filetype!="php"
-        echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
-        return
-    endif
-    if &filetype=="php"
-        " Check php syntax
-        setlocal makeprg=\"php\"\ -l\ -n\ -d\ html_errors=off
-        " Set shellpipe
-        setlocal shellpipe=>
-        " Use error format for parsing PHP error output
-        setlocal errorformat=%m\ in\ %f\ on\ line\ %l
-    endif
-    execute "silent make %"
-    set makeprg=make
-    execute "normal :"
-    execute "copen"
+  if &filetype!="php"
+    echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
+    return
+  endif
+  if &filetype=="php"
+    " Check php syntax
+    setlocal makeprg=\"php\"\ -l\ -n\ -d\ html_errors=off
+    " Set shellpipe
+    setlocal shellpipe=>
+    " Use error format for parsing PHP error output
+    setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+  endif
+  execute "silent make %"
+  set makeprg=make
+  execute "normal :"
+  execute "copen"
 endfunction
 au filetype php map <F6> :call CheckSyntax()<CR>
 "" }}}
 
 "" php字典补全
 if has("win32")
-    au FileType php setlocal dict+=$VIM/vimfiles/dict/php_funclist.txt
+  au FileType php setlocal dict+=$VIM/vimfiles/dict/php_funclist.txt
 else
-    au FileType php setlocal dict+=~/.vim/dict/php_funclist.txt
+  au FileType php setlocal dict+=~/.vim/dict/php_funclist.txt
 endif
 
 "" Python 补全
 if has("win32")
-    let g:pydiction_location = '$VIM/vimfiles/ftplugin/pydiction/complete-dict'
+  let g:pydiction_location = '$VIM/vimfiles/ftplugin/pydiction/complete-dict'
 else
-    let g:pydiction_location = '~/.vim/ftplugin/pydiction/complete-dict'
+  let g:pydiction_location = '~/.vim/ftplugin/pydiction/complete-dict'
 endif
 let g:pydiction_menu_height = 20
 
@@ -441,27 +413,27 @@ let python_highlight_all = 1
 "" zencoding 设置
 let g:user_zen_settings = {
  \ 'php' : {
- \    'extends' : 'html',
- \    'filters' : 'c',
+ \  'extends' : 'html',
+ \  'filters' : 'c',
  \  },
  \  'xml' : {
- \    'extends' : 'html',
+ \  'extends' : 'html',
  \  },
  \  'haml' : {
- \    'extends' : 'html',
+ \  'extends' : 'html',
  \  },
  \  'snippets' : {
- \    'use' : "use strict\nuse warnings\n\n",
- \    'warn' : "warn \"|\";",
+ \  'use' : "use strict\nuse warnings\n\n",
+ \  'warn' : "warn \"|\";",
  \  }
 \}
-let g:user_zen_expandabbr_key = '<c-e>'    "设置为ctrl+e展开
+let g:user_zen_expandabbr_key = '<c-e>'  "设置为ctrl+e展开
 let g:use_zen_complete_tag = 1
 
 "" gVim Fullscreen
 if has('gui_running') && has("win32")
-    map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-    imap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+  map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+  imap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 endif
 
 "" Ack can be used as a replacement for 99% of the uses of grep.
@@ -526,6 +498,8 @@ autocmd FileType cpp,c nmap <F5> :exe "!./".expand("%:r").".bin"<Left>
 
 "" Windows 默认保存位置
 if has('gui_running') && has("win32")
-    cd D:\360data\重要数据\桌面
+  cd D:\360data\重要数据\桌面
 endif
 
+"" Twitvim
+let twitvim_enable_python = 1
