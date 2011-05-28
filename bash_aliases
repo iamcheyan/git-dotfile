@@ -1,3 +1,6 @@
+# fbterm + fbterm_ucimf
+alias myfb='LC_CTYPE=zh_CN.UTF-8 fbterm -i fbterm_ucimf'
+
 # openvpn
 alias ovpnt='sudo /etc/init.d/openvpn start'
 alias ovpnp='sudo /etc/init.d/openvpn stop'

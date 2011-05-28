@@ -25,7 +25,6 @@ else
   set background=dark
   colorscheme solarized
   let g:solarized_termcolors = 256
-  let g:solarized_contrast = "normal"
 endif
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
