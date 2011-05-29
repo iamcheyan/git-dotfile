@@ -20,6 +20,7 @@ filetype plugin on
 filetype indent on
 
 colorscheme diablo3
+let g:diablo3_longline = 1
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash

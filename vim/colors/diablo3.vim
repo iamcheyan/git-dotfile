@@ -3,6 +3,20 @@
 " Maintainer:   Vayn <vayn@vayn.de>
 " Last Change:  2011年 05月 29日 星期日 22:01:40 CST
 " Thanks To:    lilydjwg, Tomas Restrepo (author of molokai.vim)
+" Options:
+"
+" If you want to set long line warning, copy this in your vimrc:
+"
+"   let g:diablo3_longline = 1
+"
+"
+" The default length of a line is 120, you can change it by putting
+" the following in your vimrc:
+"
+"   let g:diablo3_len = 79
+"
+" Notice the length here is the length you want to set plus 1.
+"
 "
 
 hi clear
@@ -71,10 +85,10 @@ hi SpecialComment  guifg=#465457               gui=bold
 hi Special         guifg=#66d9ef guibg=bg      gui=italic
 hi SpecialKey      guifg=#888A85               gui=italic
 if has("spell")
-    hi SpellBad    guisp=#ff0000 gui=undercurl
-    hi SpellCap    guisp=#7070F0 gui=undercurl
-    hi SpellLocal  guisp=#70f0f0 gui=undercurl
-    hi SpellRare   guisp=#ffffff gui=undercurl
+  hi SpellBad    guisp=#ff0000 gui=undercurl
+  hi SpellCap    guisp=#7070F0 gui=undercurl
+  hi SpellLocal  guisp=#70f0f0 gui=undercurl
+  hi SpellRare   guisp=#ffffff gui=undercurl
 endif
 hi Statement       guifg=#6d8fd9               gui=bold
 hi htmlStatement   guifg=#99b5d9
@@ -179,7 +193,7 @@ if &t_Co > 255
   highlight Structure                                     ctermfg=81
   highlight Tag                                           ctermfg=197
   highlight Title                                         ctermfg=209
-  highlight Todo            cterm=bold                    ctermfg=231
+  highlight Todo            cterm=bold                    ctermfg=234
 
   highlight Typedef                                       ctermfg=81
   highlight Type            cterm=none                    ctermfg=81
@@ -198,7 +212,14 @@ if &t_Co > 255
   highlight LineNr                          ctermbg=18    ctermfg=250
   highlight NonText                         ctermbg=18    ctermfg=235
 
-  highlight LongLineWarning cterm=underline ctermbg=53    ctermfg=89
+  highlight LongLineWarning cterm=underline ctermbg=53    ctermfg=152
 end
 
-match LongLineWarning '\%121v.*' " Error format when a line is longer than 120
+" Error format when a line is longer than g:diablo3_longlen, default
+" length is 120.
+if exists('g:diablo3_longline') && g:diablo3_longline == 1 
+  if ! exists('g:diablo3_len')
+    let g:diablo3_len = 121
+  end
+  exe 'match LongLineWarning "\%'.g:diablo3_len.'v.*"'
+end
