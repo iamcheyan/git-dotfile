@@ -19,13 +19,7 @@ filetype plugin on
 "" 为特定文件类型载入相关缩进文件
 filetype indent on
 
-if has('gui_running')
-  colorscheme diablo3
-else
-  set background=dark
-  colorscheme solarized
-  let g:solarized_termcolors = 256
-endif
+colorscheme diablo3
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -146,8 +140,7 @@ if has("win32")
 else
   set fileencoding=utf-8
 endif
-"" source $VIMRUNTIME/delmenu.vim
-"" source $VIMRUNTIME/menu.vim
+source $VIMRUNTIME/delmenu.vim
 language messages zh_CN.utf-8
 
 "" 设置文件格式为unix
@@ -284,6 +277,10 @@ nmap <leader>r :RainbowParenthesesToggle<CR>
 
 "" Ack
 map <leader>a :Ack
+
+
+"" Display Highlight Group
+nnoremap wh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 
 "" 括号和引号补全 {{{

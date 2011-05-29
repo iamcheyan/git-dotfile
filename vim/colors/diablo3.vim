@@ -1,19 +1,18 @@
 " Vim color file
-" Name:   diablo3.vim
-" Author: Vayn <vayn@vayn.de>
-" Note:   Based on molokai theme by Tomas Restrepo
+" Name:         diablo3
+" Maintainer:   Vayn <vayn@vayn.de>
+" Last Change:  2011年 05月 29日 星期日 22:01:40 CST
+" Thanks To:    lilydjwg, Tomas Restrepo (author of molokai.vim)
 "
 
 hi clear
 
 set background=dark
 if version > 580
-    " no guarantees for version 5.8 and below, but this makes it stop
-    " complaining
-    hi clear
-    if exists("syntax_on")
-        syntax reset
-    endif
+  hi clear
+  if exists("syntax_on")
+    syntax reset
+  endif
 endif
 let g:colors_name="diablo3"
 
@@ -103,95 +102,103 @@ hi CursorLine                    guibg=#293739
 hi CursorColumn                  guibg=#293739
 hi LineNr          guifg=#bcbcbc guibg=#151825
 hi NonText         guifg=#151825 guibg=#151825 
-" RoyalBlue #151825
 
 hi LongLineWarning guifg=#960050 guibg=#1e0010 gui=underline
-match LongLineWarning '\%121v.*' " Error format when a line is longer than 120
 
 "
 " Support for 256-color terminal
 "
 if &t_Co > 255
-   hi Boolean         ctermfg=135
-   hi Character       ctermfg=144
-   hi Number          ctermfg=135
-   hi String          ctermfg=144
-   hi Conditional     ctermfg=161               cterm=bold
-   hi Constant        ctermfg=135               cterm=bold
-   hi Cursor          ctermfg=16  ctermbg=253
-   hi Debug           ctermfg=225               cterm=bold
-   hi Define          ctermfg=81
-   hi Delimiter       ctermfg=241
+  highlight Boolean         cterm=bold                    ctermfg=141
+  highlight Character                                     ctermfg=185
+  highlight Number                                        ctermfg=210
+  highlight String                                        ctermfg=209
+  highlight Conditional                                   ctermfg=214
+  highlight Constant        cterm=bold                    ctermfg=191
+  highlight Cursor                          ctermbg=231   ctermfg=16
+  highlight Debug           cterm=bold                    ctermfg=250
+  highlight Define                                        ctermfg=81
+  highlight Delimiter                                     ctermfg=245
+  highlight DiffAdd                         ctermbg=23
+  highlight DiffChange                      ctermbg=239   ctermfg=245
+  highlight DiffDelete                      ctermbg=53    ctermfg=89
+  highlight DiffText        cterm=bold      ctermbg=239
 
-   hi DiffAdd                     ctermbg=24
-   hi DiffChange      ctermfg=181 ctermbg=239
-   hi DiffDelete      ctermfg=162 ctermbg=53
-   hi DiffText                    ctermbg=102 cterm=bold
+  highlight Directory       cterm=bold                    ctermfg=112
+  highlight Error                           ctermbg=53    ctermfg=89
+  highlight ErrorMsg        cterm=bold      ctermbg=235   ctermfg=197
+  highlight Exception       cterm=bold                    ctermfg=112
+  highlight Float                                         ctermfg=141
+  highlight FoldColumn                      ctermbg=31    ctermfg=195
+  highlight Folded                          ctermbg=31    ctermfg=195
+  highlight Function                                      ctermfg=154
+  highlight Identifier                                    ctermfg=208
+  highlight Ignore                                        ctermfg=244
+  highlight IncSearch                       ctermbg=16    ctermfg=186
 
-   hi Directory       ctermfg=118               cterm=bold
-   hi Error           ctermfg=219 ctermbg=89
-   hi ErrorMsg        ctermfg=199 ctermbg=16    cterm=bold
-   hi Exception       ctermfg=118               cterm=bold
-   hi Float           ctermfg=135
-   hi FoldColumn      ctermfg=67  ctermbg=16
-   hi Folded          ctermfg=67  ctermbg=16
-   hi Function        ctermfg=118
-   hi Identifier      ctermfg=208
-   hi Ignore          ctermfg=244 ctermbg=232
-   hi IncSearch       ctermfg=193 ctermbg=16
+  highlight Keyword         cterm=bold                    ctermfg=197
+  highlight Label           cterm=none                    ctermfg=185
+  highlight Macro                                         ctermfg=186
+  highlight SpecialKey                                    ctermfg=191
 
-   hi Keyword         ctermfg=161               cterm=bold
-   hi Label           ctermfg=229               cterm=none
-   hi Macro           ctermfg=193
-   hi SpecialKey      ctermfg=81
+  highlight MatchParen      cterm=bold      ctermbg=208   ctermfg=16
 
-   hi MatchParen      ctermfg=16  ctermbg=208 cterm=bold
-   hi ModeMsg         ctermfg=229
-   hi MoreMsg         ctermfg=229
-   hi Operator        ctermfg=161
+  highlight MoreMsg                                       ctermfg=185
+  highlight Operator        cterm=bold                    ctermfg=33
 
-   " complete menu
-   hi Pmenu           ctermfg=81  ctermbg=16
-   hi PmenuSel                    ctermbg=244
-   hi PmenuSbar                   ctermbg=232
-   hi PmenuThumb      ctermfg=81
+  " complete menu
+  highlight Pmenu                           ctermbg=16    ctermfg=81
+  highlight PmenuSel                        ctermbg=244
+  highlight PmenuSbar                       ctermbg=232
+  highlight PmenuThumb                                    ctermfg=81
 
-   hi PreCondit       ctermfg=118               cterm=bold
-   hi PreProc         ctermfg=118
-   hi Question        ctermfg=81
-   hi Repeat          ctermfg=161               cterm=bold
-   hi Search          ctermfg=253 ctermbg=66
+  highlight PreCondit       cterm=bold                    ctermfg=112
+  highlight PreProc                                       ctermfg=112
+  highlight Question                                      ctermfg=81
+  highlight Repeat          cterm=bold                    ctermfg=33
+  highlight Search                          ctermbg=33    ctermfg=231
+  " marks column
+  highlight SignColumn                      ctermbg=235   ctermfg=112
+  highlight SpecialChar     cterm=bold                    ctermfg=197
+  highlight SpecialComment  cterm=bold                    ctermfg=240
+  highlight Special                                       ctermfg=81
+  highlight SpecialKey                                    ctermfg=245
 
-   " marks column
-   hi SignColumn      ctermfg=118 ctermbg=235
-   hi SpecialChar     ctermfg=161               cterm=bold
-   hi SpecialComment  ctermfg=245               cterm=bold
-   hi Special         ctermfg=81  ctermbg=232
-   hi SpecialKey      ctermfg=245
+  if has("spell")
+    highlight SpellBad      cterm=undercurl
+    highlight SpellCap      cterm=undercurl
+    highlight SpellLocal    cterm=undercurl
+    highlight SpellRare     cterm=undercurl
+  endif
 
-   hi Statement       ctermfg=161               cterm=bold
-   hi StatusLine      ctermfg=238 ctermbg=253
-   hi StatusLineNC    ctermfg=244 ctermbg=232
-   hi StorageClass    ctermfg=208
-   hi Structure       ctermfg=81
-   hi Tag             ctermfg=161
-   hi Title           ctermfg=166
-   hi Todo            ctermfg=231 ctermbg=232   cterm=bold
+  highlight Statement       cterm=bold                    ctermfg=33
+  highlight htmlStatement                                 ctermfg=67
+  highlight StatusLine                                    ctermfg=240
+  highlight StatusLineNC                    ctermbg=232   ctermfg=244
+  highlight StorageClass                                  ctermfg=208
+  highlight Structure                                     ctermfg=81
+  highlight Tag                                           ctermfg=197
+  highlight Title                                         ctermfg=209
+  highlight Todo            cterm=bold                    ctermfg=231
 
-   hi Typedef         ctermfg=81
-   hi Type            ctermfg=81                cterm=none
-   hi Underlined      ctermfg=244               cterm=underline
+  highlight Typedef                                       ctermfg=81
+  highlight Type            cterm=none                    ctermfg=81
+  highlight Underlined      cterm=underline               ctermfg=244
 
-   hi VertSplit       ctermfg=244 ctermbg=232   cterm=bold
-   hi VisualNOS                   ctermbg=238
-   hi Visual                      ctermbg=235
-   hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
-   hi WildMenu        ctermfg=81  ctermbg=16
+  highlight VertSplit       cterm=bold      ctermbg=232   ctermfg=244
+  highlight VisualNOS                       ctermbg=238
+  highlight Visual                          ctermbg=238
+  highlight WarningMsg      cterm=bold      ctermbg=236   ctermfg=231
+  highlight WildMenu                        ctermbg=16    ctermfg=81
 
-   hi Normal          ctermfg=252 ctermbg=233
-   hi Comment         ctermfg=59
-   hi CursorLine                  ctermbg=234   cterm=none
-   hi CursorColumn                ctermbg=234
-   hi LineNr          ctermfg=250 ctermbg=234
-   hi NonText         ctermfg=250 ctermbg=234
+  highlight Normal                          ctermbg=17    ctermfg=231
+  highlight Comment                                       ctermfg=248
+  highlight CursorLine      cterm=none      ctermbg=237
+  highlight CursorColumn                    ctermbg=237
+  highlight LineNr                          ctermbg=18    ctermfg=250
+  highlight NonText                         ctermbg=18    ctermfg=235
+
+  highlight LongLineWarning cterm=underline ctermbg=53    ctermfg=89
 end
+
+match LongLineWarning '\%121v.*' " Error format when a line is longer than 120
