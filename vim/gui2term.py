@@ -2,7 +2,6 @@
 # vim:fileencoding=utf-8
 
 '''
-为Vim的图形界面配色方案生成256色终端版定义
 Generate 256-color definition for Vim's colorscheme
 http://www.vim.org/scripts/script.php?script_id=2778
 '''

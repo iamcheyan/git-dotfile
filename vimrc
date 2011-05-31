@@ -11,7 +11,6 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-""call system("notify-send " . v:version)
 
 "" 载入文件类型插件
 filetype plugin on
@@ -29,7 +28,7 @@ set shellslash
 syntax on
 
 "" 设置字体
-set guifont="Menlo"
+set guifont=DejaVu\ Sans\ Mono\ Book\ 11
 
 "" 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
 "" set encoding=utf-8
