@@ -206,9 +206,11 @@ imap <silent> <F8> <esc>:BufExplorer<CR>
 nmap <silent> <F8> :BufExplorer<CR>
 "" }}}
 
-"" Taglist shortcuts
-imap <silent> <F9> <esc>:TlistToggle<CR>
-nmap <silent> <F9> :TlistToggle<CR>
+"" Tagbar settings
+imap <silent> <F9> <esc>:TagbarToggle<CR>
+nmap <silent> <F9> :TagbarToggle<CR>
+let g:tagbar_left = 1
+let g:tagbar_width = 30
 
 "" 窗口区域切换,F5 后 ↑↓←→  来切换
 imap <silent> <C-left> <esc><C-W><left>
