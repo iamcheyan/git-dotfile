@@ -25,10 +25,10 @@ let g:diablo3_longline = 1
 set shellslash
 
 "" 语法样式开启
-syntax on
+syntax enable
 
 "" 设置字体
-set guifont=DejaVu\ Sans\ Mono\ Book\ 11
+set guifont=DejaVu\ Sans\ Mono\ Book
 
 "" 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
 "" set encoding=utf-8
@@ -76,7 +76,6 @@ set wildmode=list:longest
 "" 打开自动缩,继承前一行的缩进注释进
 set autoindent
 
-"" 默认情况下手动折叠 foldmethod
 set fdm=syntax
 set foldclose=all
 
@@ -196,6 +195,9 @@ function! CHANGE_CURR_DIR()
 endfunction
 autocmd BufEnter * call CHANGE_CURR_DIR()
 
+
+nnoremap <silent> <CR> :nohl<CR>
+
 "" NERDTree插件的快捷键
 imap <silent> <F7> <esc>:NERDTreeToggle<CR>
 nmap <silent> <F7> :NERDTreeToggle<CR>
@@ -267,7 +269,7 @@ nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
 
 "" Edit vim stuff.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/snippets/<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/bundle/snipmate/snippets/<cr>
 
 "" open a new vertical split and switch over to it
 nnoremap <leader>w <C-w>v<C-w>l

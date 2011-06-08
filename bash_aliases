@@ -34,3 +34,6 @@ alias w='python $HOME/local/t/t.py --task-dir $HOME/Dropbox/tasks --list writing
 
 # quit terminal
 alias ':q'='exit'
+
+# read bootlog
+alias blog='sed "#^`LANG=C date \"+%a %b %e\"`#\!d;s/^.\{26\}//;s/\^\[/\x1b/g" /var/log/boot.log|while read i; do echo "$i" && sleep 0.1; done'

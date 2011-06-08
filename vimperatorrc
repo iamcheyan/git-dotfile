@@ -2,12 +2,12 @@
 set runtimepath=~/.vimperator
 
 "把页面浏览、标签页跳转和历史跳转绑定到顺手的地方
-noremap j 3j
-noremap k 3k
-noremap h gT
-noremap l gt
-noremap H h
-noremap L l
+nnoremap j 3j
+nnoremap k 3k
+nnoremap h gT
+nnoremap l gt
+nnoremap H h
+nnoremap L l
 map < <C-6>
 noremap > g$
 noremap , <C-o>
