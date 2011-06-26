@@ -1,1 +1,1 @@
-/home/vayn/code/repository/hg/diablo3-scheme/diablo3.vim
+/home/vayn/code/repository/my/diablo3-scheme/diablo3.vim

@@ -212,19 +212,19 @@ nmap <silent> <F9> :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_width = 30
 
-"" 窗口区域切换,F5 后 ↑↓←→  来切换
-imap <silent> <C-left> <esc><C-W><left>
-vmap <silent> <C-left> <esc><C-W><left>
-nmap <silent> <C-left> <C-W><left>
-imap <silent> <C-right> <esc><C-W><right>
-vmap <silent> <C-right> <esc><C-W><right>
-nmap <silent> <C-right> <C-W><right>
-imap <silent> <C-up> <esc><C-W><up>
-vmap <silent> <C-up> <esc><C-W><up>
-nmap <silent> <C-up> <C-W><up>
-imap <silent> <C-down> <esc><C-W><down>
-vmap <silent> <C-down> <esc><C-W><down>
-nmap <silent> <C-down> <C-W><down>
+"" 窗口区域切换 ←→↑↓
+imap <silent> `h <esc><C-W><left>
+vmap <silent> `h <esc><C-W><left>
+nmap <silent> `h <C-W><left>
+imap <silent> `l <esc><C-W><right>
+vmap <silent> `l <esc><C-W><right>
+nmap <silent> `l <C-W><right>
+imap <silent> `k <esc><C-W><up>
+vmap <silent> `k <esc><C-W><up>
+nmap <silent> `k <C-W><up>
+imap <silent> `j <esc><C-W><down>
+vmap <silent> `j <esc><C-W><down>
+nmap <silent> `j <C-W><down>
 
 "" Use the damn hjkl keys
 nnoremap <up> <nop>

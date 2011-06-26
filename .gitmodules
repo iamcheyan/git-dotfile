@@ -65,3 +65,9 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = git://github.com/majutsushi/tagbar.git
+[submodule "vim/bundle/color-indent"]
+	path = vim/bundle/color-indent
+	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/bundle/vimproc"]
+	path = vim/bundle/vimproc
+	url = git://github.com/Shougo/vimproc.git

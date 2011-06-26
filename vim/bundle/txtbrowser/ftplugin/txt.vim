@@ -17,8 +17,7 @@ endif
 "When this file reload, only load TBrowser_Ctags_Cmd once.
 
 if !exists('Tlist_Ctags_Cmd')
-	echomsg 'TxtBrowser: Taglist(http://www.vim.org/scripts/script.php?script_id=273) ' .
-				\ 'not found. Plugin is not loaded.'
+	"echomsg 'TxtBrowser: Taglist(http://www.vim.org/scripts/script.php?script_id=273) not found. Plugin is not loaded.'
 	" Skip loading the plugin
 	let loaded_taglist = 'no'
 	let &cpo = s:cpo_save

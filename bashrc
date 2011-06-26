@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export TERM="gnome-256color"
+export TERM="xterm-256color"
 export LANG="zh_CN.UTF-8";
 export LC_CTYPE="zh_CN.UTF-8";
 export LC_NUMERIC="zh_CN.UTF-8";
@@ -19,7 +19,7 @@ export LC_ADDRESS="zh_CN.UTF-8";
 export LC_TELEPHONE="zh_CN.UTF-8";
 export LC_MEASUREMENT="zh_CN.UTF-8";
 export LC_IDENTIFICATION="zh_CN.UTF-8";
-export PATH="$PATH:/opt/lampp/bin:/var/lib/gems/1.8/bin";
+export PATH="$PATH:~/bin/mongodb/bin:/opt/lampp/bin:/var/lib/gems/1.8/bin";
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
@@ -144,15 +144,6 @@ else
   start_agent;
 fi
 
-# $ tweet "your message"
-function tweet {
- if [ ! "$*" ]; then
-   echo 'Nothing to tweet!'
-   return 1
- fi
- echo "$*" | bti
-}
-
 
 function vasa {
     if [ ! "$*" ]; then
@@ -165,6 +156,9 @@ function vasa {
 
 # bti completion
 source ~/.bash_completion.d/bti-bashcompletion
+
+# tmux completion
+source ~/.bash_completion.d/bash_completion_tmux.sh
 
 # notify
 complete -o filenames -F _root_command notify
