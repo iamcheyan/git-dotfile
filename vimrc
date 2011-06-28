@@ -195,7 +195,7 @@ function! CHANGE_CURR_DIR()
 endfunction
 autocmd BufEnter * call CHANGE_CURR_DIR()
 
-
+"" 回车取消搜索高亮
 nnoremap <silent> <CR> :nohl<CR>
 
 "" NERDTree插件的快捷键
@@ -366,6 +366,10 @@ nnoremap Vat vatV
 vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
 vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
 
+"" Gundo Toggle
+nnoremap <F5> :GundoToggle<CR>
+
+
 "" 检查当前文件代码语法(php){{{
 function! CheckSyntax()
   if &filetype!="php"
@@ -430,11 +434,6 @@ let g:user_zen_settings = {
 let g:user_zen_expandabbr_key = '<c-e>'  "设置为ctrl+e展开
 let g:use_zen_complete_tag = 1
 
-"" gVim Fullscreen
-if has('gui_running') && has("win32")
-  map <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-  imap <F11> :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-endif
 
 "" Ack can be used as a replacement for 99% of the uses of grep.
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
@@ -494,7 +493,7 @@ autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
 "" simple compile
 autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -std=gnu99\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
 "" execute bin which is compiled by source
-autocmd FileType cpp,c nmap <F5> :exe "!./".expand("%:r").".bin"<Left>
+autocmd FileType cpp,c nmap <F11> :exe "!./".expand("%:r").".bin"<Left>
 
 "" Windows 默认保存位置
 if has('gui_running') && has("win32")

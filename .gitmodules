@@ -29,9 +29,6 @@
 [submodule "vim/bundle/cscope_macros"]
     path = vim/bundle/cscope_macros
     url = git://github.com/vim-scripts/cscope_macros.vim.git
-[submodule "vim/bundle/pyflakes"]
-    path = vim/bundle/pyflakes
-    url = git://github.com/vim-scripts/pyflakes.vim.git
 [submodule "vim/bundle/tabular"]
     path = vim/bundle/tabular
     url = git://github.com/godlygeek/tabular.git
@@ -74,3 +71,6 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/pyflakes"]
+	path = vim/bundle/pyflakes
+	url = git://github.com/kevinw/pyflakes-vim.git
