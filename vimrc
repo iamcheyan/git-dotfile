@@ -19,7 +19,7 @@ filetype plugin on
 filetype indent on
 
 colorscheme diablo3
-let g:diablo3_longline = 1
+let g:diablo3_longline = 0
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -151,7 +151,7 @@ set showcmd
 "" 设置窗口大小
 set lines=30
 set columns=85
-set textwidth=79
+set textwidth=80
 
 "" 自动换行
 set wrap dy=lastline
