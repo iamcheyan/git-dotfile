@@ -74,3 +74,9 @@
 [submodule "vim/bundle/pyflakes"]
 	path = vim/bundle/pyflakes
 	url = git://github.com/kevinw/pyflakes-vim.git
+[submodule "vim/bundle/jslint"]
+	path = vim/bundle/jslint
+	url = git://github.com/hallettj/jslint.vim.git
+[submodule "vim/bundle/js_better_indent"]
+	path = vim/bundle/js_better_indent
+	url = git://github.com/pangloss/vim-javascript.git

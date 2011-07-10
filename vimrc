@@ -53,10 +53,6 @@ set history=1000
 "" 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
 
-"" 高亮显示普通txt文件（需要txt.vim脚本）
-au BufRead,BufNewFile *.txt setlocal ft=txt
-au BufRead,BufNewFile *  setfiletype txt
-
 "" 不需要保持和 vi 非常兼容
 set nocompatible
 
@@ -342,14 +338,23 @@ endfunction
 autocmd InsertLeave * set imdisable
 autocmd InsertLeave * set noimdisable
 
+"" 高亮显示普通txt文件（需要txt.vim脚本）
+au BufRead,BufNewFile *.txt setlocal ft=txt
+au BufRead,BufNewFile *  setfiletype txt
+
 "" CSS3 语法支持
 au BufRead,BufNewFile *.css set ft=css syntax=css3
 
+"" Markdown 语法支持
 au BufNewFile,BufRead *.m*down set filetype=markdown
 au BufNewFile,BufRead *.m*down nnoremap <leader>1 yypVr=
 au BufNewFile,BufRead *.m*down nnoremap <leader>2 yypVr-
 au BufNewFile,BufRead *.m*down nnoremap <leader>3 I### <ESC>
 
+"" jQuery 语法支持
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+"" Vim 格式折叠设置
 au BufNewFile,BufRead *.vim set foldmethod=marker
 
 "" Make selecting inside an HTML tag less dumb
@@ -500,5 +505,3 @@ if has('gui_running') && has("win32")
   cd D:\360data\重要数据\桌面
 endif
 
-"" Twitvim
-let twitvim_enable_python = 1
