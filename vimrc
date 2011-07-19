@@ -505,3 +505,5 @@ if has('gui_running') && has("win32")
   cd D:\360data\重要数据\桌面
 endif
 
+"" 打开javascript对dom、html和css的支持
+let javascript_enable_domhtmlcss=1

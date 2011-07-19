@@ -114,6 +114,11 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# My custom functions
+if [[ -f ~/.bash_funcs ]]; then
+  . ~/.bash_funcs
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -144,29 +149,11 @@ else
   start_agent;
 fi
 
-
-function vasa {
-    if [ ! "$*" ]; then
-        echo 'Nothing to tweet!'
-        return 1
-    fi
-    # gd $*
-    echo "$* #vasa" | bti
-}
-
 # bti completion
 source ~/.bash_completion.d/bti-bashcompletion
 
 # tmux completion
 source ~/.bash_completion.d/bash_completion_tmux.sh
-
-# notify
-complete -o filenames -F _root_command notify
-if [ "$PS1" ] ; then
-mkdir -p -m 0700 /dev/cgroup/cpu/user/$$ > /dev/null 2>&1
-echo $$ > /dev/cgroup/cpu/user/$$/tasks
-echo "1" > /dev/cgroup/cpu/user/$$/notify_on_release
-fi
 
 ### chsdir start ###
 . $HOME/bin/chs_completion
