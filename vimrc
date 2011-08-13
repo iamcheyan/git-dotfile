@@ -28,7 +28,7 @@ set shellslash
 syntax enable
 
 "" 设置字体
-set guifont=DejaVu\ Sans\ Mono\ Book
+set guifont=inconsolata-dz
 
 "" 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
 "" set encoding=utf-8

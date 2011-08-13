@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+export EDITOR="vim"
 export TERM="xterm-256color"
 export LANG="zh_CN.UTF-8";
 export LC_CTYPE="zh_CN.UTF-8";
@@ -21,12 +22,17 @@ export LC_MEASUREMENT="zh_CN.UTF-8";
 export LC_IDENTIFICATION="zh_CN.UTF-8";
 export PATH="$PATH:~/bin/mongodb/bin:/opt/lampp/bin:/var/lib/gems/1.8/bin";
 
+# setup XIM environment, needn't if use SCIM as gtk-immodules
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE=xim
+export QT_IM_MODULE=xim
+
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
-HISTIGNORE="ls:pwd:cd:clear:vim:vi:gvim:fg:bg:jobs:top:ovpnt:ovpnp:sudo:ffword:man:rm:cp:mv"
+HISTIGNORE="ls:pwd:cd:clear:vim:vi:gvim:fg:bg:jobs:top:ovpnt:ovpnp:sudo:ffword:man:rm:cp:mv:ff"
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -149,9 +155,6 @@ else
   start_agent;
 fi
 
-# bti completion
-source ~/.bash_completion.d/bti-bashcompletion
-
 # tmux completion
 source ~/.bash_completion.d/bash_completion_tmux.sh
 
@@ -164,3 +167,9 @@ complete -o filenames -F _filedir_xspec file
 
 # autojump
 source /etc/profile.d/autojump.bash
+### chsdir start ###
+. $HOME/bin/chs_completion
+PATH=$PATH:$HOME/bin
+#export CHSDIR="{'n':'l'}"
+complete -o filenames -F _filedir_xspec file
+### chsdir finish. ###
