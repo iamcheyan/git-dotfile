@@ -4,6 +4,7 @@ HISTFILE=~/.histfile
 HISTSIZE=20000
 SAVEHIST=20000
 unsetopt beep
+export EDITOR="vim"
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/vayn/.zshrc'
