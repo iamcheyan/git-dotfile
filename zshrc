@@ -188,6 +188,7 @@ alias mpc="mpc -h ~/.mpd/socket"
 alias ncmpcpp="ncmpcpp -h ~/.mpd/socket"
 alias xx="file-roller -h"
 alias irssi="irssi -c irc.freenode.net"
+alias bat="acpitool -b"
 
 alias winxp="VBoxManage startvm WinXP"
 alias winxp2="VBoxManage startvm WinXP_test"

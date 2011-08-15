@@ -116,9 +116,6 @@ myclock:start()
 netwidget = widget({ type = "textbox" })
 vicious.register(netwidget, vicious.widgets.net, '↓<span color="#5798d9">${eth0 down_kb}</span> ↑<span color="#c2ba62">${eth0 up_kb}</span> ', 2)
 
-memwidget = widget({ type = "textbox" })
-vicious.register(memwidget, vicious.widgets.mem, 'Mem <span color="#90ee90">$1%</span>', 3)
-
 --cputempwidget = widget({ type = "textbox" })
 --cputempwidget_clock = timer({ timeout = 2 })
 --cputempwidget_clock:add_signal("timeout", function()
