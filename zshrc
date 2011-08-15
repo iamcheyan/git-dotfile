@@ -146,6 +146,7 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 # 别名 {{{1
 # 命令别名 {{{2
+source .bash_aliases
 alias ll='ls -lh'
 alias la='ls -A'
 alias rsync="rsync '--exclude=*~' '--exclude=*.swp'"
@@ -195,7 +196,7 @@ alias ren="vim +'Ren'"
 # 查看进程数最多的程序
 alias topnum="ps -e|sort -k4|awk '{print \$4}'|uniq -c|sort -n|tail"
 alias soul="mplayer -really-quiet -nolirc -loop 0 ~/音乐/_纯音乐/忧伤还是快乐.mp3"
-alias rebootrt="wget --user=admin --password=admin 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
+alias rebootrt="wget --user=vayn --password=admin888 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
 alias xcp="rsync -aviHK --delete --exclude='*~'"
 
 # 后缀别名 {{{2

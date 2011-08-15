@@ -9,9 +9,6 @@ require("vicious")
 require("naughty")
 -- require("vicious")
 
--- Load Debian menu entries
--- require("debian.menu")
-
 -- my modules
 require("empathy")
 require("myutil")
@@ -82,23 +79,12 @@ end
 -- tags[1][9].selected = true
 
 -- {{{1 Menu
--- applications menu
-require('freedesktop.utils')
-freedesktop.utils.terminal = terminal -- default: "xterm"
-freedesktop.utils.icon_theme = 'gnome' -- look inside /usr/share/icons/,
-                                       -- default: nil (don't use icon theme)
-require('freedesktop.menu')
--- require('debian.menu')
-
-menu_items = freedesktop.menu.new()
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "编辑配置", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
    { "重新加载", awesome.restart, '/usr/share/icons/gnome/16x16/actions/stock_refresh.png' },
    { "注销", awesome.quit },
 }
-table.insert(menu_items, { "awesome", myawesomemenu, beautiful.awesome_icon })
-table.insert(menu_items, { "open terminal", terminal, freedesktop.utils.lookup_icon({icon = 'terminal'}) })
 
 mymenu = {
    { "Nautilus", "nautilus --no-desktop /home/lilydjwg/tmpfs", '/usr/share/icons/hicolor/32x32/apps/nautilus.png' },
@@ -108,23 +94,16 @@ mymenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
-            { "终端", terminal, '/usr/share/icons/gnome/16x16/apps/gnome-terminal.png' },
-            { "GVIM", "gvim", '/usr/share/pixmaps/gvim.png' },
-            { "火狐", "firefox", '/usr/share/icons/hicolor/32x32/apps/firefox.png' },
-            { "常用", mymenu },
-            { "关机", "dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown", '/usr/share/icons/gnome/16x16/actions/gtk-quit.png' },
-          }
-      })
+				    { "终端", terminal, '/usr/share/icons/gnome/16x16/apps/gnome-terminal.png' },
+				    { "GVIM", "gvim", '/usr/share/pixmaps/gvim.png' },
+				    { "火狐", "firefox-nightly", '/usr/share/icons/hicolor/32x32/apps/firefox.png' },
+				    { "常用", mymenu },
+				    { "关机", "dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown", '/usr/share/icons/gnome/16x16/actions/gtk-quit.png' },
+				  }
+			})
 
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-             menu = mymainmenu })
-
--- desktop icons
-require('freedesktop.desktop')
-for s = 1, screen.count() do
-    freedesktop.desktop.add_applications_icons({screen = s, showlabels = true})
-    freedesktop.desktop.add_dirs_and_files_icons({screen = s, showlabels = true})
-end
+				     menu = mymainmenu })
 
 -- {{{1 Wibox
 -- {{{2Create a textclock widget
@@ -658,5 +637,9 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 awful.util.spawn("awesomeup")
 awful.tag.viewonly(tags[1][6])
+
+-- {{{1 Autostart
+-- autostart apps
+awful.util.spawn("guake")
 
 -- vim: set fdm=marker sw=4 sts=4:
