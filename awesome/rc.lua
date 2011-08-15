@@ -641,5 +641,6 @@ awful.tag.viewonly(tags[1][6])
 -- {{{1 Autostart
 -- autostart apps
 awful.util.spawn("guake")
+awful.util.spawn("dropboxd")
 
 -- vim: set fdm=marker sw=4 sts=4:
