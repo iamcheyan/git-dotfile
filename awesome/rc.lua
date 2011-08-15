@@ -116,6 +116,9 @@ myclock:start()
 netwidget = widget({ type = "textbox" })
 vicious.register(netwidget, vicious.widgets.net, '↓<span color="#5798d9">${eth0 down_kb}</span> ↑<span color="#c2ba62">${eth0 up_kb}</span> ', 2)
 
+memwidget = widget({ type = "textbox" })
+vicious.register(memwidget, vicious.widgets.mem, 'Mem <span color="#90ee90">$1%</span>', 3)
+
 --cputempwidget = widget({ type = "textbox" })
 --cputempwidget_clock = timer({ timeout = 2 })
 --cputempwidget_clock:add_signal("timeout", function()
@@ -638,6 +641,7 @@ awful.tag.viewonly(tags[1][6])
 -- {{{1 Autostart
 -- autostart apps
 awful.util.spawn("guake")
+awful.util.spawn("sudo dhcpcd wlan0 &")
 awful.util.spawn("dropboxd")
 
 -- vim: set fdm=marker sw=4 sts=4:

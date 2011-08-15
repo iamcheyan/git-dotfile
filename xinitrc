@@ -36,9 +36,9 @@ xrdb -merge ~/.Xresources   # update x resources db
 xrdb ~/.Xdefaults
 
 xscreensaver -no-splash &         # starts screensaver daemon
-xsetroot -cursor_name right_ptr & # sets the cursor icon
+xsetroot -cursor_name left_ptr &  # sets the cursor icon
 sh ~/.fehbg &                     # sets the background image
-xset -b /usr/bin/numlockx on      # open numlock
+#xset -b /usr/bin/numlockx on     # open numlock
 
 # Transparency
 xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
