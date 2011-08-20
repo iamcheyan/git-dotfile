@@ -1,5 +1,6 @@
 /*** BEGIN LICENSE BLOCK {{{
     Copyright (c) 2008 suVene<suvene@zeromemory.info>
+    Copyright (c) 2008-2011 anekos<anekos@snca.net>
 
     distributable under the terms of an MIT-style license.
     http://www.opensource.jp/licenses/mit-license.html
@@ -11,10 +12,10 @@ var PLUGIN_INFO =
     <description>Vimperator plugins library?</description>
     <description lang="ja">適当なライブラリっぽいものたち。</description>
     <author mail="suvene@zeromemory.info" homepage="http://zeromemory.sblo.jp/">suVene</author>
+    <author mail="anekos@snca.net" homepage="http://snca.net/">anekos</author>
     <license>MIT</license>
-    <version>0.1.34</version>
+    <version>0.1.35</version>
     <minVersion>2.3pre</minVersion>
-    <maxVersion>3.0</maxVersion>
     <updateURL>https://github.com/vimpr/vimperator-plugins/raw/master/_libly.js</updateURL>
     <detail><![CDATA[
 == Objects ==
@@ -275,7 +276,7 @@ libly.$U = {//{{{
                 let self = this, args = arguments;
                 return func.call(self, function (_args) original.apply(self, _args || args), args);
             };
-            libly.$U.extend(current, {original: original.original || original, restore: restore});
+            libly.$U.extend(current, {original: original && original.original || original, restore: restore});
             return libly.$U.extend({
                 original: original,
                 current: current,
@@ -544,13 +545,22 @@ libly.Request.prototype = {
             this.transport = new XMLHttpRequest();
             this.transport.open(method, this.url, this.options.asynchronous, this.options.username, this.options.password);
 
-            this.transport.onreadystatechange = libly.$U.bind(this, this._onStateChange);
+            var stateChangeException;
+            this.transport.onreadystatechange = libly.$U.bind(this, function () {
+                try {
+                    this._onStateChange();
+                } catch (e) {
+                    stateChangeException = e;
+                }
+            });
             this.setRequestHeaders();
             this.transport.overrideMimeType('text/html; charset=' + this.options.encoding);
 
             this.body = this.method == 'POST' ? this.options.postBody : null;
 
             this.transport.send(this.body);
+
+            if (!this.options.asynchronous && stateChangeException) throw stateChangeException;
 
             // Force Firefox to handle ready state 4 for synchronous requests
             if (!this.options.asynchronous && this.transport.overrideMimeType)
@@ -673,7 +683,7 @@ libly.Wedata.prototype = {
 
         var logger = this.logger;
         var STORE_KEY = 'plugins-libly-wedata-' + this.dbname + '-items';
-        var store = storage.newMap(STORE_KEY, true);
+        var store = storage.newMap(STORE_KEY, {store: true});
         var cache = store && store.get('data');
 
         if (store && cache && new Date(store.get('expire')) > new Date()) {

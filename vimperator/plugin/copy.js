@@ -134,6 +134,7 @@ if (!liberator.globalVariables.copy_templates){
     liberator.globalVariables.copy_templates = [
         { label: 'titleAndURL',    value: '%TITLE%\n%URL%' },
         { label: 'title',          value: '%TITLE%' },
+        { label: 'url',            value: '%URL%' },
         { label: 'anchor',         value: '<a href="%URL%">%TITLE%</a>' },
         { label: 'selanchor',      value: '<a href="%URL%" title="%TITLE%">%SEL%</a>' },
         { label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' }

@@ -7,7 +7,6 @@ require("beautiful")
 require("vicious")
 -- Notification library
 require("naughty")
--- require("vicious")
 
 -- my modules
 require("empathy")
@@ -96,7 +95,7 @@ mymenu = {
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
 				    { "终端", terminal, '/usr/share/icons/gnome/16x16/apps/gnome-terminal.png' },
 				    { "GVIM", "gvim", '/usr/share/pixmaps/gvim.png' },
-				    { "火狐", "firefox-nightly", '/usr/share/icons/hicolor/32x32/apps/firefox.png' },
+				    { "火狐", "firefox", '/usr/share/icons/hicolor/32x32/apps/firefox.png' },
 				    { "常用", mymenu },
 				    { "关机", "dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown", '/usr/share/icons/gnome/16x16/actions/gtk-quit.png' },
 				  }
@@ -114,10 +113,20 @@ myclock:start()
 
 -- {{{2 vicious widgets
 netwidget = widget({ type = "textbox" })
-vicious.register(netwidget, vicious.widgets.net, '↓<span color="#5798d9">${eth0 down_kb}</span> ↑<span color="#c2ba62">${eth0 up_kb}</span> ', 2)
+vicious.register(netwidget, vicious.widgets.net, '↓<span color="#5798d9">${wlan0 down_kb}</span> ↑<span color="#c2ba62">${wlan0 up_kb}</span> ', 2)
 
 memwidget = widget({ type = "textbox" })
 vicious.register(memwidget, vicious.widgets.mem, 'Mem <span color="#90ee90">$1%</span>', 3)
+
+batwidget = awful.widget.progressbar()
+batwidget:set_width(8)
+batwidget:set_height(10)
+batwidget:set_vertical(true)
+batwidget:set_background_color("#494B4F")
+batwidget:set_border_color(nil)
+batwidget:set_color("#AECF96")
+batwidget:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
+vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
 
 --cputempwidget = widget({ type = "textbox" })
 --cputempwidget_clock = timer({ timeout = 2 })
@@ -640,8 +649,8 @@ awful.tag.viewonly(tags[1][6])
 
 -- {{{1 Autostart
 -- autostart apps
-awful.util.spawn("guake")
-awful.util.spawn("sudo dhcpcd wlan0 &") -- wireless setting in rc.local
+awful.util.spawn("sudo dhcpcd wlan0 &") -- scanning in rc.local
+awful.util.spawn("guake -e 'tmux'")
 awful.util.spawn("dropboxd")
 awful.util.spawn("xsetroot -cursor_name left_ptr")
 

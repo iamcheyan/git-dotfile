@@ -146,7 +146,7 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 # 别名 {{{1
 # 命令别名 {{{2
-source .bash_aliases
+source "$HOME/.bash_aliases"
 alias ll='ls -lh'
 alias la='ls -A'
 alias rsync="rsync '--exclude=*~' '--exclude=*.swp'"

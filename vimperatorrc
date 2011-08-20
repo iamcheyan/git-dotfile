@@ -1,7 +1,10 @@
-"设置路径
+"" 设置路径
 set runtimepath=~/.vimperator
 
-"把页面浏览、标签页跳转和历史跳转绑定到顺手的地方
+"" 加载plugins目录下的脚本
+loadplugins
+
+"" 把页面浏览、标签页跳转和历史跳转绑定到顺手的地方
 nnoremap j 3j
 nnoremap k 3k
 nnoremap h gT
@@ -15,44 +18,52 @@ noremap . <C-i>
 map U :ju<CR>
 map <C-.> :tabm<CR>
 
-"想办法再减少按键频率
+"" 想办法再减少按键频率
 noremap s <C-c>
 noremap <C-n> gb
 noremap <C-N> gB
 
-" 把剪贴板的URL贴至新标签上
+"" 把剪贴板的URL贴至新标签上
 noremap pp P
-" 把选中的URL直接跳转至新标签
+"" 把选中的URL直接跳转至新标签
 noremap po YP
-" 取消载入
+"" 取消载入
 map <C-d> :stop<CR>
 
-"Options
-set toolbars=none,tabs,bookmarks,navigation
+"" 还原书签栏和下载对话框快捷键
+noremap <C-b> <C-v><C-b>
+noremap <C-y> <C-v><C-y>
+
+"" 还原 ctrl-l 跳到标签栏的快捷键
+noremap <C-l> <C-v><C-l>
+
+"" Google search
+map gs :gsearch!<space>
+
+"" Options
+set toolbars=none,tabs,bookmarks
 set titlestring='Serene Paraselene'
 set popups=resized
-set complete=lfbs
-
-"" 加载plugins目录下的脚本
-loadplugins
+set cpt=lfbs
 
 "" Gmail和Greader的后台打开标签设置
 autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=false
 autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=true
 
-"PassThrough gmail and greader
-autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|chrome\:\/\/brief\/content\/brief\.xul).*/.test(buffer.URL)
-inoremap <C-z> <C-v><C-z>
-inoremap <C-y> <C-v><C-y>
+"" PassThrough gmail and greader
+""autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|chrome\:\/\/brief\/content\/brief\.xul).*/.test(buffer.URL)
+""inoremap <C-z> <C-v><C-z>
+""inoremap <C-y> <C-v><C-y>
 
-"还原我的书签栏和下载对话框快捷键
-noremap <C-b> <C-v><C-b>
-noremap <C-y> <C-v><C-y>
+"" feedSomeKeys Gmail
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+lazy fmaps -u=’mail\.google\.com/mail’ gi gs gt gd ga gc gb gk gl u k j o <Enter> ` ~ c / ? x s e m ! # r <S-r> a <S-a> <S-f> <S-n> <tab><Enter> ] [ { } z . *a *n *r *u *s *t
 
-"还原 ctrl-l 跳到标签栏的快捷键
-noremap <C-l> <C-v><C-l>
+"" feedSomeKeys GReader
+command! -nargs=+ googlereader lazy fmaps -urls='www\.google\.com/reader' -events=vkeypress <args>
+googlereader j k J K <space> <s-space> n m o p s t S v gh ga gs gS gu gt gT gd gf gF gc ge gp r u A 
+fmaps -urls='www\.google\.com/reader' p[,1 p],2
 
-"齐全的next和previous
+"" 齐全的next和previous
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
 set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
-
