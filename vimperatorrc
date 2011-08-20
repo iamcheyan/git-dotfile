@@ -27,18 +27,15 @@ noremap <C-N> gB
 noremap pp P
 "" 把选中的URL直接跳转至新标签
 noremap po YP
-"" 取消载入
-map <C-d> :stop<CR>
-
-"" 还原书签栏和下载对话框快捷键
-noremap <C-b> <C-v><C-b>
-noremap <C-y> <C-v><C-y>
 
 "" 还原 ctrl-l 跳到标签栏的快捷键
 noremap <C-l> <C-v><C-l>
 
-"" Google search
+"" 常用网站映射
 map gs :gsearch!<space>
+map gr t https://reader.google.com/<CR>
+map gm t https://mail.google.com/<CR>
+map pi :pinboard<space>
 
 "" Options
 set toolbars=none,tabs,bookmarks
@@ -62,7 +59,6 @@ lazy fmaps -u=’mail\.google\.com/mail’ gi gs gt gd ga gc gb gk gl u k j o <E
 "" feedSomeKeys GReader
 command! -nargs=+ googlereader lazy fmaps -urls='www\.google\.com/reader' -events=vkeypress <args>
 googlereader j k J K <space> <s-space> n m o p s t S v gh ga gs gS gu gt gT gd gf gF gc ge gp r u A 
-fmaps -urls='www\.google\.com/reader' p[,1 p],2
 
 "" 齐全的next和previous
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
