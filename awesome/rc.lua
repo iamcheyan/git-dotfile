@@ -71,7 +71,7 @@ for s = 1, screen.count() do
     tags[s] = awful.tag(tags_name, s, tags_layout)
     revtags[s] = {}
     for i, t in ipairs(tags[s]) do
-  revtags[s][t] = i
+        revtags[s][t] = i
     end
 end
 
@@ -93,16 +93,16 @@ mymenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
-				    { "终端", terminal, '/usr/share/icons/gnome/16x16/apps/gnome-terminal.png' },
-				    { "GVIM", "gvim", '/usr/share/pixmaps/gvim.png' },
-				    { "火狐", "firefox", '/usr/share/icons/hicolor/32x32/apps/firefox.png' },
-				    { "常用", mymenu },
-				    { "关机", "dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown", '/usr/share/icons/gnome/16x16/actions/gtk-quit.png' },
-				  }
-			})
+            { "终端", terminal, '/usr/share/icons/gnome/16x16/apps/gnome-terminal.png' },
+            { "GVIM", "gvim", '/usr/share/pixmaps/gvim.png' },
+            { "火狐", "firefox", '/usr/share/icons/hicolor/32x32/apps/firefox.png' },
+            { "常用", mymenu },
+            { "关机", "dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Shutdown", '/usr/share/icons/gnome/16x16/actions/gtk-quit.png' },
+          }
+      })
 
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
-				     menu = mymainmenu })
+             menu = mymainmenu })
 
 -- {{{1 Wibox
 -- {{{2Create a textclock widget
@@ -314,169 +314,169 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q sset Master 10%- unmute") end),
     awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q sset Master 10%+ unmute") end),
     -- 切换 tag {{{3
-    awful.key({ modkey,		  }, "Left",   awful.tag.viewprev	),
-    awful.key({ modkey,		  }, "Right",  awful.tag.viewnext	),
+    awful.key({ modkey,     }, "Left",   awful.tag.viewprev ),
+    awful.key({ modkey,     }, "Right",  awful.tag.viewnext ),
     -- 切换桌面，这样更方便
-    awful.key({ modkey,		  }, "p",      awful.tag.viewprev	),
-    awful.key({ modkey,		  }, "n",      awful.tag.viewnext	),
+    awful.key({ modkey,     }, "p",      awful.tag.viewprev ),
+    awful.key({ modkey,     }, "n",      awful.tag.viewnext ),
     awful.key({ modkey, "Shift"   }, "p",      function ()
-	movebyrelidx(-1, true)
+  movebyrelidx(-1, true)
     end),
     awful.key({ modkey, "Shift"   }, "n",      function ()
-	movebyrelidx(1, true)
+  movebyrelidx(1, true)
     end),
-    awful.key({ modkey, "Mod1"	  }, "p",      function ()
-	movebyrelidx(-1, false)
+    awful.key({ modkey, "Mod1"    }, "p",      function ()
+  movebyrelidx(-1, false)
     end),
-    awful.key({ modkey, "Mod1"	  }, "n",      function ()
-	movebyrelidx(1, false)
+    awful.key({ modkey, "Mod1"    }, "n",      function ()
+  movebyrelidx(1, false)
     end),
     -- 截图 {{{3
-    awful.key({			  }, "Print", function ()
-	-- 截图：全屏
-	awful.util.spawn("zsh -c 'cd ~/tmpfs\nscrot\n'")
-	os.execute("sleep .5")
-	naughty.notify({title="截图", text="全屏截图已保存。"})
+    awful.key({       }, "Print", function ()
+  -- 截图：全屏
+  awful.util.spawn("zsh -c 'cd ~/tmpfs\nscrot\n'")
+  os.execute("sleep .5")
+  naughty.notify({title="截图", text="全屏截图已保存。"})
     end),
 
     -- {{{3 窗口管理
     -- Alt-Tab etc
-    awful.key({ "Mod1",		  }, "Tab",
-	function ()
-	    awful.client.focus.byidx( 1)
-	    if client.focus then client.focus:raise() end
-	end),
+    awful.key({ "Mod1",     }, "Tab",
+  function ()
+      awful.client.focus.byidx( 1)
+      if client.focus then client.focus:raise() end
+  end),
     awful.key({ "Mod1", "Shift"   }, "Tab",
-	function ()
-	    awful.client.focus.byidx(-1)
-	    if client.focus then client.focus:raise() end
-	end),
+  function ()
+      awful.client.focus.byidx(-1)
+      if client.focus then client.focus:raise() end
+  end),
 
-    awful.key({ modkey,		  }, "j",
-	function ()
-	    awful.client.focus.byidx( 1)
-	    if client.focus then client.focus:raise() end
-	end),
-    awful.key({ modkey,		  }, "k",
-	function ()
-	    awful.client.focus.byidx(-1)
-	    if client.focus then client.focus:raise() end
-	end),
+    awful.key({ modkey,     }, "j",
+  function ()
+      awful.client.focus.byidx( 1)
+      if client.focus then client.focus:raise() end
+  end),
+    awful.key({ modkey,     }, "k",
+  function ()
+      awful.client.focus.byidx(-1)
+      if client.focus then client.focus:raise() end
+  end),
     -- Unminimize clients
     awful.key({ modkey, "Control" }, "m",
-	function ()
-	    local allclients = client.get(mouse.screen)
-	    for _, c in ipairs(allclients) do
-		if c.minimized and c:tags()[mouse.screen] == awful.tag.selected(mouse.screen) then
-		    c.minimized = false
-		    client.focus = c
-		    c:raise()
-		    return
-		end
-	    end
-	end),
+  function ()
+      local allclients = client.get(mouse.screen)
+      for _, c in ipairs(allclients) do
+    if c.minimized and c:tags()[mouse.screen] == awful.tag.selected(mouse.screen) then
+        c.minimized = false
+        client.focus = c
+        c:raise()
+        return
+    end
+      end
+  end),
 
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(	1)    end),
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
     awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,		  }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,		  }, "Tab", function ()
-	awful.client.focus.history.previous()
-	if client.focus then
-	    client.focus:raise()
-	end
+    awful.key({ modkey,     }, "u", awful.client.urgent.jumpto),
+    awful.key({ modkey,     }, "Tab", function ()
+  awful.client.focus.history.previous()
+  if client.focus then
+      client.focus:raise()
+  end
     end),
-    awful.key({ modkey,		  }, "Escape", awful.tag.history.restore),
+    awful.key({ modkey,     }, "Escape", awful.tag.history.restore),
 
     -- {{{3 窗口布局
-    awful.key({ modkey,		  }, "l",     function () awful.tag.incmwfact( 0.05)	end),
-    awful.key({ modkey,		  }, "h",     function () awful.tag.incmwfact(-0.05)	end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)	end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)	end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)		end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)		end),
-    awful.key({ modkey,		  }, "space", function () awful.layout.inc(layouts,  1) end),
+    awful.key({ modkey,     }, "l",     function () awful.tag.incmwfact( 0.05)  end),
+    awful.key({ modkey,     }, "h",     function () awful.tag.incmwfact(-0.05)  end),
+    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)  end),
+    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)  end),
+    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)   end),
+    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)   end),
+    awful.key({ modkey,     }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     -- {{{3 程序
-    awful.key({ modkey,		  }, "g", function () awful.util.spawn("gvim") end),
+    awful.key({ modkey,     }, "g", function () awful.util.spawn("gvim") end),
     awful.key({ "Control", "Mod1" }, "e", function () awful.util.spawn("nautilus --no-desktop /home/lilydjwg/tmpfs") end),
     awful.key({ "Control", "Mod1", "Shift" }, "x", function () awful.util.spawn("xkill") end),
     awful.key({ "Control", "Mod1" }, "l", function () awful.util.spawn("leave") end),
-    awful.key({ modkey,		  }, "w", function () mymainmenu:show({keygrabber=true}) end),
+    awful.key({ modkey,     }, "w", function () mymainmenu:show({keygrabber=true}) end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Control" }, "q",      awesome.quit),
     -- {{{4 终端
     -- 找一个居中终端来
-    awful.key({ modkey,		  }, "Return", function ()
-	myutil.run_or_raise("gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs --class TempTerm --geometry 80x24+343+180",
-	{ class = "TempTerm" })
+    awful.key({ modkey,     }, "Return", function ()
+  myutil.run_or_raise("gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs --class TempTerm --geometry 80x24+343+180",
+  { class = "TempTerm" })
     end),
 
     -- 新居中终端
     awful.key({ modkey, "Shift"   }, "Return", function ()
-	awful.util.spawn("gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs --class TempTerm --geometry 80x24+343+180")
+  awful.util.spawn("gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs --class TempTerm --geometry 80x24+343+180")
     end),
 
     -- 普通终端
-    awful.key({ modkey,		  }, "t", function ()
-	awful.util.spawn(terminal)
+    awful.key({ modkey,     }, "t", function ()
+  awful.util.spawn(terminal)
     end),
 
     -- htop
-    awful.key({ modkey,		 }, "z", function ()
-	if client.focus and client.focus.class == 'FullScreenHtop' then
-	    awful.client.movetotag(tags[mouse.screen][10], client.focus)
-	else
-	    myutil.run_or_raise("gnome-terminal --disable-factory --class FullScreenHtop -e 'htop'",
-	    { class = "FullScreenHtop" })
-	end
+    awful.key({ modkey,    }, "z", function ()
+  if client.focus and client.focus.class == 'FullScreenHtop' then
+      awful.client.movetotag(tags[mouse.screen][10], client.focus)
+  else
+      myutil.run_or_raise("gnome-terminal --disable-factory --class FullScreenHtop -e 'htop'",
+      { class = "FullScreenHtop" })
+  end
     end),
 
     -- {{{4 临时窗口 -> tag10
-    awful.key({ modkey,		  }, "q", function ()
-	local c = client.focus
-	if c.class == 'FullScreenHtop' or c.class == 'TempTerm' then
-	    awful.client.movetotag(tags[mouse.screen][10], c)
-	end
+    awful.key({ modkey,     }, "q", function ()
+  local c = client.focus
+  if c.class == 'FullScreenHtop' or c.class == 'TempTerm' then
+      awful.client.movetotag(tags[mouse.screen][10], c)
+  end
     end),
 
     -- {{{3 sdcv
     awful.key({ modkey }, "d", function ()
-	local f = io.popen("xsel -p")
-	local new_word = f:read("*a")
-	f:close()
+  local f = io.popen("xsel -p")
+  local new_word = f:read("*a")
+  f:close()
 
-	if frame ~= nil then
-	    naughty.destroy(frame)
-	    frame = nil
-	    if old_word == new_word then
-		return
-	    end
-	end
-	old_word = new_word
+  if frame ~= nil then
+      naughty.destroy(frame)
+      frame = nil
+      if old_word == new_word then
+    return
+      end
+  end
+  old_word = new_word
 
-	local fc = ""
-	local f  = io.popen("sdcv -n --utf8-output -u 'stardict1.3英汉辞典' '"..new_word.."'")
-	for line in f:lines() do
-	    fc = fc .. line .. '\n'
-	end
-	f:close()
-	frame = naughty.notify({ text = fc, timeout = 5, width = 320 })
+  local fc = ""
+  local f  = io.popen("sdcv -n --utf8-output -u 'stardict1.3英汉辞典' '"..new_word.."'")
+  for line in f:lines() do
+      fc = fc .. line .. '\n'
+  end
+  f:close()
+  frame = naughty.notify({ text = fc, timeout = 5, width = 320 })
     end),
 
     -- {{{3 Prompt
-    awful.key({ "Mod1"		  }, "F2",     function () mypromptbox[mouse.screen]:run() end),
-    awful.key({ modkey		  }, "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ "Mod1"      }, "F2",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey      }, "r",     function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey		  }, "x",
-	      function ()
-		  awful.prompt.run({ prompt = "Run Lua code: " },
-		  mypromptbox[mouse.screen].widget,
-		  awful.util.eval, nil,
-		  awful.util.getdir("cache") .. "/history_eval")
-	      end)
+    awful.key({ modkey      }, "x",
+        function ()
+      awful.prompt.run({ prompt = "Run Lua code: " },
+      mypromptbox[mouse.screen].widget,
+      awful.util.eval, nil,
+      awful.util.getdir("cache") .. "/history_eval")
+        end)
 )
 
     -- {{{3 窗口的快捷键

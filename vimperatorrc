@@ -1,12 +1,7 @@
 "" 设置路径
 set runtimepath=~/.vimperator
 
-"" 加载plugins目录下的脚本
-loadplugins
-
 "" 把页面浏览、标签页跳转和历史跳转绑定到顺手的地方
-nnoremap j 3j
-nnoremap k 3k
 nnoremap h gT
 nnoremap l gt
 nnoremap H h
@@ -16,12 +11,8 @@ noremap > g$
 noremap , <C-o>
 noremap . <C-i>
 map U :ju<CR>
-map <C-.> :tabm<CR>
-
-"" 想办法再减少按键频率
+map <C-.> :tabm<space>
 noremap s <C-c>
-noremap <C-n> gb
-noremap <C-N> gB
 
 "" 把剪贴板的URL贴至新标签上
 noremap pp P
@@ -31,17 +22,25 @@ noremap po YP
 "" 还原 ctrl-l 跳到标签栏的快捷键
 noremap <C-l> <C-v><C-l>
 
+"" Options
+set toolbars=tabs,bookmarks
+set scrollbars=false
+set titlestring='Serene Paraselene'
+set popups=resized
+set cpt=lfbs
+
+"" 加载plugins目录下的脚本
+loadplugins
+
 "" 常用网站映射
 map gs :gsearch!<space>
 map gr t https://reader.google.com/<CR>
 map gm t https://mail.google.com/<CR>
 map pi :pinboard<space>
 
-"" Options
-set toolbars=none,tabs,bookmarks
-set titlestring='Serene Paraselene'
-set popups=resized
-set cpt=lfbs
+"" Smoozie scroll
+let g:smooziee_scroll_amount="100"
+let g:smooziee_scroll_interval="10"
 
 "" Gmail和Greader的后台打开标签设置
 autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=false
@@ -54,12 +53,30 @@ autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor
 
 "" feedSomeKeys Gmail
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-lazy fmaps -u=’mail\.google\.com/mail’ gi gs gt gd ga gc gb gk gl u k j o <Enter> ` ~ c / ? x s e m ! # r <S-r> a <S-a> <S-f> <S-n> <tab><Enter> ] [ { } z . *a *n *r *u *s *t
+lazy fmaps -u='mail\.google\.com/mail' gi gs gt gd ga gc gb gk gl a c e j k m n o p r s u x z <Enter> ` ~ / ? ! # <S-r> <S-a> <S-f> <S-n> <tab><Enter> ] [ { } . *a *n *r *u *s *t
 
 "" feedSomeKeys GReader
 command! -nargs=+ googlereader lazy fmaps -urls='www\.google\.com/reader' -events=vkeypress <args>
-googlereader j k J K <space> <s-space> n m o p s t S v gh ga gs gS gu gt gT gd gf gF gc ge gp r u A 
+googlereader A j k J K n m o p r s S t u v ? gh ga gs gS gu gt gT gd gf gF gc ge gp <space> <S-space> <S-a>
 
 "" 齐全的next和previous
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
 set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
+
+"" Minimize window {{{
+js << EOM
+  mini = function() {
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                       .getService(Components.interfaces.nsIWindowMediator);
+    var browserWindow = wm.getMostRecentWindow("navigator:browser");
+    browserWindow.minimize();
+  }
+
+  commands.addUserCommand (["mini"], "最小化视窗",
+    function (args) {
+      mini();
+    }
+  );
+EOM ""}}}
+
+"" vim: set fdm=marker sw=2 ts=2 sts=0 et:
