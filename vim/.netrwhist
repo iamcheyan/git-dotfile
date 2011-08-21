@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/home/vayn/Desktop'
 let g:netrw_dirhist_2='/home/vayn/.vimperator'
 let g:netrw_dirhist_3='/home/vayn/notes/blog/_posts'
@@ -8,3 +8,4 @@ let g:netrw_dirhist_5='/home/vayn/.fontconfig'
 let g:netrw_dirhist_6='/home/vayn/.git-dotfile/.git'
 let g:netrw_dirhist_7='/home/vayn/SDK/dotcloud/planet/themes/vimmer/js'
 let g:netrw_dirhist_8='/home/vayn/.vimperator'
+let g:netrw_dirhist_9='/home/vayn/.vim'
