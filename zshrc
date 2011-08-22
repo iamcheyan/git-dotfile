@@ -131,8 +131,8 @@ bindkey -s "^X^D" "evince ~/文档/编程/shell/zsh/zsh.pdf &^M"
 bindkey -s "^Xc" "tmux attach -d^M"
 bindkey -s "^Xp" "http_proxy=http://localhost:"
 # History search, past commands beginning with the current be shown.
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
+#bindkey "^[[A" history-search-backward
+#bindkey "^[[B" history-search-forward
 # cursor up/down look for a command that started like the one starting
 # on the command line
 # http://www.xsteve.at/prg/zsh/.zshrc {{{3
