@@ -133,17 +133,6 @@ bindkey -s "^Xp" "http_proxy=http://localhost:"
 # History search, past commands beginning with the current be shown.
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
-# 词界像 bash 那样{{{3
-# autoload -U select-word-style
-# select-word-style bash
-# Esc-Esc 在当前/上一条命令前插入 sudo {{{3
-sudo-command-line() {
-    [[ -z $BUFFER ]] && zle up-history
-    [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
-    zle end-of-line                 #光标移动到行末
-}
-zle -N sudo-command-line
-bindkey "\e\e" sudo-command-line
 # cursor up/down look for a command that started like the one starting
 # on the command line
 # http://www.xsteve.at/prg/zsh/.zshrc {{{3
@@ -170,6 +159,17 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "\e[A" history-beginning-search-backward-end #cursor up
 bindkey "\e[B" history-beginning-search-forward-end  #cursor down
+# 词界像 bash 那样{{{3
+# autoload -U select-word-style
+# select-word-style bash
+# Esc-Esc 在当前/上一条命令前插入 sudo {{{3
+sudo-command-line() {
+    [[ -z $BUFFER ]] && zle up-history
+    [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+    zle end-of-line                 #光标移动到行末
+}
+zle -N sudo-command-line
+bindkey "\e\e" sudo-command-line
 # 别名 {{{1
 # 命令别名 {{{2
 source "$HOME/.bash_aliases"
