@@ -4,7 +4,6 @@ HISTFILE=~/.histfile
 HISTSIZE=20000
 SAVEHIST=20000
 unsetopt beep
-export EDITOR="vim"
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/vayn/.zshrc'
@@ -21,7 +20,7 @@ unsetopt nomatch
 # zstyle {{{1
 # 自动补全 {{{2
 # 用本用户的所有进程补全
-[[ -x =trimdir ]] && zstyle ':completion:*:processes' command 'ps -afu$USER|trimdir' || zstyle ':completion:*:processes' command 'ps -afu$USER'
+[[ -n $commands[trimdir] ]] && zstyle ':completion:*:processes' command 'ps -afu$USER|trimdir' || zstyle ':completion:*:processes' command 'ps -afu$USER'
 zstyle ':completion:*:*:*:*:processes' force-list always
 # 进程名补全
 zstyle ':completion:*:processes-names' command  'ps c -u ${USER} -o command | uniq'
@@ -57,6 +56,7 @@ compdef pgrep=killall
 compdef vman=man
 compdef proxychains=command
 compdef watch=command
+compdef ptyless=command
 
 # 我的自动补全 {{{2
 # 补全 pdf2png
@@ -127,15 +127,11 @@ bindkey '^[/' _history-complete-older
 # FIXME 如何引起光标处的单词？
 bindkey -s "^['" "^[] ^f^@^e^[\""
 # 打开 zsh 的PDF格式文档
-bindkey -s "^X^D" "evince ~/文档/编程/shell/zsh/zsh.pdf &^M"
+bindkey -s "^X^D" "evince ~/Dropbox/eBooks/Linux/zsh/zshguide.pdf &^M"
 bindkey -s "^Xc" "tmux attach -d^M"
 bindkey -s "^Xp" "http_proxy=http://localhost:"
-# History search, past commands beginning with the current be shown.
-#bindkey "^[[A" history-search-backward
-#bindkey "^[[B" history-search-forward
-# cursor up/down look for a command that started like the one starting
-# on the command line
-# http://www.xsteve.at/prg/zsh/.zshrc {{{3
+# look for a command that started like the one starting on the command line {{{3
+# http://www.xsteve.at/prg/zsh/.zshrc
 function history-search-end {
   integer ocursor=$CURSOR
 
@@ -157,8 +153,8 @@ function history-search-end {
 }
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey "\e[A" history-beginning-search-backward-end #cursor up
-bindkey "\e[B" history-beginning-search-forward-end  #cursor down
+bindkey '^[[A' history-beginning-search-backward-end
+bindkey '^[[B' history-beginning-search-forward-end
 # 词界像 bash 那样{{{3
 # autoload -U select-word-style
 # select-word-style bash
@@ -178,7 +174,7 @@ alias la='ls -A'
 alias rsync="rsync '--exclude=*~' '--exclude=*.swp'"
 if [[ $OS == 'Linux' ]]; then
   alias ls='ls --color=auto'
-  [[ -x =dircolors ]] && eval "`dircolors -b`"
+  [[ -n $commands[dircolors] ]] && eval "`dircolors -b`"
 elif [[ $OS == 'FreeBSD' ]]; then
   alias ls='ls -G'
 elif [[ $OS == 'OpenBSD' ]]; then
@@ -206,25 +202,23 @@ alias html2text="html2text -nobs -style pretty"
 alias less="less -R"
 alias 7z="7z '-xr!*~' '-xr!*.swp'"
 alias zhcon="zhcon --utf8"
-alias matlab="~/soft/Matlab/bin/matlab"
-alias mytex=". ~/soft/context/tex/setuptex"
 alias myadb="path+=(~/soft/android-sdk-linux_x86/tools ~/soft/android-sdk-linux_x86/platform-tools)"
 alias gbk="luit -encoding gb18030"
 alias mpc="mpc -h ~/.mpd/socket"
 alias ncmpcpp="ncmpcpp -h ~/.mpd/socket"
 alias xx="file-roller -h"
-alias irssi="irssi -c irc.freenode.net"
 alias bat="acpitool -b"
+[[ -n $commands[ilua] ]] && alias ilua='rlwrap ilua'
 
-alias winxp="VBoxManage startvm WinXP"
-alias winxp2="VBoxManage startvm WinXP_test"
+alias winxp="VBoxManage startvm win"
 alias zshrc="vim ~/.zshrc"
 alias ren="vim +'Ren'"
 # 查看进程数最多的程序
 alias topnum="ps -e|sort -k4|awk '{print \$4}'|uniq -c|sort -n|tail"
-alias soul="mplayer -really-quiet -nolirc -loop 0 ~/音乐/_纯音乐/忧伤还是快乐.mp3"
-alias rebootrt="wget --user=vayn --password=admin888 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
+alias soul="mplayer -really-quiet -nolirc -loop 0 ~/Music/Promise.mp3"
+alias rebootrt="wget --user=admin --password=admin 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
 alias xcp="rsync -aviHK --delete --exclude='*~'"
+alias pm-suspend="dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0"
 
 # 后缀别名 {{{2
 alias -s xsl="vim"
@@ -237,20 +231,12 @@ alias -s swf="flashplayer"
 
 # 路径别名 {{{2
 hash -d tmp="$HOME/tmpfs"
-hash -d SJ='/media/SJ'
-hash -d phone='/media/PHONE\x20CARD'
-hash -d gtk="$HOME/scripts/c/gtk"
-hash -d js="$HOME/scripts/js"
-hash -d py="$HOME/scripts/python"
-hash -d lua="$HOME/scripts/lua"
-hash -d java="$HOME/scripts/java"
-hash -d ebook="$HOME/temp/ebook"
-hash -d lily='/media/lilydjwg'
-hash -d jar="/media/soft/software/jar"
-hash -d xul="/media/soft/software/xul"
+hash -d js="$HOME/code/js"
+hash -d py="$HOME/code/python"
+hash -d ebook="$HOME/Dropbox/eBooks"
+hash -d d='/media/d'
 hash -d ff="$HOME/.mozilla/firefox/profile"
-hash -d nginx="$HOME/.nginx/www"
-hash -d dos="$HOME/.dosbox/programs"
+hash -d wuala="$HOME/Dropbox"
 
 # 全局别名 {{{2
 alias -g LS="|less"
@@ -260,33 +246,53 @@ alias -g NN="*(oc[1])"
 alias -g NUL="/dev/null"
 
 # 函数 {{{1
-gcc () { command gcc -g -Wall $@ |& tee $HOME/tmpfs/error }
-g++ () { command g++ -g -Wall $@ |& tee $HOME/tmpfs/error }
 update () { . $HOME/.zshrc }
-if [[ $TERM == screen* ]]; then
+strace () { command strace $@ 3>&1 1>&2 2>&3 | vim - }
+ltrace () { command ltrace $@ 3>&1 1>&2 2>&3 | vim - }
+vman () { vim +"set ft=man" +"Man $@" }
+song () { find ~/Music -iname "$1*" }
+mvpc () { mv $1 "`echo $1|ascii2uni -a J`" } # 将以 %HH 表示的文件名改正常
+nocolor () { sed -r "s:\x1b\[[0-9;]*[mK]::g" }
+if [[ $TERM == screen* ]]; then # {{{2 设置标题
   # 注：不支持中文
   title () { echo -ne "\ek$*\e\\" }
 else
   title () { echo -ne "\e]0;$*\a" }
 fi
-strace () { command strace $@ 3>&1 1>&2 2>&3 | vim - }
-ltrace () { command ltrace $@ 3>&1 1>&2 2>&3 | vim - }
-vman () { vim +"set ft=man" +"Man $@" }
-song () { find ~/音乐 -iname "$1*" }
-mvpc () { mv $1 "`echo $1|ascii2uni -a J`" } # 将以 %HH 表示的文件名改正常
-nocolor () { sed -r "s:\x1b\[[0-9;]*[mK]::g" }
-if [[ $(uname -a) == *Ubuntu* ]]; then # {{{ tree
+if [[ $(uname -a) == *Ubuntu* ]]; then # {{{2 tree
   tree () {
     command tree -C $@|ascii2uni -a K 2>/dev/null
   }
 else
   alias tree="tree -C"
 fi
+gcc () { # {{{2
+  errfile=$HOME/tmpfs/error
+  command gcc -g -Wall $@ >$errfile 2>&1
+  ret=$?
+  cat $errfile
+  return $ret
+}
+g++ () { # {{{2
+  errfile=$HOME/tmpfs/error
+  command g++ -g -Wall $@ >$errfile 2>&1
+  ret=$?
+  cat $errfile
+  return $ret
+}
 2mp3 () { # 转换成 mp3 格式 {{{2
   [[ $# -ne 1 ]] && echo "Usage: $0 FILE" && return 1
   mplayer -vo null -vc dummy -af resample=44100 -ao pcm:waveheader "$1" && \
   lame -m s audiodump.wav -o "$1:r.mp3" && rm audiodump.wav || \
   {echo Failed. && return 2}
+}
+ptyless () { # 使用伪终端代替管道，对 ls 这种“顽固分子”有效 {{{2
+  zmodload zsh/zpty
+  zpty ptyless ${1+"$@"}
+  zpty -r ptyless > /tmp/ptyless.$$
+  less /tmp/ptyless.$$
+  rm -f /tmp/ptyless.$$
+  zpty -d ptyless
 }
 sdu () { #排序版的 du {{{2
   du -sk $@ | sort -n | awk '
@@ -356,7 +362,6 @@ proxy () { #常用代理一起启动{{{2
   ~/soft/g/gappproxy-1.0.0beta/localproxy/proxy.py&
   ~/soft/g/gappproxy-2.0.0/proxy.py &
   ~/soft/g/wallproxy/local/proxy.py &
-  python2.6 ~/scripts/python/pyexe/ubuntu2.pyc&
   # ~/soft/g/APJP/JAVA/APJP.sh&
 }
 s () { # 快速查找当前目录下的文件 {{{2
@@ -423,6 +428,12 @@ if [[ -n $DISPLAY || -n $SSH_TTY ]]; then
   [[ $TERM == *color* ]] || export TERM=${TERM%%[.-]*}-256color
   # 支持256色
   [[ $OS = FreeBSD ]] && export TERMCAP='xterm|xterm-256color:Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm:tc=xterm-xfree86:'
+else
+  # tty 下光标显示为块状
+  echo -ne "\e[?6c"
+  zshexit () {
+    [[ $SHLVL -eq 1 ]] && echo -ne "\e[?0c"
+  }
 fi
 # 通用{{{2
 # 在图形界面下使用火狐作为默认浏览器
@@ -438,4 +449,4 @@ unset OS
 setopt nomatch
 return 0
 
-# vim:fdm=marker:ft=sh
+# vim:fdm=marker
