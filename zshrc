@@ -144,6 +144,32 @@ sudo-command-line() {
 }
 zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
+# cursor up/down look for a command that started like the one starting
+# on the command line
+# http://www.xsteve.at/prg/zsh/.zshrc {{{3
+function history-search-end {
+  integer ocursor=$CURSOR
+
+  if [[ $LASTWIDGET = history-beginning-search-*-end ]]; then
+    # Last widget called set $hbs_pos.
+    CURSOR=$hbs_pos
+  else
+    hbs_pos=$CURSOR
+  fi
+
+  if zle .${WIDGET%-end}; then
+    # success, go to end of line
+    zle .end-of-line
+  else
+    # failure, restore position
+    CURSOR=$ocursor
+    return 1
+  fi
+}
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "\e[A" history-beginning-search-backward-end #cursor up
+bindkey "\e[B" history-beginning-search-forward-end  #cursor down
 # 别名 {{{1
 # 命令别名 {{{2
 source "$HOME/.bash_aliases"

@@ -8,14 +8,6 @@ function vasa {
   echo "$* #vasa" | bti
 }
 
-# notify
-complete -o filenames -F _root_command notify
-if [ "$PS1" ] ; then
-mkdir -p -m 0700 /dev/cgroup/cpu/user/$$ > /dev/null 2>&1
-echo $$ > /dev/cgroup/cpu/user/$$/tasks
-echo "1" > /dev/cgroup/cpu/user/$$/notify_on_release
-fi
-
 # Google tts
 tts() {
   curl -sA 'Mozilla' "http://translate.google.com/translate_tts?tl=en&q=$(echo $* | sed 's#[ ,]#\+#g')" | play -t mp3 - > /dev/null 2>&1;

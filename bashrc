@@ -153,12 +153,6 @@ complete -o filenames -F _filedir_xspec file
 
 # autojump
 source /etc/profile.d/autojump.bash
-### chsdir start ###
-. $HOME/bin/chs_completion
-PATH=$PATH:$HOME/bin
-#export CHSDIR="{'n':'l'}"
-complete -o filenames -F _filedir_xspec file
-### chsdir finish. ###
 
 # some more ls aliases
 #alias ll='ls -l'
