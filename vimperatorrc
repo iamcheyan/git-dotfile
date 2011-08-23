@@ -56,8 +56,21 @@ command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 lazy fmaps -u='mail\.google\.com/mail' gi gs gt gd ga gc gb gk gl a c e j k m n o p r s u x z <Enter> ` ~ / ? ! # <S-r> <S-a> <S-f> <S-n> <tab><Enter> ] [ { } . *a *n *r *u *s *t
 
 "" feedSomeKeys GReader
-command! -nargs=+ googlereader lazy fmaps -urls='www\.google\.com/reader' -events=vkeypress <args>
-googlereader A j k J K n m o p r s S t u v ? gh ga gs gS gu gt gT gd gf gF gc ge gp <space> <S-space> <S-a>
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+command! -nargs=+ lazyfmapgooglereader  lazy fmap -urls='https?://www\.google\.com/reader/view' <args>
+command! -nargs=+ lazyfmapsgooglereader lazy fmaps -urls='https?://www\.google\.com/reader/view' <args>
+lazyfmapsgooglereader -events=vkeypress <Space> <S-Space> N P X O
+lazyfmapsgooglereader -events=vkeypress v m A
+lazyfmapsgooglereader -events=vkeypress gh ga gs gS gu gt gT gd gf gF gc ge gp
+lazyfmapsgooglereader -events=vkeypress r u / a
+lazyfmapsgooglereader -events=vkeypress j,n k,p J,N K,P n,N p,P o,vn w,NO
+lazyfmapgooglereader  -events=keypress  ; <CR>
+lazyfmapgooglereader  -events=vkeypress , X
+lazyfmapgooglereader  -events=vkeypress . O
+lazyfmapsgooglereader -events=vkeypress <C-1>,1 <C-2>,2
+"" GoogleReader
+lazyfmapgooglereader -events=vkeyup <C-t> T
+map -urls='https?://www\.google\.com/reader/view' i <C-t>j
 
 "" 齐全的next和previous
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b

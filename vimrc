@@ -101,6 +101,7 @@ set directory=~/.vim/tmp/swap   " swap files
 set backup            " enable backups
 ""set noswapfile
 
+set hidden
 "" set bufhidden=hide
 
 "" 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
