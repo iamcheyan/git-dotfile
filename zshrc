@@ -21,10 +21,14 @@ typeset -ga preexec_functions
 typeset -ga precmd_functions
 typeset -ga chpwd_functions
 # Append git functions needed for prompt.
-preexec_functions+='preexec_update_git_vars'
-precmd_functions+='precmd_update_git_vars'
-chpwd_functions+='chpwd_update_git_vars'
+preexec_functions+=(preexec_update_vcs_vars)
+precmd_functions+=(precmd_update_vcs_vars)
+chpwd_functions+=(chpwd_update_vcs_vars)
 # }}} End of loading zsh functions
+
+# ssh-agent
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+source ~/.zsh/functions/ssh-agent
 
 # 确定环境 {{{1
 OS=${$(uname)%_*}
@@ -402,6 +406,7 @@ tianqi () { #天气预报 {{{2
   fi
   w3m -dump "http://3g.sina.com.cn/prog/wapsite/weather_new/forecast_new.php?city=$city&vt=4" 2>/dev/null | sed '1,/转发至微博/d;/生活指数/,$d;s/\[[^]]\+\]//g'
 }
+
 [[ -x /usr/lib/command-not-found ]] && command_not_found_handler () { # {{{2
   /usr/lib/command-not-found -- $@ |& sed 's/apt-get/aptitude/g' >&2
   return -1
@@ -412,15 +417,17 @@ tianqi () { #天气预报 {{{2
 # %n --- 用户名
 # %~ --- 当前目录
 # %h --- 历史记录号
- 
 # http://sebastiancelis.com/2009/11/16/zsh-prompt-git-users/
-PS1='%{[2m%}%h %(?..%{[1;31m%}%? )%{[32m%}%~$(prompt_git_info) 
+PS1='%{[2m%}%h %(?..%{[1;31m%}%? )%{[32m%}%~$(prompt_vcs_info)
 %(!.%{[0;31m%}###.%{[1;34m%}>>>)%{[0m%} '
-
 # 次提示符：使用暗色
 PS2="%{[2m%}%_>%{[0m%} "
 # 右边的提示
-RPS1="%(1j.%{[1;33m%}%j .)%{[m%}%T"
+#RPS1="%(1j.%{[1;33m%}%j .)%{[m%}%T"
+function battery_charge {
+  echo `batcharge` 2>/dev/null
+}
+RPS1='%(1j.%{[1;33m%}%j .)$(battery_charge)'
 CORRECT_IGNORE='_*'
 READNULLCMD=less
 

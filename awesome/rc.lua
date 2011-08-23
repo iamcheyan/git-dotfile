@@ -20,7 +20,7 @@ theme_path = awful.util.getdir("config") .. "/theme.lua"
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs"
+terminal = "gnome-terminal --disable-factory --working-directory=/home/vayn/tmpfs"
 editor = "gvim" or os.getenv("EDITOR") or "editor"
 -- editor_cmd = terminal .. " -e " .. editor
 editor_cmd = editor
@@ -420,7 +420,7 @@ globalkeys = awful.util.table.join(
     end),
 
     -- 普通终端
-    awful.key({ modkey,     }, "t", function ()
+    awful.key({ "Control",     }, "i", function ()
   awful.util.spawn(terminal)
     end),
 
@@ -650,7 +650,6 @@ awful.tag.viewonly(tags[1][6])
 -- {{{1 Autostart
 -- autostart apps
 awful.util.spawn("sudo dhcpcd wlan0 &") -- scanning in rc.local
-awful.util.spawn("guake -e 'tmux'")
 awful.util.spawn("dropboxd")
 awful.util.spawn("xsetroot -cursor_name left_ptr")
 
