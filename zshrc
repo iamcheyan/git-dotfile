@@ -13,6 +13,19 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# Autoload zsh functions
+fpath=(~/.zsh/functions $fpath)
+autoload -U ~/.zsh/functions/*(:t)
+# Enable auto-execution of functions {{{2
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
+# Append git functions needed for prompt.
+preexec_functions+='preexec_update_git_vars'
+precmd_functions+='precmd_update_git_vars'
+chpwd_functions+='chpwd_update_git_vars'
+# }}} End of loading zsh functions
+
 # 确定环境 {{{1
 OS=${$(uname)%_*}
 [[ $OS == "CYGWIN" ]] && OS=Linux
@@ -108,6 +121,8 @@ setopt noflowcontrol
 setopt hist_ignore_all_dups
 # 在命令前添加空格，不将此命令添加到记录文件中
 setopt hist_ignore_space
+# Allow for functions in the prompt.
+setopt prompt_subst
 
 # 命令行编辑{{{2
 bindkey -e
@@ -380,7 +395,7 @@ tianqi () { #天气预报 {{{2
   if [[ $# -eq 1 ]]; then
     city=$1
   elif [[ $# -eq 0 ]]; then
-    city=武汉
+    city=西安
   else
     echo "城市？" >&2
     return 1
@@ -397,8 +412,11 @@ tianqi () { #天气预报 {{{2
 # %n --- 用户名
 # %~ --- 当前目录
 # %h --- 历史记录号
-PS1="%{[2m%}%h %(?..%{[1;31m%}%? )%{[32m%}%~
-%(!.%{[0;31m%}###.%{[1;34m%}>>>)%{[0m%} "
+ 
+
+PS1='%{[2m%}%h %(?..%{[1;31m%}%? )%{[32m%}%~$(prompt_git_info) 
+%(!.%{[0;31m%}###.%{[1;34m%}>>>)%{[0m%} '
+
 # 次提示符：使用暗色
 PS2="%{[2m%}%_>%{[0m%} "
 # 右边的提示
