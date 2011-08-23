@@ -16,7 +16,8 @@ echo "\t\tln -fs \`pwd\`/vim ~/.vim" >> Makefile
 echo "\t\tln -fs \`pwd\`/vimrc ~/.vimrc" >> Makefile
 echo "\t\tln -fs \`pwd\`/vimperator ~/.vimperator/" >> Makefile
 echo "\t\tln -fs \`pwd\`/vimperatorrc ~/.vimperatorrc" >> Makefile
-echo "\t\tln -fs \`pwd\`/vromerc ~/.vromerc" >> Makefile
+echo "\t\tln -fs \`pwd\`/profile ~/.profile" >> Makefile
+echo "\t\tln -fs ~/.profile ~/.zprofile" >> Makefile
 echo "\t\tln -fs \`pwd\`/bashrc ~/.bashrc" >> Makefile
 echo "\t\tln -fs \`pwd\`/inputrc ~/.inputrc" >> Makefile
 echo "\t\tln -fs \`pwd\`/bash_aliases ~/.bash_aliases" >> Makefile

@@ -5,28 +5,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export EDITOR="vim"
-export TERM="xterm-256color"
-export LANG="zh_CN.UTF-8";
-export LC_CTYPE="zh_CN.UTF-8";
-export LC_NUMERIC="zh_CN.UTF-8";
-export LC_TIME="zh_CN.UTF-8";
-export LC_COLLATE="zh_CN.UTF-8";
-export LC_MONETARY="zh_CN.UTF-8";
-export LC_MESSAGES="zh_CN.UTF-8";
-export LC_PAPER="zh_CN.UTF-8";
-export LC_NAME="zh_CN.UTF-8";
-export LC_ADDRESS="zh_CN.UTF-8";
-export LC_TELEPHONE="zh_CN.UTF-8";
-export LC_MEASUREMENT="zh_CN.UTF-8";
-export LC_IDENTIFICATION="zh_CN.UTF-8";
-export PATH="$PATH:~/bin/mongodb/bin:/opt/lampp/bin:/var/lib/gems/1.8/bin";
-
-# setup XIM environment, needn't if use SCIM as gtk-immodules
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE=xim
-export QT_IM_MODULE=xim
-
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
 HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
@@ -35,16 +13,12 @@ HISTCONTROL=ignoreboth
 HISTIGNORE="ls:pwd:cd:clear:vim:vi:gvim:fg:bg:jobs:top:ovpnt:ovpnp:sudo:ffword:man:rm:cp:mv:ff"
 
 # append to the history file, don't overwrite it
-shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+shopt -s histappend
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
@@ -116,29 +90,6 @@ fi
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
-fi
-
-# SSH-AGENT
-SSH_ENV="$HOME/.ssh/environment"
-
-function start_agent {
-  echo "Initializing new SSH agent..."
-  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-  echo succeeded
-  chmod 600 "${SSH_ENV}"
-  . "${SSH_ENV}" > /dev/null
-  /usr/bin/ssh-add;
-}
-
-# Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-  . "${SSH_ENV}" > /dev/null
-  #ps ${SSH_AGENT_PID} doesn't work under cywgin
-  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-    start_agent;
-  }
-else
-  start_agent;
 fi
 
 # tmux completion

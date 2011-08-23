@@ -4,19 +4,16 @@
 #
 # Executed by startx (run your window manager from here)
 
-export LC_LANG=zh_CN.UTF-8
-export LC_CTYPE=zh_CN.UTF-8
+[[ -f $HOME/.profile ]] && source $HOME/.profile
 
-# Fcitx
+# setup XIM environment, needn't if use SCIM as gtk-immodules
 export XIM="fcitx"
 export XMODIFIERS=@im=fcitx
 export GTK_IM_MODULE=xim
 export QT_IM_MODULE=xim
 export XIM_PROGRAM='fcitx &'
-
 killall fcitx
 fcitx &
-[[ -z $ZSHRC_ENV && -f $HOME/.profile ]] && source $HOME/.profile
 
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
   for f in /etc/X11/xinit/xinitrc.d/*; do
