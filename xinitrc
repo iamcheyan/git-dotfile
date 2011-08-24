@@ -6,6 +6,8 @@
 
 [[ -f $HOME/.profile ]] && source $HOME/.profile
 
+export TERM="xterm-256color";
+
 # setup XIM environment, needn't if use SCIM as gtk-immodules
 export XIM="fcitx"
 export XMODIFIERS=@im=fcitx

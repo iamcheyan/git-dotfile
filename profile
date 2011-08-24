@@ -9,7 +9,6 @@
 #umask 022
 
 export EDITOR="vim";
-export TERM="xterm-256color";
 export LANG="zh_CN.UTF-8";
 export LC_LANG="zh_CN.UTF-8";
 export LC_CTYPE="zh_CN.UTF-8";

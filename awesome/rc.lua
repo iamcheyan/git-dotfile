@@ -20,7 +20,7 @@ theme_path = awful.util.getdir("config") .. "/theme.lua"
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal --disable-factory --working-directory=/home/vayn/tmpfs"
+terminal = "gnome-terminal --disable-factory --working-directory=/home/vayn"
 editor = "gvim" or os.getenv("EDITOR") or "editor"
 -- editor_cmd = terminal .. " -e " .. editor
 editor_cmd = editor
@@ -410,13 +410,13 @@ globalkeys = awful.util.table.join(
     -- {{{4 终端
     -- 找一个居中终端来
     awful.key({ modkey,     }, "Return", function ()
-  myutil.run_or_raise("gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs --class TempTerm --geometry 80x24+343+180",
+  myutil.run_or_raise("gnome-terminal --disable-factory --working-directory=/home/vayn/tmpfs --class TempTerm --geometry 80x24+343+180",
   { class = "TempTerm" })
     end),
 
     -- 新居中终端
     awful.key({ modkey, "Shift"   }, "Return", function ()
-  awful.util.spawn("gnome-terminal --disable-factory --working-directory=/home/lilydjwg/tmpfs --class TempTerm --geometry 80x24+343+180")
+  awful.util.spawn("gnome-terminal --disable-factory --working-directory=/home/vayn/tmpfs --class TempTerm --geometry 80x24+343+180")
     end),
 
     -- 普通终端
