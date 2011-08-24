@@ -18,8 +18,12 @@ filetype plugin on
 "" 为特定文件类型载入相关缩进文件
 filetype indent on
 
-colorscheme diablo3
-let g:diablo3_longline = 0
+if has('gui_running')
+  colorscheme diablo3
+  let g:diablo3_longline = 0
+else
+  colorscheme lemon256
+endif
 
 "" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
 set shellslash
@@ -28,7 +32,7 @@ set shellslash
 syntax enable
 
 "" 设置字体
-set guifont=inconsolata-dz
+set guifont=inconsolata-dz\ 11
 
 "" 当使用了图形界面，并且环境变量 LANG 中不含“.”（即没有规定编码）时，把 Vim 的内部编码设为 UTF-8
 "" set encoding=utf-8

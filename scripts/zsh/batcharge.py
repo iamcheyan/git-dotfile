@@ -16,8 +16,8 @@ filled = int(math.ceil(float(status[1][:-1])) * 0.1) * '▸'
 empty = (total_slots - len(filled)) * '▹'
 out = filled + empty
 
-color_green = '%{[32m%}'
-color_yellow = '%{[1;33m%}'
+color_green = '%{[34m%}'
+color_yellow = '%{[33m%}'
 color_red = '%{[31m%}'
 color_reset = '%{[00m%}'
 color_out = (

@@ -12,7 +12,7 @@ function! ShowColor(beginColor,endColor,lineSize)
         echohl WarningMsg | echo "Must use this function in gui." | echohl None
         return
     endif
-python << EOF
+python3 << EOF
 import vim
 def LinkColor(xColor,beginColor,endColor):
     strColor = '#%06x' % xColor
@@ -57,7 +57,7 @@ function! ShowColorTerm()
         echohl WarningMsg | echo "Must use this function in term." | echohl None
         return
     endif
-python << EOF
+python3 << EOF
 beginColor = 0
 endColor = 255
 import vim
