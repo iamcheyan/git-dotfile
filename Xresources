@@ -34,7 +34,7 @@ xterm*faceName: Inconsolata:antialias=True:pixelsize=17
 !xter*boldFont: Inconsolata:style=Bold:pixelsize=17
 xterm*faceNameDoublesize: WenQuanYi Micro Hei:pixelsize=14:antialias=True
 xterm*xftAntialias: true
-xterm*cjkWidth:false
+xterm*cjkWidth: false
 
 !!SOLARIZED HEX     16/8 TERMCOL  XTERM/HEX   L*A*B      RGB         HSB
 !!--------- ------- ---- -------  ----------- ---------- ----------- -----------
@@ -63,14 +63,14 @@ xterm*cjkWidth:false
 #define S_base1         #93a1a1
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
-#define S_yellow        #b58900
+#define S_yellow        #f1f50d
 #define S_orange        #cb4b16
 #define S_red           #dc322f
 #define S_magenta       #d33682
 #define S_violet        #6c71c4
 #define S_blue          #268bd2
 #define S_cyan          #2aa198
-#define S_green         #859900
+#define S_green         #008604
 
 *background:            S_base03
 *foreground:            S_base00
@@ -94,7 +94,7 @@ xterm*cjkWidth:false
 
 !! yellow dark/light
 *color3:                S_yellow
-*color11:               S_base00
+*color11:               S_yellow
 
 !! blue dark/light
 *color4:                S_blue

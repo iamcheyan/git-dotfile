@@ -14,12 +14,12 @@ status = [o.strip() for o in output.split(':', 1)[1].split(',')]
 
 total_slots, slots = 10, []
 
-if os.getenv('TERM').find('xterm') != -1:
-  fsign = '▸'
-  esign = '▹'
-else:
+if os.getenv('TERM').find('linux') != -1:
   fsign = '>'
   esign = '0'
+else:
+  fsign = '▸'
+  esign = '▹'
 
 filled = int(math.ceil(float(status[1][:-1])) * 0.1) * fsign
 empty = (total_slots - len(filled)) * esign
