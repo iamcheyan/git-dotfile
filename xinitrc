@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# ~/.xinitrc
+# $HOME/.xinitrc
 #
 # Executed by startx (run your window manager from here)
 
@@ -24,18 +24,20 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-for script in /etc/X11/Xsession.d/*; do
-  if [ -x $script ]; then
-    . $script
-  fi
-done
-unset script
+if [ -d /etc/X11/Xsession.d ]; then
+  for script in /etc/X11/Xsession.d/*; do
+    if [ -x $script ]; then
+      . $script
+    fi
+  done
+  unset script
+fi
 
-xrdb -merge ~/.Xresources   # update x resources db
-xrdb ~/.Xdefaults
+xrdb -merge $HOME/.Xdefaults       # update x resources db
+xrdb -merge $HOME/.Xresources
 
-xscreensaver -no-splash &         # starts screensaver daemon
-sh ~/.fehbg &                     # sets the background image
+xscreensaver -no-splash &          # starts screensaver daemon
+sh $HOME/.fehbg &                  # sets the background image
 #xsetroot -cursor_name left_ptr &  # sets the cursor icon
 #xset -b /usr/bin/numlockx on      # open numlock
 
@@ -45,8 +47,8 @@ xcompmgr -c -t-5 -l-5 -r4.2 -o.55 &
 #xbindkeys &
 
 # X keymap, console keymap in /etc/rc.local
-if [ -f ~/.Xmodmap ]; then
-  xmodmap ~/.Xmodmap
+if [ -f $HOME/.Xmodmap ]; then
+  xmodmap $HOME/.Xmodmap
 fi
 xmodmap -e "keycode 135 = Menu"
 xmodmap -e "keysym Menu = Super_R"

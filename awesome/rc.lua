@@ -651,6 +651,6 @@ awful.tag.viewonly(tags[1][6])
 -- autostart apps
 awful.util.spawn("sudo dhcpcd wlan0 &") -- scanning in rc.local
 awful.util.spawn("dropboxd")
-awful.util.spawn("xsetroot -cursor_name left_ptr")
+awful.util.spawn("xsetroot -cursor_name left_ptr &")
 
 -- vim: set fdm=marker sw=4 sts=4:

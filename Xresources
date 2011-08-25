@@ -1,3 +1,4 @@
+! Xterm Settings {{{
 xterm.termName: xterm-256color
 xterm.*.geometry: 80x36
 xterm*scrollBar: false
@@ -5,10 +6,7 @@ xterm*rightScrollBar: true
 xterm*loginshell: true
 xterm*cursorBlink: true
 xterm.borderLess: true
-
-! Cursor theme
-Xcursor.theme: aero
-Xcursor.size: 32
+xterm*metaSendsEscape: true
 
 !fix alt key input
 xterm*eightBitInput: false
@@ -90,7 +88,7 @@ xterm*cjkWidth: false
 
 !! green dark/light
 *color2:                S_green
-*color10:               S_base01
+*color10:               S_green
 
 !! yellow dark/light
 *color3:                S_yellow
@@ -98,11 +96,11 @@ xterm*cjkWidth: false
 
 !! blue dark/light
 *color4:                S_blue
-*color12:               S_base0
+*color12:               S_violet
 
 !! magenta dark/light
 *color5:                S_magenta
-*color13:               S_violet
+*color13:               S_magenta
 
 !! cyan dark/light
 *color6:                S_cyan
@@ -111,3 +109,6 @@ xterm*cjkWidth: false
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
+! }}}
+
+! vim: ts=4 sw=4

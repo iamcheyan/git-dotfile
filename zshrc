@@ -172,8 +172,8 @@ function history-search-end {
 }
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey '^[[A' history-beginning-search-backward-end
-bindkey '^[[B' history-beginning-search-forward-end
+bindkey '^P' history-beginning-search-backward-end
+bindkey '^N' history-beginning-search-forward-end
 # 词界像 bash 那样{{{3
 # autoload -U select-word-style
 # select-word-style bash
@@ -405,6 +405,16 @@ tianqi () { #天气预报 {{{2
     return 1
   fi
   w3m -dump "http://3g.sina.com.cn/prog/wapsite/weather_new/forecast_new.php?city=$city&vt=4" 2>/dev/null | sed '1,/转发至微博/d;/生活指数/,$d;s/\[[^]]\+\]//g'
+}
+color-blocks () {   
+  echo
+  local width=$(( ($COLUMNS / 16) -1 ))
+  local chars
+  local pre=$(( ( $COLUMNS - ($width+1)*16)/2 ))
+  for ((i=0; i<$width; i++)); chars+="░"
+  for ((i=0; i<$pre; i++)); echo -n " " 
+  for ((i=0; i<=7; i++)); echo -en "\e[3${i}m${chars} \e[1;3${i}m${chars}\e[m "; echo; echo
+  unset i
 }
 
 [[ -x /usr/lib/command-not-found ]] && command_not_found_handler () { # {{{2
