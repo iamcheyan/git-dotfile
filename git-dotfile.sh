@@ -24,6 +24,7 @@ echo "\t\tln -fs \`pwd\`/bash_aliases ~/.bash_aliases" >> Makefile
 echo "\t\tln -fs \`pwd\`/xinitrc ~/.xinitrc" >> Makefile
 echo "\t\tln -fs \`pwd\`/Xmodmap ~/.Xmodmap" >> Makefile
 echo "\t\tln -fs \`pwd\`/Xresources ~/.Xresources" >> Makefile
+echo "\t\tln -fs \`pwd\`/Xdefaults ~/.Xdefaults" >> Makefile
 
 # initialize your dotfile env
 make init
