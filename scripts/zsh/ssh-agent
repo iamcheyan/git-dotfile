@@ -1,5 +1,4 @@
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/ssh-agent/ssh-agent.plugin.zsh
-#
+#!/bin/zsh
 # INSTRUCTIONS
 #
 #   To enabled agent forwarding support add the following to
@@ -20,6 +19,8 @@
 #
 #   Agent forwarding support based on ideas from
 #   Florent Thoumie and Jonas Pfenniger
+#
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/ssh-agent/ssh-agent.plugin.zsh
 #
 
 local _plugin__ssh_env=$HOME/.ssh/environment-$HOST
