@@ -1,4 +1,4 @@
-"" Last Change: 2012年 05月 12日 星期四 07:05:37 CST
+"" Last Change: 2011年 08月 28日 星期日 06:23:07 CST
 
 "" 判断系统是否具有“自动命令”（autocmd）的支持
 if has('autocmd')
@@ -10,7 +10,6 @@ endif
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-
 
 "" 载入文件类型插件
 filetype plugin on
