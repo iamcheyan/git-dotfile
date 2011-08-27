@@ -19,9 +19,19 @@ filetype plugin on
 filetype indent on
 
 if has('gui_running')
+  "" 设置窗口大小
+  "" 有些终端不能改变大小 http://vayn.de/qF7u2c
+  set lines=30 " 终端出现断裂的原因
+  set columns=85
+  set textwidth=80
+
+  "" 高亮光标所在行
+  set cursorline
+
   colorscheme diablo3
   let g:diablo3_longline = 0
 else
+  set ambiwidth=single
   colorscheme lemon256
 endif
 
@@ -148,11 +158,6 @@ set fileformat=unix
 
 "" 开启命令显示
 set showcmd
-
-"" 设置窗口大小
-set lines=30
-set columns=85
-set textwidth=80
 
 "" 自动换行
 set wrap dy=lastline
