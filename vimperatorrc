@@ -43,34 +43,16 @@ let g:smooziee_scroll_amount="100"
 let g:smooziee_scroll_interval="10"
 
 "" Gmail和Greader的后台打开标签设置
-autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=false
 autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=true
 
 "" PassThrough gmail and greader
-""autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|www\.google\.com\/reader|chrome\:\/\/brief\/content\/brief\.xul).*/.test(buffer.URL)
-""inoremap <C-z> <C-v><C-z>
-""inoremap <C-y> <C-v><C-y>
+""autocmd LocationChange .* js modes.passAllKeys = /.*(mail\.google\.com|chrome\:\/\/brief\/content\/brief\.xul).*/.test(buffer.URL)
+
+autocmd LocationChange .* js modes.passAllKeys = /.*(www\.google\.com\/reader\/view).*/.test(buffer.URL)
 
 "" feedSomeKeys Gmail
-command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+command! -nargs=+ lazy autocmd VimperatorEnter 'mail\.google\.com/mail' <args>
 lazy fmaps -u='mail\.google\.com/mail' gi gs gt gd ga gc gb gk gl a c e j k m n o p r s u x z <Enter> ` ~ / ? ! # <S-r> <S-a> <S-f> <S-n> <tab><Enter> ] [ { } . *a *n *r *u *s *t
-
-"" feedSomeKeys GReader
-command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-command! -nargs=+ lazyfmapgooglereader  lazy fmap -urls='https?://www\.google\.com/reader/view' <args>
-command! -nargs=+ lazyfmapsgooglereader lazy fmaps -urls='https?://www\.google\.com/reader/view' <args>
-lazyfmapsgooglereader -events=vkeypress <Space> <S-Space> N P X O
-lazyfmapsgooglereader -events=vkeypress v m A
-lazyfmapsgooglereader -events=vkeypress gh ga gs gS gu gt gT gd gf gF gc ge gp
-lazyfmapsgooglereader -events=vkeypress r u / a
-lazyfmapsgooglereader -events=vkeypress j,n k,p J,N K,P n,N p,P o,vn w,NO
-lazyfmapgooglereader  -events=keypress  ; <CR>
-lazyfmapgooglereader  -events=vkeypress , X
-lazyfmapgooglereader  -events=vkeypress . O
-lazyfmapsgooglereader -events=vkeypress <C-1>,1 <C-2>,2
-"" GoogleReader
-lazyfmapgooglereader -events=vkeyup <C-t> T
-map -urls='https?://www\.google\.com/reader/view' i <C-t>j
 
 "" 齐全的next和previous
 set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b

@@ -416,6 +416,16 @@ color-blocks () {
   for ((i=0; i<=7; i++)); echo -en "\e[3${i}m${chars} \e[1;3${i}m${chars}\e[m "; echo; echo
   unset i
 }
+# {{{2 设置光标颜色
+if [[ $TERM == xterm* ]] || [[ $TERM == *rxvt* ]]; then
+  cursorcolor () { echo -ne "\e]12;$*\007" }
+elif [[ $TERM == screen* ]]; then
+  if [[ -n "$TMUX" ]]; then
+    cursorcolor () { echo -ne "\ePtmux;\e\e]12;$*\007\e\\" }
+  else
+    cursorcolor () { echo -ne "\eP\e]12;$*\007\e\\" }
+  fi
+fi
 
 [[ -x /usr/lib/command-not-found ]] && command_not_found_handler () { # {{{2
   /usr/lib/command-not-found -- $@ |& sed 's/apt-get/aptitude/g' >&2

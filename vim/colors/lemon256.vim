@@ -41,21 +41,23 @@ let s:color_normal = 'azure4'
 let s:color_insert = 'DarkGoldenrod1'
 let s:color_exit = 'azure4'
 if &term =~ 'xterm\|rxvt'
-  exe 'silent !echo -ne "\e]12;"' . s:color_normal . '"\007"'
+  exe 'silent !echo -ne "\e]12;"' . shellescape(s:color_normal, 1) . '"\007"'
   let &t_SI="\e]12;" . s:color_insert . "\007"
   let &t_EI="\e]12;" . s:color_normal . "\007"
-  exe 'autocmd VimLeave * :!echo -ne "\e]12;"' . s:color_exit . '"\007"'
+  exe 'autocmd VimLeave * :!echo -ne "\e]12;"' . shellescape(s:color_exit, 1) . '"\007"'
 elseif &term =~ "screen"
-  if exists('$TMUX')
-    exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . s:color_normal . '"\007\033\\"'
-    let &t_SI="\033Ptmux;\033\e]12;" . s:color_insert . "\007\033\\"
-    let &t_EI="\033Ptmux;\033\e]12;" . s:color_normal . "\007\033\\"
-    exe 'autocmd VimLeave * :!echo -ne "\033Ptmux;\033\e]12;"' . s:color_exit . '"\007\033\\"'
-  else
-    exe 'silent !echo -ne "\033P\e]12;"' . s:color_normal . '"\007\033\\"'
-    let &t_SI="\033P\e]12;" . s:color_insert . "\007\033\\"
-    let &t_EI="\033P\e]12;" . s:color_normal . "\007\033\\"
-    exe 'autocmd VimLeave * :!echo -ne "\033P\e]12;"' . s:color_exit . '"\007\033\\"'
+  if !exists('$SUDO_UID')
+    if exists('$TMUX')
+      exe 'silent !echo -ne "\033Ptmux;\033\e]12;"' . shellescape(s:color_normal, 1) . '"\007\033\\"'
+      let &t_SI="\033Ptmux;\033\e]12;" . s:color_insert . "\007\033\\"
+      let &t_EI="\033Ptmux;\033\e]12;" . s:color_normal . "\007\033\\"
+      exe 'autocmd VimLeave * :!echo -ne "\033Ptmux;\033\e]12;"' . shellescape(s:color_exit, 1) . '"\007\033\\"'
+    else
+      exe 'silent !echo -ne "\033P\e]12;"' . shellescape(s:color_normal, 1) . '"\007\033\\"'
+      let &t_SI="\033P\e]12;" . s:color_insert . "\007\033\\"
+      let &t_EI="\033P\e]12;" . s:color_normal . "\007\033\\"
+      exe 'autocmd VimLeave * :!echo -ne "\033P\e]12;"' . shellescape(s:color_exit, 1) . '"\007\033\\"'
+    endif
   endif
 endif
 unlet s:color_normal
@@ -156,7 +158,7 @@ if &t_Co > 255
   highlight WarningMsg      cterm=bold      ctermbg=236   ctermfg=231
   highlight WildMenu                        ctermbg=7     ctermfg=0
 
-  highlight Normal                          ctermbg=none  ctermfg=12
+  highlight Normal                          ctermbg=8     ctermfg=12
   highlight Comment                                       ctermfg=10
   highlight CursorLine      cterm=none      ctermbg=0
   highlight CursorColumn                    ctermbg=0

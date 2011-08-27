@@ -420,7 +420,7 @@ globalkeys = awful.util.table.join(
     end),
 
     -- 普通终端
-    awful.key({ "Control",     }, "i", function ()
+    awful.key({ "Control",   }, "i", function ()
   awful.util.spawn(terminal)
     end),
 
