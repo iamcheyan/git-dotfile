@@ -2,8 +2,8 @@
 alias myfb='LC_CTYPE=zh_CN.UTF-8 fbterm -i fbterm_ucimf'
 
 # openvpn
-alias ovpnt='sudo /etc/init.d/openvpn start'
-alias ovpnp='sudo /etc/init.d/openvpn stop'
+alias ovpnt='sudo /etc/rc.d/openvpn restart'
+alias ovpnp='sudo /etc/rc.d/openvpn stop'
 
 alias lily='ssh -qTfnN -D 1080 lily -p 2'
 alias uc='ssh -qTfnN -D 1080 uc'
