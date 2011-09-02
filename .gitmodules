@@ -80,3 +80,9 @@
 [submodule "vim/bundle/lusty"]
 	path = vim/bundle/lusty
 	url = git://github.com/lilydjwg/lusty.git
+[submodule "vim/bundle/countjump"]
+	path = vim/bundle/countjump
+	url = git://github.com/vim-scripts/CountJump.git
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
