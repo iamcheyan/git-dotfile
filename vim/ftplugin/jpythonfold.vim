@@ -49,23 +49,32 @@ setlocal foldexpr=GetPythonFold(v:lnum)
 setlocal foldtext=PythonFoldText()
 
 function! PythonFoldText()
-    " ignore decorators
-    let fs = v:foldstart
-    while getline(fs) =~ '^\s*@' | let fs = nextnonblank(fs + 1)
-    endwhile
-    let line = getline(fs)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 4
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+  let fs = v:foldstart
+  while getline(fs) =~ '^\s*@' | let fs = nextnonblank(fs + 1)
+  endwhile
+  let line = getline(fs)
+  let nnum = nextnonblank(fs + 1)
+  let nextline = getline(nnum)
+  "get the document string: next line is ''' or """
+  if nextline =~ "^\\s\\+[\"']\\{3}\\s*$"
+      let line = line . " " . matchstr(getline(nextnonblank(nnum + 1)), '^\s*\zs.*\ze$')
+  "next line starts with qoutes, and has text
+  elseif nextline =~ "^\\s\\+[\"']\\{1,3}"
+      let line = line." ".matchstr(nextline, "^\\s\\+[\"']\\{1,3}\\zs.\\{-}\\ze['\"]\\{0,3}$")
+  elseif nextline =~ '^\s\+pass\s*$'
+    let line = line . ' pass'
+  endif
+  "compute the width of the visible part of the window (see Note above)
+  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+  let size = 1 + v:foldend - v:foldstart
+  "compute expansion string
+  let spcs = '................'
+  while strlen(spcs) < w | let spcs = spcs . spcs
+  endwhile
+  "expand tabs (mail me if you have tabstop>10)
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
+  return strpart(line.spcs, 0, w-strlen(size)-7).'.'.size.' lines'
 endfunction
 
 function! GetBlockIndent(lnum)
@@ -120,8 +129,7 @@ function! GetPythonFold(lnum)
         endif
     " Case E***: empty lines fold with previous
     " (***) change '=' to -1 if you want empty lines/comment out of a fold
-    elseif line == '' && getline(a:lnum-1) == '' | return '-1'
-    elseif line == '' && getline(a:lnum-1) != '' | return '='
+    elseif line == '' | return '='
     endif
     " now we need the indent from previous
     let p = prevnonblank(a:lnum-1)
