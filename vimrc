@@ -2,7 +2,7 @@ scriptencoding utf-8
 " Last Change: 2011年 09月 03日 星期六 06:11:14 CST
 
 " 初始化设置 [[[1
-" 判断系统是否具有“自动命令”（autocmd）的支持
+" 判断系统是否具有 autocmd 的支持 [[[2
 if has('autocmd')
   " 清除所有的自动命令，以方便调试
   au!

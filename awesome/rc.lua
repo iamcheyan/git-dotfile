@@ -20,7 +20,7 @@ theme_path = awful.util.getdir("config") .. "/theme.lua"
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal --disable-factory --working-directory=/home/vayn"
+terminal = "urxvt -cd /home/vayn"
 editor = "gvim" or os.getenv("EDITOR") or "editor"
 -- editor_cmd = terminal .. " -e " .. editor
 editor_cmd = editor
@@ -410,13 +410,13 @@ globalkeys = awful.util.table.join(
     -- {{{4 终端
     -- 找一个居中终端来
     awful.key({ modkey,     }, "Return", function ()
-  myutil.run_or_raise("gnome-terminal --disable-factory --working-directory=/home/vayn/tmpfs --class TempTerm --geometry 80x24+343+180",
+  myutil.run_or_raise("urxvt -cd /home/vayn/tmpfs -name TempTerm -geometry 80x24+343+180",
   { class = "TempTerm" })
     end),
 
     -- 新居中终端
     awful.key({ modkey, "Shift"   }, "Return", function ()
-  awful.util.spawn("gnome-terminal --disable-factory --working-directory=/home/vayn/tmpfs --class TempTerm --geometry 80x24+343+180")
+  awful.util.spawn("urxvt -cd /home/vayn/tmpfs -name TempTerm -geometry 80x24+343+180")
     end),
 
     -- 普通终端
@@ -429,7 +429,7 @@ globalkeys = awful.util.table.join(
   if client.focus and client.focus.class == 'FullScreenHtop' then
       awful.client.movetotag(tags[mouse.screen][10], client.focus)
   else
-      myutil.run_or_raise("gnome-terminal --disable-factory --class FullScreenHtop -e 'htop'",
+      myutil.run_or_raise("urxvt -name FullScreenHtop -e 'htop'",
       { class = "FullScreenHtop" })
   end
     end),
@@ -558,13 +558,11 @@ awful.rules.rules = {
     { rule = { name = "文件传输" },
       properties = { floating = true } },
      -- 居中的终端
-    { rule = { class = "TempTerm" },
+    { rule = { instance = "TempTerm" },
       properties = { floating = true } },
     { rule = { class = "Tomboy" },
       properties = { floating = true } },
     { rule = { name = "Firefox 首选项" },
-      properties = { floating = true } },
-    { rule = { instance = "QQ.exe" },
       properties = { floating = true } },
     { rule = { class = "FullScreenHtop" },
       properties = { maximized_horizontal = true,
@@ -580,8 +578,6 @@ awful.rules.rules = {
 
 -- {{{1 Signals
 -- Signal function to execute when a new client appears.
-qqad_blocked = 0
-qq_dontblock = { '上线提醒', 'TXMenuWindow', '关闭提示', '系统消息', '选择文件夹', '导出', '查找' }
 client.add_signal("manage", function (c, startup)
     -- Add a titlebar
     -- awful.titlebar.add(c, { modkey = modkey })
@@ -619,25 +615,6 @@ client.add_signal("manage", function (c, startup)
     end
     if c.class == 'Empathy' then
   awful.client.movetotag(tags[mouse.screen][6], c)
-    end
-    if c.instance == 'QQ.exe' then
-  -- naughty.notify({title="新窗口", text="名称为 ".. c.name .."，class 为 " .. c.class:gsub('&', '&amp;') .. " 的窗口已接受管理。", preset=naughty.config.presets.critical})
-  for _, i in pairs(qq_dontblock) do
-      if c.name == i then
-    handled = true
-    break
-      end
-  end
-  if not handled then
-      if c.name and c.above and not c.name:match('^%w+$') then
-    qqad_blocked = qqad_blocked + 1
-    naughty.notify({title="QQ广告屏蔽 " .. qqad_blocked, text="检测到一个符合条件的窗口，标题为".. c.name .."。"})
-    c:kill()
-      else
-    awful.client.movetotag(tags[mouse.screen][3], c)
-      end
-  end
-  handled = false
     end
 end)
 
