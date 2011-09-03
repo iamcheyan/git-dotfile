@@ -322,15 +322,6 @@ au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 au BufNewFile,BufRead *.vim set foldmethod=marker
 
 " 函数及插件设置 [[[1
-" Python 补全 [[[
-if has("win32")
-  let g:pydiction_location = '$VIM/vimfiles/ftplugin/pydiction/complete-dict'
-else
-  let g:pydiction_location = expand('~/.vim/ftplugin/pydiction/complete-dict')
-endif
-let g:pydiction_menu_height = 20
-" ]]]
-
 " Python 高亮
 let python_highlight_all = 1
 
