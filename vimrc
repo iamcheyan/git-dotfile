@@ -69,10 +69,10 @@ set history=1000
 set iskeyword+=_,$,@,%,#,-
 
 " 使backspace正常处理indent, eol, start等
-set backspace=indent,eol,start whichwrap+=<,>,[,]
+set backspace=indent,eol,start
 
 " 允许backspace和光标键跨越行边界
-set whichwrap+=<,>,h,l
+set whichwrap=b,s,[,]
 
 " 在输入命令时列出匹配项目
 set wildmenu
@@ -84,6 +84,7 @@ set foldclose=all
 " 显示行号（否：nonumber）
 set number
 
+" 使用相对行号
 set relativenumber
 
 " create <FILENAME>.un~ files whenever you edit a file, undo previous actions
@@ -96,7 +97,7 @@ set undoreload=10000 "max number lines to save for undo on a buffer reload
 " 在终端输出一个相对平滑的更新
 set ttyfast
 
-" Backups
+" 备份
 set backup
 set backupdir=~/.vim/tmp/backup " backups
 set directory=~/.vim/tmp/swap   " swap files
@@ -178,7 +179,6 @@ set winaltkeys=no
 set completeopt+=longest
 set maxcombine=4
 set cedit=<C-Y>
-set whichwrap=b,s,[,]
 
 " Avoid command-line redraw on every entered character by turning off Arabic
 " shaping (which is implemented poorly).

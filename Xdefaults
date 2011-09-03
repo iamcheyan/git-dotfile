@@ -48,8 +48,8 @@ URxvt.inputMethod: fcitx
 
 ! Perl extensions
 URxvt.perl-ext-common: default,matcher,tabbed
+URxvt.urlLauncher:     firefox
 URxvt.matcher.button:  1
-URxvt.urlLauncher:     x-www-browser
 
 ! Commands
 !! ---- ctrl+F12 --> clean screen and scroll-bar
