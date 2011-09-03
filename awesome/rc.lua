@@ -20,7 +20,7 @@ theme_path = awful.util.getdir("config") .. "/theme.lua"
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt -cd /home/vayn"
+terminal = "urxvt -cd /home/vayn -e 'tmux'"
 editor = "gvim" or os.getenv("EDITOR") or "editor"
 -- editor_cmd = terminal .. " -e " .. editor
 editor_cmd = editor
@@ -629,6 +629,11 @@ awful.tag.viewonly(tags[1][6])
 awful.util.spawn("sudo dhcpcd wlan0 &") -- scanning in rc.local
 awful.util.spawn("dropboxd")
 awful.util.spawn("goldendict")
-awful.util.spawn("xsetroot -cursor_name left_ptr")
+-- xsetroot every 10 seconds
+-- http://awesome.naquadah.org/wiki/FAQ#How_to_change_the_cursor_theme.3F
+mytimer = timer({ timeout = 10 })
+mytimer:add_signal("timeout", function() awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr") end)
+mytimer:start()
+awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
 
 -- vim: set fdm=marker sw=4 sts=4:
