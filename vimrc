@@ -12,7 +12,7 @@ endif
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-source $VIMRUNTIME/vimrc_example.vim
+"source $VIMRUNTIME/vimrc_example.vim
 
 " 窗口及主题设置 [[[2
 if has('gui_running')
@@ -156,13 +156,16 @@ set shortmess=atI
 set guioptions-=b
 
 " 隐藏右边滚动条
-set guioptions-=Rr
+set guioptions-=R
+set guioptions-=r
 
 " 隐藏左边滚动条
-set guioptions-=lL
+set guioptions-=l
+set guioptions-=L
 
 " 隐藏菜单和工具栏
-set guioptions-=mT
+set guioptions-=m
+set guioptions-=T
 
 " 屏幕保留行数
 set scrolloff=5

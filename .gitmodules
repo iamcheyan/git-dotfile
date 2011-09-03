@@ -89,3 +89,6 @@
 [submodule "vim/bundle/pydiction"]
 	path = vim/bundle/pydiction
 	url = git://github.com/vim-scripts/Pydiction.git
+[submodule "vim/bundle/paredit-vim"]
+	path = vim/bundle/paredit-vim
+	url = git://github.com/njackson/paredit-vim.git
