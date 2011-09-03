@@ -12,7 +12,7 @@ endif
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-"source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/vimrc_example.vim
 
 " 窗口及主题设置 [[[2
 if has('gui_running')
