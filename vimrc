@@ -378,12 +378,6 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 " Use neocomplcache [[[
 let g:neocomplcache_enable_at_startup = 1
 
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-
-" Use underbar completion
-let g:neocomplcache_enable_underbar_completion = 1 
-
 " AutoComplPop like behavior.
 let g:neocomplcache_enable_auto_select = 1
 
