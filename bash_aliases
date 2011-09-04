@@ -8,11 +8,6 @@ alias ovpnp='sudo /etc/rc.d/openvpn stop'
 alias lily='ssh -qTfnN -D 1080 lily -p 2'
 alias uc='ssh -qTfnN -D 1080 uc'
 
-# xampp
-alias lampp='sudo /opt/lampp/lampp'
-# xampp directory permission
-alias webch='sudo chmod -R 777 /opt/lampp/htdocs/'
-
 # dictionary
 alias gd='. gdict.sh'
 alias dct='dictcn.py'

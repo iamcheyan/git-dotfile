@@ -81,9 +81,6 @@ set wildmode=list:longest
 " 自动关闭折叠
 set foldclose=all
 
-" 显示行号（否：nonumber）
-set number
-
 " 使用相对行号
 set relativenumber
 
