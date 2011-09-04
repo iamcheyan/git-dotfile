@@ -378,9 +378,6 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 " Use neocomplcache [[[
 let g:neocomplcache_enable_at_startup = 1
 
-" AutoComplPop like behavior.
-let g:neocomplcache_enable_auto_select = 1
-
 " Recommended key-mappings.
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
