@@ -22,11 +22,6 @@ alias copy='xsel -b -i'
 #alias cmfu='lynx --dump http://www.commandlinefu.com/commands/random/plaintext | grep .'
 alias cmfu='wget -qO - http://www.commandlinefu.com/commands/random/plaintext | sed -n "1d; /./p"'
 
-# GTD
-alias t='python $HOME/local/t/t.py --task-dir $HOME/Dropbox/tasks --list tasks'
-alias r='python $HOME/local/t/t.py --task-dir $HOME/Dropbox/tasks --list reading'
-alias w='python $HOME/local/t/t.py --task-dir $HOME/Dropbox/tasks --list writing'
-
 # quit terminal
 alias ':q'='exit'
 
