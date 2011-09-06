@@ -20,7 +20,6 @@ includes=(
   [bin]=/usr/local/bin
 )
 
-# Check if chrooted prompt.
 echo -n "Are you ready to backup? (y/n): "
 read executeback
 
