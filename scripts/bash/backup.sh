@@ -12,6 +12,7 @@ fi
 truecrypt $HOME/Dropbox/Private/sysbak $DEST
 
 if [[ $? -ne 0 ]]; then
+  echo "[1;31mFail to mount truecrypt volume.[0m"
   exit 65
 fi
 
