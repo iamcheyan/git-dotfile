@@ -1,0 +1,39 @@
+#!/bin/bash
+# system backup
+
+if [[ $UID != 0 ]]; then
+  echo "[1;31mMust be executed as root user.[0m"
+  exit 1
+fi
+
+distro=arch
+date=`date "+%F"`
+backupname="$distro-$date.tar"
+backdest=/opt/backup
+
+declare -A includes
+includes=(
+  [etc]=/etc
+  [grub]=/boot/grub/menu.lst
+  [pacman]=/var/lib/pacman/local
+  [cron]=/var/spool/cron
+  [bin]=/usr/local/bin
+)
+
+# Check if chrooted prompt.
+echo -n "Are you ready to backup? (y/n): "
+read executeback
+
+if [[ $executeback = 'y' ]]; then
+  echo "[32mBackup started[0m"
+  mkdir /tmp/backup
+
+  for i in "${!includes[@]}"; do
+    tar -czpf "/tmp/backup/$i.tar.gz" "${includes[$i]}" 2>/dev/null
+  done
+
+  tar -cvf "$backdest/$backupname" -C /tmp backup/
+  rm -r /tmp/backup
+  df -h "$backdest"
+  echo "[32mBackup finished[0m"
+fi
