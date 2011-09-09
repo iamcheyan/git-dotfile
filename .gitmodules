@@ -86,6 +86,3 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/paredit-vim"]
-	path = vim/bundle/paredit-vim
-	url = git://github.com/njackson/paredit-vim.git
