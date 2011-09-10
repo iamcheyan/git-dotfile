@@ -86,3 +86,9 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/vim-pyflakes"]
+	path = vim/bundle/vim-pyflakes
+	url = git://github.com/nvie/vim-pyflakes.git
+[submodule "vim/bundle/vim-pep8"]
+	path = vim/bundle/vim-pep8
+	url = git://github.com/nvie/vim-pep8.git

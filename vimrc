@@ -420,6 +420,11 @@ autocmd FileType cpp,c nmap <F11> :exe "!./".expand("%:r").".bin"<Left>
 " 打开javascript对dom、html和css的支持
 let javascript_enable_domhtmlcss=1
 
+" vim-pyflakes 设置
+autocmd FileType python map <buffer> <F2> :call Pyflakes()<CR>
+" vim-pep8 设置
+autocmd FileType python map <buffer> <F3> :call Pep8()<CR>
+
 " Windows 默认保存位置
 if has('gui_running') && has("win32")
   cd D:\360data\重要数据\桌面
