@@ -35,9 +35,6 @@
 [submodule "vim/bundle/jslint"]
 	path = vim/bundle/jslint
 	url = git://github.com/hallettj/jslint.vim.git
-[submodule "vim/bundle/neocomplcache"]
-	path = vim/bundle/neocomplcache
-	url = git://github.com/Shougo/neocomplcache.git
 [submodule "vim/bundle/fanfou"]
 	path = vim/bundle/fanfou
 	url = git://github.com/Vayn/Fanfou.git

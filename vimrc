@@ -1,5 +1,5 @@
+" Last Change: 2011年 09月 14日 星期三 12:19:36 CST
 scriptencoding utf-8
-" Last Change: 2011年 09月 03日 星期六 06:11:14 CST
 
 " 初始化设置 [[[1
 " 判断系统是否具有 autocmd 的支持 [[[2
@@ -12,7 +12,9 @@ endif
 filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-source $VIMRUNTIME/vimrc_example.vim
+
+runtime vimrc_example.vim
+runtime macros/matchit.vim
 
 " 窗口及主题设置 [[[2
 if has('gui_running')
@@ -295,28 +297,19 @@ vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR>
 vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
 
 " 自动命令 [[[1
+" 设置默认 filetype 为 txt
+autocmd BufEnter * if &filetype == "" | setlocal ft=txt | endif
+
 " 自动打开或关闭fcitx
 autocmd InsertLeave * set imdisable
 autocmd InsertLeave * set noimdisable
 
-" 高亮显示普通txt文件（需要txt.vim脚本）
-au BufRead,BufNewFile *.txt setlocal ft=txt
-au BufRead,BufNewFile *  setfiletype txt
-
-" CSS3 语法支持
-au BufRead,BufNewFile *.css set ft=css syntax=css3
-
-" Markdown 语法支持
-au BufNewFile,BufRead *.m*down set filetype=markdown
-au BufNewFile,BufRead *.m*down nnoremap <leader>1 yypVr=
-au BufNewFile,BufRead *.m*down nnoremap <leader>2 yypVr-
-au BufNewFile,BufRead *.m*down nnoremap <leader>3 I### <ESC>
-
-" jQuery 语法支持
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-
-" Vim 格式折叠设置
-au BufNewFile,BufRead *.vim set foldmethod=marker
+" Make
+autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
+" simple compile
+autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -std=gnu99\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
+" execute bin which is compiled by source
+autocmd FileType cpp,c nmap <F11> :exe "!./".expand("%:r").".bin"<Left>
 
 " 函数及插件设置 [[[1
 " Python 高亮
@@ -324,11 +317,11 @@ let python_highlight_all = 1
 
 " PHP 相关 [[[
 function! CheckSyntax()
-  if &filetype!="php"
+  if &FileType!="php"
     echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
     return
   endif
-  if &filetype=="php"
+  if &FileType=="php"
     " Check php syntax
     setlocal makeprg=\"php\"\ -l\ -n\ -d\ html_errors=off
     " Set shellpipe
@@ -341,7 +334,7 @@ function! CheckSyntax()
   execute "normal :"
   execute "copen"
 endfunction
-au filetype php map <F6> :call CheckSyntax()<CR>
+autocmd FileType php map <F6> :call CheckSyntax()<CR>
 
 " PHP字典补全
 if has("win32")
@@ -375,27 +368,11 @@ let g:use_zen_complete_tag = 1
 " Ack can be used as a replacement for 99% of the uses of grep.
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
-" Use neocomplcache [[[
-let g:neocomplcache_enable_at_startup = 1
-
-" Recommended key-mappings.
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#smart_close_popup()
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" ]]]
-
 " PHPDoc conform document generator [[[
-au FileType php source ~/.vim/plugin/php-doc.vim 
-au FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
-au FileType php nnoremap <C-P> :call PhpDocSingle()<CR> 
-au FileType php vnoremap <C-P> :call PhpDocRange()<CR>
+autocmd FileType php source ~/.vim/plugin/php-doc.vim 
+autocmd FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
+autocmd FileType php nnoremap <C-P> :call PhpDocSingle()<CR> 
+autocmd FileType php vnoremap <C-P> :call PhpDocRange()<CR>
 " ]]]
 
 " mru [[[
@@ -409,13 +386,6 @@ let MRU_Exclude_Files = '\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/'
 "  加载菜单太耗时
 let MRU_Add_Menu = 0
 " ]]]
-
-" Make
-autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
-" simple compile
-autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -std=gnu99\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
-" execute bin which is compiled by source
-autocmd FileType cpp,c nmap <F11> :exe "!./".expand("%:r").".bin"<Left>
 
 " 打开javascript对dom、html和css的支持
 let javascript_enable_domhtmlcss=1
