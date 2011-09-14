@@ -368,6 +368,25 @@ let g:use_zen_complete_tag = 1
 " Ack can be used as a replacement for 99% of the uses of grep.
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
+" Use neocomplcache [[[
+let g:neocomplcache_enable_at_startup = 1
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplcache#smart_close_popup()
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" ]]]
+
 " PHPDoc conform document generator [[[
 autocmd FileType php source ~/.vim/plugin/php-doc.vim 
 autocmd FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
