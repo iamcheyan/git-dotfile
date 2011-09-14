@@ -134,7 +134,6 @@ if has("win32")
 else
   set fileencoding=utf-8
 endif
-source $VIMRUNTIME/delmenu.vim
 language messages zh_CN.utf-8
 
 " 设置文件格式为unix
@@ -388,7 +387,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " ]]]
 
 " PHPDoc conform document generator [[[
-autocmd FileType php source ~/.vim/plugin/php-doc.vim 
+autocmd FileType php runtime plugin/php-doc.vim 
 autocmd FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
 autocmd FileType php nnoremap <C-P> :call PhpDocSingle()<CR> 
 autocmd FileType php vnoremap <C-P> :call PhpDocRange()<CR>
