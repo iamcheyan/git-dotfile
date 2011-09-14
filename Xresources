@@ -28,7 +28,7 @@ xterm*locale: true
 xterm.utf8:     true
 xterm*utf8Title: true
 xterm*fontMenu*fontdefault*Label: Default
-xterm*faceName: Inconsolata:antialias=True:pixelsize=17
+xterm*faceName: Inconsolata-dz:antialias=True:pixelsize=17
 !xter*boldFont: Inconsolata:style=Bold:pixelsize=17
 xterm*faceNameDoublesize: WenQuanYi Micro Hei:pixelsize=14:antialias=True
 xterm*xftAntialias: true
