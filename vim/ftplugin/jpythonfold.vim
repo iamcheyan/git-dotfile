@@ -40,7 +40,7 @@ let s:defpat = '^\s*\(@\|class\s.*:\|def\s\)'
 
 " (**) Ignore non-python files
 " Commented out because some python files are not recognized by Vim
-if &filetype != 'python' && match(getline(1), 'python') = -1
+if &filetype != 'python' && match(getline(1), 'python') == -1
     finish
 endif
 
