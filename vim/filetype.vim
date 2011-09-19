@@ -32,9 +32,6 @@ augroup filetypedetect
   au BufNewFile,BufRead *.m*down nnoremap <leader>2 yypVr-
   au BufNewFile,BufRead *.m*down nnoremap <leader>3 I### <ESC>
 
-  " CSS3 语法支持
-  au BufNewFile,BufRead *.css setf css syntax=css3
-
   " jQuery 语法支持
   au BufNewFile,BufRead jquery.*.js setf javascript syntax=jquery
 
