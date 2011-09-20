@@ -74,7 +74,7 @@ set iskeyword+=_,$,@,%,#,-
 set backspace=indent,eol,start
 
 " 允许backspace和光标键跨越行边界
-set whichwrap=b,s,[,]
+set whichwrap=b,s,[,],h,l
 
 " 在输入命令时列出匹配项目
 set wildmenu
