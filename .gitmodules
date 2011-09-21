@@ -95,6 +95,3 @@
 [submodule "vim/bundle/vim-css3-syntax"]
 	path = vim/bundle/vim-css3-syntax
 	url = git://github.com/hail2u/vim-css3-syntax.git
-[submodule "vim/bundle/vim-ipython"]
-	path = vim/bundle/vim-ipython
-	url = git://github.com/ivanov/vim-ipython.git

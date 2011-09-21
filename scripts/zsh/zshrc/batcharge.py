@@ -14,7 +14,8 @@ status = [o.strip() for o in output.split(':', 1)[1].split(',')]
 
 total_slots, slots = 10, []
 
-if os.getenv('TERM').find('linux') != -1:
+term = os.getenv('TERM')
+if term.find('linux') != -1 or term.find('xterm') != -1:
   fsign = '>'
   esign = '0'
 else:
