@@ -10,5 +10,6 @@ status=$1
 text=$2
 service=org.gajim.dbus
 path=org/gajim/dbus/RemoteObject
+interface=org.gajim.dbus.RemoteInterface
 
-dbus-send --print-reply --dest=$service /$path org.gajim.dbus.RemoteInterface.change_status string:"$status" string:"$text" string:"" 1>/dev/null
+dbus-send --print-reply --dest=$service /$path $interface.change_status string:"$status" string:"$text" string:"" 1>/dev/null
