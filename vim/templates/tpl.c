@@ -1,4 +1,4 @@
-/* <T_FILENAME> -
+/* <T_FILENAME>
  *
  * Copyright (c) 2011, <T_AUTHOR> <<T_AUTHOR_EMAIL>>
  * All rights reserved.
@@ -10,3 +10,8 @@
 
 #include <stdio.h>
 <T_CURSOR>
+
+/* ===================================================================== *
+ * vim modeline                                                          *
+ * vim: se fdm=expr foldexpr=getline(v\:lnum)=~'^\\S.*{'?'>1'\:1:        *
+ * ===================================================================== */
