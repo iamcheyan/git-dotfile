@@ -1,7 +1,3 @@
-/**
- * network-timer.c
- **/
-
 #include <stdio.h>
 #include <curl/curl.h>
 
