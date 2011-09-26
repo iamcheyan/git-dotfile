@@ -62,7 +62,7 @@ int main(int argc, const char *argv[]) {
     if (CURLE_OK == res)
       printf("The IP address is: %s\n", ip);
 
-    char * header;
+    char *header;
     res = curl_easy_getinfo(curl,CURLINFO_CONTENT_TYPE, &header);
     if(CURLE_OK == res)
       printf("The content type is: %s\n", header );
