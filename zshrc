@@ -133,6 +133,7 @@ bindkey -e
 bindkey "^U" backward-kill-line
 bindkey "^]" vi-find-next-char
 bindkey "^[]" vi-find-prev-char
+bindkey "^[w" vi-backward-kill-word
 # ^J 保持当前命令行但不执行
 bindkey -s "^J" "^[[A^[[B"
 bindkey -s "^[[Z" "^P"
