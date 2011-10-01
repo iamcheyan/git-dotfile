@@ -14,4 +14,4 @@ keycode 211 = Home
 keycode 121 = End
 
 ! Delete
-keycode 91 = Delete KP_Decimal
+keycode 119 = Delete KP_Decimal

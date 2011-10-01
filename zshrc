@@ -133,7 +133,11 @@ bindkey -e
 bindkey "^U" backward-kill-line
 bindkey "^]" vi-find-next-char
 bindkey "^[]" vi-find-prev-char
+# Alt-W 删除 path 的部分
 bindkey "^[w" vi-backward-kill-word
+bindkey "^[[3~" delete-char
+# Shift-delete
+bindkey "^[On" kill-word
 # ^J 保持当前命令行但不执行
 bindkey -s "^J" "^[[A^[[B"
 bindkey -s "^[[Z" "^P"
