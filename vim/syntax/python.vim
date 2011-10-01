@@ -263,7 +263,7 @@ if exists("python_highlight_builtin_funcs") && python_highlight_builtin_funcs !=
   syn keyword pythonBuiltinFunc	memoryview min next object oct open ord
   syn keyword pythonBuiltinFunc	pow print property range
   syn keyword pythonBuiltinFunc	repr reversed round set setattr
-  syn keyword pythonBuiltinFunc	slice sorted staticmethod str sum super tuple
+  syn keyword pythonBuiltinFunc	slice sorted staticmethod str sum super tuple self
   syn keyword pythonBuiltinFunc	type vars zip
 endif
 
