@@ -131,7 +131,7 @@ syn keyword pythonOperator  and in is not or
 " Decorators (new in Python 2.4)
 syn match   pythonDecorator "@" display nextgroup=pythonDottedName skipwhite
 syn match   pythonDottedName "[a-zA-Z_][a-zA-Z0-9_]*\(\.[a-zA-Z_][a-zA-Z0-9_]*\)*" display contained
-syn match   pythonDot        "\." display containedin=pythonDottedName
+syn match   pythonDot        "\.\|," display containedin=pythonDottedName
 
 " Comments
 syn match   pythonComment "#.*$" display contains=pythonTodo,@Spell

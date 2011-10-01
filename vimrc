@@ -23,8 +23,7 @@ if has('gui_running')
   set columns=85
   set cursorline    " 高亮光标所在行
 
-  colorscheme diablo3
-  let g:diablo3_longline = 0
+  colorscheme solarized
 else
   set ambiwidth=single
   colorscheme lemon256
