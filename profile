@@ -23,7 +23,7 @@ export LC_ADDRESS="zh_CN.UTF-8";
 export LC_TELEPHONE="zh_CN.UTF-8";
 export LC_MEASUREMENT="zh_CN.UTF-8";
 export LC_IDENTIFICATION="zh_CN.UTF-8";
-export PATH="$PATH:/opt/lampp/bin:/var/lib/gems/1.8/bin";
+export PATH="$PATH:/opt/lampp/bin";
 export LANGUAGE="zh_CN:zh:en";
 
 # set PATH so it includes user's private bin if it exists
