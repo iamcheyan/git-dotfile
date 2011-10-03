@@ -23,6 +23,7 @@ if has('gui_running')
   set columns=85
   set cursorline    " 高亮光标所在行
 
+  set background=dark
   colorscheme solarized
 else
   set ambiwidth=single
