@@ -1,8 +1,13 @@
 #!/bin/zsh
 
-if [[ -n "$__EXECUTED_GIT_COMMAND" || -n "$__EXECUTED_HG_COMMAND" ]];
-then
+#if [[ -n "$__EXECUTED_GIT_COMMAND" || -n "$__EXECUTED_HG_COMMAND" ]];
+#then
+  #update_current_vcs_vars
+  #[[ -n "$__EXECUTED_GIT_COMMAND" ]] && unset __EXECUTED_GIT_COMMAND
+	#[[ -n "$__EXECUTED_HG_COMMAND" ]] && unset __EXECUTED_HG_COMMAND
+#fi
+
+if [[ -n "$__EXECUTED_GIT_COMMAND" ]]; then
   update_current_vcs_vars
   [[ -n "$__EXECUTED_GIT_COMMAND" ]] && unset __EXECUTED_GIT_COMMAND
-	[[ -n "$__EXECUTED_HG_COMMAND" ]] && unset __EXECUTED_HG_COMMAND
 fi
