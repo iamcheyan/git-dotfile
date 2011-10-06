@@ -10,7 +10,10 @@ p = subprocess.Popen(["acpitool", "-b"], stdout=subprocess.PIPE)
 output = p.communicate()[0]
 output = output.decode('utf8')
 
-status = [o.strip() for o in output.split(':', 1)[1].split(',')]
+try:
+  status = [o.strip() for o in output.split(':', 1)[1].split(',')]
+except IndexError:
+  exit(1)
 
 total_slots, slots = 10, []
 
