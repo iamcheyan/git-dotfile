@@ -6,16 +6,6 @@ import sys
 import math
 import subprocess
 
-p = subprocess.Popen(["acpitool", "-b"], stdout=subprocess.PIPE)
-output = p.communicate()[0]
-output = output.decode('utf8')
-
-try:
-  status = [o.strip() for o in output.split(':', 1)[1].split(',')]
-except IndexError:
-  exit(1)
-
-total_slots, slots = 10, []
 
 term = os.getenv('TERM')
 if term.find('linux') != -1 or term.find('xterm') != -1:
@@ -25,7 +15,21 @@ else:
   fsign = '▸'
   esign = '▹'
 
-filled = int(math.ceil(float(status[1][:-1])) * 0.1) * fsign
+total_slots, slots = 10, []
+
+p = subprocess.Popen(["acpitool", "-b"], stdout=subprocess.PIPE)
+output = p.communicate()[0]
+output = output.decode('utf8')
+
+try:
+  # XXX: `acpitool -b` has been broken since 10/16/2011
+  status = [o.strip() for o in output.split(':', 1)[1].split(',')]
+  filled = int(math.ceil(float(status[1][:-1])) * 0.1) * fsign
+except IndexError:
+  charge_full = int(open('/sys/class/power_supply/BAT0/charge_full').read())
+  charge_now = int(open('/sys/class/power_supply/BAT0/charge_now').read())
+  filled = math.ceil((charge_now / charge_full) * 10) * fsign
+
 empty = (total_slots - len(filled)) * esign
 out = filled + empty
 
