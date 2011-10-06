@@ -119,7 +119,7 @@ myclock:start()
 
 -- {{{2 vicious widgets
 netwidget = widget({ type = "textbox" })
-vicious.register(netwidget, vicious.widgets.net, '↓<span color="#5798d9">${eth0 down_kb}</span> ↑<span color="#c2ba62">${eth0 up_kb}</span> ', 2)
+vicious.register(netwidget, vicious.widgets.net, '↓<span color="#5798d9">${wlan0 down_kb}</span> ↑<span color="#c2ba62">${wlan0 up_kb}</span> ', 2)
 
 memwidget = widget({ type = "textbox" })
 vicious.register(memwidget, vicious.widgets.mem, '<span color="#90ee90">$1%</span>', 3)
