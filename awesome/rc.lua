@@ -138,7 +138,7 @@ cputempwidget_clock:add_signal("timeout", function()
   end
   f:close()
   if fc and tonumber(fc:match('%d+')) > 65 then
-  naughty.notify({title="警告", text="CPU 温度已超过 65℃！", preset=naughty.config.presets.critical})
+  naughty.notify({title="警告", text="CPU 温度已超过 65℃！", timeout=2, preset=naughty.config.presets.critical})
   end
   cputempwidget.text = '<span color="#add8e6">' .. fc .. '</span> '
 end)
