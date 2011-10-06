@@ -28,7 +28,7 @@ try:
 except IndexError:
   charge_full = int(open('/sys/class/power_supply/BAT0/charge_full').read())
   charge_now = int(open('/sys/class/power_supply/BAT0/charge_now').read())
-  filled = math.ceil((charge_now / charge_full) * 10) * fsign
+  filled = math.floor((charge_now / charge_full) * 10) * fsign
 
 empty = (total_slots - len(filled)) * esign
 out = filled + empty
