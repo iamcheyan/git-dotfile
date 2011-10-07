@@ -444,13 +444,13 @@ fi
 PS1='%{[2m%}%h %(?..%{[1;31m%}%? )%{[32m%}%~$(prompt_vcs_info)
 %(!.%{[0;31m%}###.%{[1;35m%}>>>)%{[0m%} '
 # 次提示符：使用暗色
-PS2="%{[2m%}%_>%{[0m%} "
+PS2='%{[2m%}%_>%{[0m%} '
 # 右边的提示
 function battery_charge {
   echo `batcharge` 2>/dev/null
 }
-#RPS1="%(1j.%{[1;33m%}%j .)%{[m%}%T"
-RPS1="%(1j.%{[1;33m%}%j .)$(battery_charge)"
+#RPS1='%(1j.%{[1;33m%}%j .)%{[m%}%T'
+RPS1='%(1j.%{[1;33m%}%j .)$(battery_charge)'
 CORRECT_IGNORE='_*'
 READNULLCMD=less
 
