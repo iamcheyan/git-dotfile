@@ -294,6 +294,12 @@ map <leader>a :Ack
 vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
 vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
 
+" 交换历史移动键位，键位作用参见 cmdline.txt
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+cnoremap <Up> <C-P>
+cnoremap <Down> <C-N>
+
 " 自动命令 [[[1
 " 设置默认 filetype 为 txt
 autocmd BufEnter * if &filetype == "" | setlocal ft=txt | endif
