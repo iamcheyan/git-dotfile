@@ -1,0 +1,17 @@
+! Swap Esc, Caps_Lock and Control_L
+remove Lock = Caps_Lock
+remove Control = Control_L
+keycode 9 = Caps_Lock
+keycode 37 = Escape
+keycode 66 = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
+
+! Page keys
+keycode 123 = Prior
+keycode 122 = Next
+keycode 211 = Home
+keycode 121 = End
+
+! Delete
+keycode 91 = Delete KP_Decimal

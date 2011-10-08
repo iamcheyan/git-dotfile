@@ -1,0 +1,1 @@
+/home/vayn/code/repository/my/colorschemes/diablo3.vim

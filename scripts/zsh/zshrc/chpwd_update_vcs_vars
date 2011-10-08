@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+update_current_vcs_vars

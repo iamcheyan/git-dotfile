@@ -1,0 +1,59 @@
+" 设置路径
+set runtimepath=~/.vimperator
+
+" 把页面浏览、标签页跳转和历史跳转绑定到顺手的地方
+nnoremap h gT
+nnoremap l gt
+nnoremap H h
+nnoremap L l
+map < <C-6>
+noremap > g$
+noremap , <C-o>
+noremap . <C-i>
+map U :ju<CR>
+map <C-.> :tabm<space>
+noremap s <C-c>
+
+" 把剪贴板的URL贴至新标签上
+noremap pp P
+" 把选中的URL直接跳转至新标签
+noremap po YP
+
+" 还原 ctrl-l 跳到标签栏的快捷键
+noremap <C-l> <C-v><C-l>
+
+" Options
+set toolbars=navigation,bookmarks
+set scrollbars=true
+set titlestring='Serene Paraselene'
+set popups=resized
+set cpt=lfbs
+
+" 加载plugins目录下的脚本
+loadplugins
+
+" 常用网站映射
+map gs :gsearch!<space>
+map gr t https://reader.google.com/<CR>
+map gm t https://mail.google.com/<CR>
+map pi :pinboard<space>
+
+" Smoozie scroll
+let g:smooziee_scroll_amount="100"
+let g:smooziee_scroll_interval="10"
+
+" Gmail和Greader的后台打开标签设置
+autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder|www\.google)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=true
+
+" PassThrough gmail and greader
+autocmd LocationChange .* js modes.passAllKeys = /.*(www\.google\.com\/reader\/view).*/.test(buffer.URL)
+
+" feedSomeKeys Gmail
+command! -nargs=+ lazy autocmd VimperatorEnter 'mail\.google\.com/mail' <args>
+lazy fmaps -u='mail\.google\.com/mail' gi gs gt gd ga gc gb gk gl a c e j k m n o p r s u x z <Enter> ` ~ / ? ! # <S-r> <S-a> <S-f> <S-n> <tab><Enter> ] [ { } . *a *n *r *u *s *t
+
+" 齐全的next和previous
+set nextpattern=\s*下一页|下一张|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|››|»)$,^(>|»),(>|»)$,\bmore\b
+set previouspattern=\s*上一页|上一张|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprécédent\b,^<$,^(<<|‹‹|«)$,^(<|«),(<|«)$
+
+" vim: set fdm=marker sw=2 ts=2 sts=0 et:

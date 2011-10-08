@@ -1,0 +1,83 @@
+# A basic .muttrc for using with Gmail
+
+set imap_user        = "GmailUser"
+set imap_pass        = "GmailPassword"
+
+set smtp_url         = "smtp://GmailUser@smtp.gmail.com:587"
+set smtp_pass        = "GmailPassword"
+set from             = "YOU@gmail.com"
+set realname         = "Vayn"
+
+set editor           = "vim"
+
+# Basic config, you can leave this as is
+set folder           = "imaps://imap.gmail.com:993"
+set spoolfile        = "+INBOX"
+set postponed        = "+[Gmail]/Drafts"
+
+set header_cache     = ~/.mutt/cache/headers/
+set message_cachedir = ~/.mutt/cache/bodies/
+set certificate_file = ~/.mutt/cache/certificates/
+
+set move             = no
+set fast_reply
+set locale           = "zh_CN"
+
+set imap_check_subscribed
+set hostname         = gmail.com
+set mail_check       = 120
+set timeout          = 300
+set imap_keepalive   = 600
+set record           = "+[Gmail]/Sent Mail"
+set include
+set sort             = 'threads'
+set sort_aux         = 'reverse-last-date-received'
+set auto_tag         = yes
+
+# Header stuff
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop
+
+# For better looks
+set pager_index_lines = 5 # how large is the index window?
+set index_format="%4C %Z %{%b %d} %-15.15L %?M?(#%03M)&(%4l)? %?y?(%.20Y) ?%s"
+
+# Google Contacts and Groups
+source '~/.mutt/contactos.rb --groups|'
+source '~/.mutt/contactos.rb --subscribes|'
+set query_command ="~/.mutt/contactos.rb --mutt %s"
+set query_format="%4c %t %-40.40a %-40.40n %?e?(%e)?"
+
+# PGP Setting
+source ~/.mutt/gpg.rc
+
+# Gmail-style keyboard shortcuts
+macro index,pager rd "<enter-command>unset trash\n <delete-message>" "Gmail archive message" 
+macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[GMail]/Bin\"\n <delete-message>" "Gmail delete message" 
+macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox" 
+macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail" 
+macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
+macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+folder-hook .* macro index,pager A "<save-message>=[Gmail]/All<enter>" "Archive"
+
+# Labels
+macro index y "<enter-command>set editor=\"~/bin/editlabel append\"\n\
+<edit><sync-mailbox><next-undeleted>\
+<enter-command>set editor=vim\n" "Append label"
+macro pager y "<enter-command>set editor=\"~/bin/editlabel append\"\n\
+<edit><sync-mailbox><next-undeleted>\
+<enter-command>set editor=vim\n" "Append label"
+macro index Y "<enter-command>set editor=\"~/bin/editlabel menu\"\n\
+<edit><sync-mailbox><next-undeleted>\
+<enter-command>set editor=vim\n" "Edit labels"
+macro pager Y "<enter-command>set editor=\"~/bin/editlabel menu\"\n\
+<edit><sync-mailbox><next-undeleted>\
+<enter-command>set editor=vim\n" "Edit labels"
+macro index \Cy "<limit>~y " "Limit view to label"

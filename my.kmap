@@ -1,0 +1,36 @@
+keymaps 0-127
+keycode  1 = Caps_Lock
+keycode 29 = Escape
+keycode 58 = Control
+
+keymaps 113-203
+keycode 203 = Find             Find             Find
+	control	keycode 203 = Find
+	shift	control	keycode 203 = Find
+	altgr	control	keycode 203 = Find
+	alt	keycode 203 = Find
+	shift	alt	keycode 203 = Find
+	control	alt	keycode 203 = Find
+string Find = "\033[1~"
+keycode 113 = Select           Select           Select
+	control	keycode 113 = Select
+	shift	control	keycode 113 = Select
+	altgr	control	keycode 113 = Select
+	alt	keycode 113 = Select
+	shift	alt	keycode 113 = Select
+	control	alt	keycode 113 = Select
+string Select = "\033[4~"
+keycode 114 = Prior            Scroll_Backward  Prior
+	control	keycode 114 = Prior
+	shift	control	keycode 114 = Prior
+	altgr	control	keycode 114 = Prior
+	alt	keycode 114 = Prior
+	shift	alt	keycode 114 = Prior
+	control	alt	keycode 114 = Prior
+keycode 115 = Next             Scroll_Forward   Next
+	control	keycode 115 = Next
+	shift	control	keycode 115 = Next
+	altgr	control	keycode 115 = Next
+	alt	keycode 115 = Next
+	shift	alt	keycode 115 = Next
+	control	alt	keycode 115 = Next
