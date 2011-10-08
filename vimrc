@@ -1,100 +1,60 @@
-" Last Change: 2011年 09月 14日 星期三 12:19:36 CST
+" Last Change: 2011年 10月 08日 星期六 06:52:24 CST
 scriptencoding utf-8
 
-" 初始化设置 [[[1
-" 判断系统是否具有 autocmd 的支持 [[[2
+" 初始化 {{{1
+" 判断系统是否具有 autocmd 的支持 {{{2
 if has('autocmd')
   " 清除所有的自动命令，以方便调试
   au!
 endif
+" 2}}}
 
-" Pathogen 插件管理
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" Vundle {{{2
+filetype off " *required
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" let Vundle manage Vundle *required 
+Bundle 'gmarik/vundle'
+" 2}}}
 
+" 自带设置 {{{2
 runtime vimrc_example.vim
 runtime macros/matchit.vim
+" 2}}}
 
-" 窗口及主题设置 [[[2
-if has('gui_running')
-  "" 有些终端不能改变大小 http://vayn.de/qF7u2c
-  set lines=30      " 终端出现断裂的原因
-  set columns=85
-  set cursorline    " 高亮光标所在行
-
-  set background=dark
-  colorscheme solarized
-else
-  set ambiwidth=single
-  colorscheme lemon256
-endif
-
-" 设置工作目录 [[[2
+" 工作目录 {{{2
 function! CHANGE_CURR_DIR()
   let _dir = escape(expand("%:p:h"),' ')
   exec "cd " . _dir
   unlet _dir
 endfunction
 autocmd BufEnter * call CHANGE_CURR_DIR()
+" 2}}}
 
-" 设置模板 [[[2
+" 模板 {{{2
 let g:template_load = 1
 let g:template_tags_replacing = 1
 let g:T_AUTHOR = "Vayn a.k.a. VT"
 let g:T_AUTHOR_EMAIL = "vayn@vayn.de"
 let g:T_AUTHOR_WEBSITE = "http://elnode.com"
 let g:T_DATE_FORMAT = "%c"
+" 2}}}
 
-" 导出 html 设置 [[[2
+" Python 高亮
+let python_highlight_all = 1
+" 打开 JS 对 DOM、HTML 和 CSS 的支持
+let javascript_enable_domhtmlcss=1
+" 导出 HTML 设置
 let html_use_css = 1
 let html_number_lines = 0
 let use_xhtml = 1
+" 1}}}
 
-" set 相关 [[[1
-" Vim 会在自动补全文件名的时候，用斜杠代替反斜杠
+" 常规设置 {{{1
+" Unix 风格 slash
 set shellslash
-
-" 设置字体
-set guifont=inconsolata-dz\ 11
-
-" 设置缩进
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab
-
-" history文件中需要记录的行数
+" history 文件记录行数
 set history=1000
-
-" 带有如下符号的单词不要被换行分割
-set iskeyword+=_,$,@,%,#,-
-
-" 使backspace正常处理indent, eol, start等
-set backspace=indent,eol,start
-
-" 允许backspace和光标键跨越行边界
-set whichwrap=b,s,[,],h,l
-
-" 在输入命令时列出匹配项目
-set wildmenu
-set wildmode=list:longest
-
-" 自动关闭折叠
-set foldclose=all
-
-" 使用相对行号
-set relativenumber
-
-" create <FILENAME>.un~ files whenever you edit a file, undo previous actions
-" even after you close and reopen a file.
-set undofile
-set undodir=~/.vim/undodir
-set undolevels=1000
-set undoreload=10000 "max number lines to save for undo on a buffer reload
-
-" 在终端输出一个相对平滑的更新
-set ttyfast
 
 " 备份
 set backup
@@ -102,31 +62,29 @@ set backupdir=~/.vim/tmp/backup " backups
 set directory=~/.vim/tmp/swap   " swap files
 "set noswapfile
 
-set hidden
-"set bufhidden=hide
+set undofile
+set undodir=~/.vim/undodir
+set undolevels=1000
+set undoreload=10000 "max number lines to save for undo on a buffer reload
 
-" 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
-set showmatch
-
-" 匹配括号的规则，增加针对html的<>
-set matchpairs=(:),{:},[:],<:>
-
-" 匹配括号高亮的时间（单位是十分之一秒）
-set matchtime=1
-
+" 允许backspace和光标键跨越行边界
+set whichwrap=b,s,[,],h,l
 " 搜索时不区分大小写
 set ignorecase
-
 " 搜索高亮
 set hlsearch
+" 当前 buffer 可放在 bg 而不用写入磁盘
+set hidden
 
-" 不要闪烁
-set novisualbell
+set isfname-==
+set noequalalways
+set winaltkeys=no
+set completeopt+=longest
+set cedit=<C-Y>
+" 1}}}
 
-" 正确地处理中文字符的折行和拼接
-set formatoptions+=mM
-
-" 文件 UTF-8 编码
+" 格式设置 {{{1
+" 编码 {{{2
 set encoding=utf-8
 set fileencodings=utf-8,chinese,latin-1
 if has("win32")
@@ -135,50 +93,86 @@ else
   set fileencoding=utf-8
 endif
 language messages zh_CN.utf-8
+" 2}}}
 
+" 正确地处理中文字符的折行和拼接
+set formatoptions+=mM
 " 设置文件格式为unix
 set fileformat=unix
 
-" 自动换行
-set display=lastline
-
-" 初始窗口的位置
-"winpos 252 42
-
+" 缩进
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 " 行间距
 set linespace=4
+set expandtab
 
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-
+" 使backspace正常处理indent, eol, start等
+set backspace=indent,eol,start
+" 在输入命令时列出匹配项目
+set wildmenu
+set wildmode=list:longest
+" 1}}}
+
+" 显示设置 {{{1
+" 字体
+set guifont=inconsolata-dz\ 11
+
+" 窗口及主题设置 {{{2
+if has('gui_running')
+  "" 有些终端不能改变大小 http://vayn.de/qF7u2c
+  set lines=30      " 终端出现断裂的原因
+  set columns=85
+  set cursorline    " 高亮光标所在行
+
+  Bundle 'altercation/vim-colors-solarized.git'
+  set background=dark
+  colorscheme solarized
+else
+  set ambiwidth=single
+  colorscheme lemon256
+endif
+" 2}}}
+
+" 使用相对行号
+set relativenumber
+" 在终端输出一个相对平滑的更新
+set ttyfast
+" 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
+set showmatch
+" 匹配括号的规则，增加针对html的<>
+set matchpairs=(:),{:},[:],<:>
+" 匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=1
+" 不要闪烁
+set novisualbell
+set listchars=eol:$,tab:>-,nbsp:~
+" 自动关闭折叠
+set foldclose=all
+" 自动换行
+set display=lastline
+set nolinebreak
 " 启动的时候不显示intro
 set shortmess=atI
+" 屏幕保留行数
+set scrolloff=5
 
 " 隐藏底部滚动条
 set guioptions-=b
-
 " 隐藏右边滚动条
 set guioptions-=R
 set guioptions-=r
-
 " 隐藏左边滚动条
 set guioptions-=l
 set guioptions-=L
-
 " 隐藏菜单和工具栏
 set guioptions-=m
 set guioptions-=T
 
-" 屏幕保留行数
-set scrolloff=5
-
-set isfname-==
-set nolinebreak
-set noequalalways
-set listchars=eol:$,tab:>-,nbsp:~
-set winaltkeys=no
-set completeopt+=longest
-set maxcombine=4
-set cedit=<C-Y>
-
-" Avoid command-line redraw on every entered character by turning off Arabic
+" Avoid cmdline redraw on every entered char by turning off Arabic
 " shaping (which is implemented poorly).
 if has('arabic')
   set noarabicshape
@@ -186,9 +180,11 @@ endif
 
 if has("conceal")
   set concealcursor=nc
+  set maxcombine=4
 endif
+" 1}}}
 
-" mappings [[[1
+" 键映射 {{{1
 " 回车取消搜索高亮
 nnoremap <silent> <CR> :nohl<CR>
 
@@ -262,51 +258,34 @@ nnoremap Vat vatV
 " cit 删除一对 HTML/XML 的标签内部的所有字符并进入插入模式
 " ci” ci’ ci` 删除一对引号字符 (” 或 ‘ 或 `) 中所有字符并进入插入模式
 
-" Gundo Toggle
-nnoremap <F5> :GundoToggle<CR>
-
-" leader mappings [[[2
-let mapleader = ","
-
-" strip all trailing whitespace in the current file
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
-" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
-nnoremap <leader>q gqip
-
-" CSS properties sorted
-nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
-
-" Edit vim stuff.
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/bundle/snipmate/snippets/<cr>
-
-" open a new vertical split and switch over to it
-nnoremap <leader>w <C-w>v<C-w>l
-
-" Rainbows!
-nmap <leader>r :RainbowParenthesesToggle<CR>
-
-" Ack
-map <leader>a :Ack
-
-" 让选中内容变成搜索项
-vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
-vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
-
 " 交换历史移动键位，键位作用参见 cmdline.txt
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
 cnoremap <Up> <C-P>
 cnoremap <Down> <C-N>
 
-" 自动命令 [[[1
-" 设置默认 filetype 为 txt
-autocmd BufEnter * if &filetype == "" | setlocal ft=txt | endif
+" Leader mappings {{{2
+let mapleader = ","
+" strip all trailing whitespace in the current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
+nnoremap <leader>q gqip
+" CSS properties sorted
+nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
+" Edit vim stuff.
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/bundle/snipmate/snippets/<cr>
+" open a new vertical split and switch over to it
+nnoremap <leader>w <C-w>v<C-w>l
+" 让选中内容变成搜索项
+vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
+vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
+" 2}}}
+" 1}}}
 
-" 自动打开或关闭fcitx
-autocmd InsertLeave * set imdisable
-autocmd InsertLeave * set noimdisable
+" 命令 {{{1
+" 设默认 filetype 为 txt
+autocmd BufEnter * if &filetype == "" | setlocal ft=txt | endif
 
 " Make
 autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
@@ -314,12 +293,10 @@ autocmd FileType cpp,c nmap <leader>m :make<CR> :copen<CR> <C-W>10_
 autocmd FileType c nmap <F10> :w<cr>:exe ":set makeprg=gcc\\\ -std=gnu99\\\ -lm\\\ -Wall\\\ -o\\\ ".expand("%:r").".bin\\\ ".expand("%")<cr>:make<cr><cr>:cw<cr>
 " execute bin which is compiled by source
 autocmd FileType cpp,c nmap <F11> :exe "!./".expand("%:r").".bin"<Left>
+" 1}}}
 
-" 函数及插件设置 [[[1
-" Python 高亮
-let python_highlight_all = 1
-
-" PHP 相关 [[[
+" 函数 {{{1
+" 检查 PHP 语法 {{{2
 function! CheckSyntax()
   if &FileType!="php"
     echohl WarningMsg | echo "Fail to check syntax! Please select the right file!" | echohl None
@@ -339,16 +316,57 @@ function! CheckSyntax()
   execute "copen"
 endfunction
 autocmd FileType php map <F6> :call CheckSyntax()<CR>
+" }}}
 
-" PHP字典补全
+" PHP 字典 {{{2
 if has("win32")
   au FileType php setlocal dict+=$VIM/vimfiles/dict/php_funclist.txt
 else
   au FileType php setlocal dict+=~/.vim/dict/php_funclist.txt
 endif
-" ]]]
+" 2}}}
+" 1}}}
 
-" zencoding 设置 [[[
+" 插件 {{{1
+" Bundles from github {{{2
+Bundle 'Shougo/vimproc.git'
+Bundle 'Shougo/vimshell.git'
+Bundle 'Vayn/Fanfou.git'
+Bundle 'bootleq/vim-cycle.git'
+Bundle 'c9s/cascading.vim.git'
+Bundle 'fs111/pydoc.vim.git'
+Bundle 'godlygeek/tabular.git'
+Bundle 'hail2u/vim-css3-syntax.git'
+Bundle 'hallettj/jslint.vim.git'
+Bundle 'lilydjwg/colorizer.git'
+Bundle 'lilydjwg/lusty.git'
+Bundle 'majutsushi/tagbar.git'
+Bundle 'msanders/snipmate.vim.git'
+Bundle 'nathanaelkane/vim-indent-guides.git'
+Bundle 'pangloss/vim-javascript.git'
+Bundle 'rphillips/vim-zoomwin.git'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'tpope/vim-fugitive.git'
+Bundle 'tpope/vim-surround.git'
+Bundle 'ujihisa/vimshell-ssh.git'
+Bundle 'vim-scripts/CountJump.git'
+Bundle 'vim-scripts/L9.git'
+Bundle 'vim-scripts/ManPageView.git'
+Bundle 'vim-scripts/cscope_macros.vim.git'
+" 2}}}
+
+" Gundo
+Bundle 'sjl/gundo.vim.git'
+nnoremap <F5> :GundoToggle<CR>
+
+" Ack
+Bundle 'mileszs/ack.vim.git'
+let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+map <leader>a :Ack
+
+" zencoding {{{2
+Bundle 'vim-scripts/ZenCoding.vim.git'
 let g:user_zen_settings = {
  \ 'php' : {
  \  'extends' : 'html',
@@ -367,15 +385,12 @@ let g:user_zen_settings = {
 \}
 let g:user_zen_expandabbr_key = '<c-e>'  "设置为ctrl+e展开
 let g:use_zen_complete_tag = 1
-" ]]]
+" 2}}}
 
-" Ack can be used as a replacement for 99% of the uses of grep.
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-
-" Use neocomplcache [[[
+" neocomplcache {{{2
+Bundle 'Shougo/neocomplcache.git'
 let g:neocomplcache_enable_at_startup = 1
 
-" Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -389,16 +404,29 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" ]]]
+" 2}}}
 
-" PHPDoc conform document generator [[[
+" pyflakes
+Bundle 'nvie/vim-pyflakes.git'
+autocmd FileType python map <buffer> <F2> :call Pyflakes()<CR>
+
+" pep8
+Bundle 'nvie/vim-pep8.git'
+let g:pep8_args = "--ignore=E111"
+autocmd FileType python map <buffer> <F3> :call Pep8()<CR>
+
+" Rainbows
+Bundle 'Rainbow-Parenthsis'
+nmap <leader>r :RainbowParenthesesToggle<CR>
+
+" PHPDoc conform document generator {{{2
 autocmd FileType php runtime plugin/php-doc.vim 
 autocmd FileType php inoremap <C-P> <ESC>:call PhpDocSingle()<CR>i 
 autocmd FileType php nnoremap <C-P> :call PhpDocSingle()<CR> 
 autocmd FileType php vnoremap <C-P> :call PhpDocRange()<CR>
-" ]]]
+" 2}}}
 
-" mru [[[
+" mru {{{2
 if has("win32") || has("win64")
   let MRU_File = '$VIM/vimfiles/vim_mru_files'
 else
@@ -406,21 +434,8 @@ else
 endif
 let MRU_Max_Entries = 2000
 let MRU_Exclude_Files = '\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/'
-"  加载菜单太耗时
+" 加载菜单太耗时
 let MRU_Add_Menu = 0
-" ]]]
+" 2}}}
 
-" 打开javascript对dom、html和css的支持
-let javascript_enable_domhtmlcss=1
-
-" vim-pyflakes 设置
-autocmd FileType python map <buffer> <F2> :call Pyflakes()<CR>
-" vim-pep8 设置
-autocmd FileType python map <buffer> <F3> :call Pep8()<CR>
-
-" Windows 默认保存位置
-if has('gui_running') && has("win32")
-  cd D:\360data\重要数据\桌面
-endif
-
-" vim:fdm=marker:fmr=[[[,]]]
+" vim:fdm=marker
