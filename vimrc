@@ -23,6 +23,7 @@ Bundle 'hail2u/vim-css3-syntax.git'
 Bundle 'hallettj/jslint.vim.git'
 Bundle 'lilydjwg/colorizer.git'
 Bundle 'lilydjwg/lusty.git'
+Bundle 'mileszs/ack.vim.git'
 Bundle 'msanders/snipmate.vim.git'
 Bundle 'nathanaelkane/vim-indent-guides.git'
 Bundle 'pangloss/vim-javascript.git'
@@ -335,10 +336,6 @@ endif
 " Gundo
 Bundle 'sjl/gundo.vim.git'
 nnoremap <F5> :GundoToggle<CR>
-
-" Ack
-Bundle 'mileszs/ack.vim.git'
-map <leader>a :Ack 
 
 " zencoding {{{2
 Bundle 'vim-scripts/ZenCoding.vim.git'
