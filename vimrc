@@ -2,19 +2,41 @@
 scriptencoding utf-8
 
 " 初始化 {{{1
-" 判断系统是否具有 autocmd 的支持 {{{2
-if has('autocmd')
-  " 清除所有的自动命令，以方便调试
-  au!
-endif
-" 2}}}
-
 " Vundle {{{2
-filetype off " *required
-set rtp+=~/.vim/bundle/vundle/
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 " let Vundle manage Vundle *required 
 Bundle 'gmarik/vundle'
+
+" From github {{{3
+Bundle 'Shougo/vimproc.git'
+Bundle 'Shougo/vimshell.git'
+Bundle 'Vayn/Fanfou.git'
+Bundle 'altercation/vim-colors-solarized.git'
+Bundle 'bootleq/vim-cycle.git'
+Bundle 'c9s/cascading.vim.git'
+Bundle 'fs111/pydoc.vim.git'
+Bundle 'godlygeek/tabular.git'
+Bundle 'hail2u/vim-css3-syntax.git'
+Bundle 'hallettj/jslint.vim.git'
+Bundle 'lilydjwg/colorizer.git'
+Bundle 'lilydjwg/lusty.git'
+Bundle 'msanders/snipmate.vim.git'
+Bundle 'nathanaelkane/vim-indent-guides.git'
+Bundle 'pangloss/vim-javascript.git'
+Bundle 'rphillips/vim-zoomwin.git'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'tpope/vim-fugitive.git'
+Bundle 'tpope/vim-surround.git'
+Bundle 'ujihisa/vimshell-ssh.git'
+Bundle 'vim-scripts/CountJump.git'
+Bundle 'vim-scripts/L9.git'
+Bundle 'vim-scripts/ManPageView.git'
+Bundle 'vim-scripts/cscope_macros.vim.git'
+" 3}}}
 " 2}}}
 
 " 自带设置 {{{2
@@ -128,7 +150,6 @@ if has('gui_running')
   set columns=85
   set cursorline    " 高亮光标所在行
 
-  Bundle 'altercation/vim-colors-solarized.git'
   set background=dark
   colorscheme solarized
 else
@@ -312,33 +333,6 @@ endif
 " 1}}}
 
 " 插件 {{{1
-" Bundles from github {{{2
-Bundle 'Shougo/vimproc.git'
-Bundle 'Shougo/vimshell.git'
-Bundle 'Vayn/Fanfou.git'
-Bundle 'bootleq/vim-cycle.git'
-Bundle 'c9s/cascading.vim.git'
-Bundle 'fs111/pydoc.vim.git'
-Bundle 'godlygeek/tabular.git'
-Bundle 'hail2u/vim-css3-syntax.git'
-Bundle 'hallettj/jslint.vim.git'
-Bundle 'lilydjwg/colorizer.git'
-Bundle 'lilydjwg/lusty.git'
-Bundle 'msanders/snipmate.vim.git'
-Bundle 'nathanaelkane/vim-indent-guides.git'
-Bundle 'pangloss/vim-javascript.git'
-Bundle 'rphillips/vim-zoomwin.git'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'tpope/vim-pathogen.git'
-Bundle 'tpope/vim-surround.git'
-Bundle 'ujihisa/vimshell-ssh.git'
-Bundle 'vim-scripts/CountJump.git'
-Bundle 'vim-scripts/L9.git'
-Bundle 'vim-scripts/ManPageView.git'
-Bundle 'vim-scripts/cscope_macros.vim.git'
-" 2}}}
-
 " Gundo
 Bundle 'sjl/gundo.vim.git'
 nnoremap <F5> :GundoToggle<CR>
@@ -411,7 +405,7 @@ let g:tagbar_left = 1
 let g:tagbar_width = 30
 
 " 启动 pathogen 
-call pathogen#infect()
+call pathogen#infect('virus')
 
 " Rainbows
 nmap <leader>r :RainbowParenthesesToggle<CR>
