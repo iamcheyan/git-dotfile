@@ -271,17 +271,21 @@ cnoremap <Down> <C-N>
 
 " Leader mappings {{{2
 let mapleader = ","
+
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
 nnoremap <leader>q gqip
 " CSS properties sorted
 nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
+
 " Edit vim stuff.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/bundle/snipmate/snippets/<cr>
+
 " open a new vertical split and switch over to it
 nnoremap <leader>w <C-w>v<C-w>l
+
 " 让选中内容变成搜索项
 vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
 vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
