@@ -5,8 +5,7 @@ scriptencoding utf-8
 " Vundle {{{2
 set nocompatible
 filetype off
-
-set rtp+=~/.vim/vundle.git/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle *required 
 Bundle 'gmarik/vundle'
