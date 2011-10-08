@@ -8,22 +8,22 @@
 " Section: highlight {{{1
 
 function! rainbow_parentheses#Activate()
-    highlight default level1c   guifg=OrangeRed1
-    highlight default level2c   guifg=LightGoldenRod1
-    highlight default level3c   guifg=DeepSkyBlue1
-    highlight default level4c   guifg=HotPink1
-    highlight default level5c   guifg=chartreuse1
-    highlight default level6c   guifg=OrangeRed1
-    highlight default level7c   guifg=LightGoldenRod1
-    highlight default level8c   guifg=DeepSkyBlue1
-    highlight default level9c   guifg=HotPink1
-    highlight default level10c  guifg=chartreuse1
-    highlight default level11c  guifg=OrangeRed1
-    highlight default level12c  guifg=LightGoldenRod1
-    highlight default level13c  guifg=DeepSkyBlue1
-    highlight default level14c  guifg=HotPink1
-    highlight default level15c  guifg=chartreuse1
-    highlight default level16c  guifg=Yellow
+    highlight default level1c   guifg=OrangeRed1       ctermfg=003
+    highlight default level2c   guifg=LightGoldenRod1  ctermfg=011
+    highlight default level3c   guifg=DeepSkyBlue1     ctermfg=027
+    highlight default level4c   guifg=HotPink1         ctermfg=211
+    highlight default level5c   guifg=chartreuse1      ctermfg=142
+    highlight default level6c   guifg=OrangeRed1       ctermfg=124
+    highlight default level7c   guifg=LightGoldenRod1  ctermfg=184
+    highlight default level8c   guifg=DeepSkyBlue1     ctermfg=024
+    highlight default level9c   guifg=HotPink1         ctermfg=198
+    highlight default level10c  guifg=chartreuse1      ctermfg=129
+    highlight default level11c  guifg=OrangeRed1       ctermfg=196
+    highlight default level12c  guifg=LightGoldenRod1  ctermfg=155
+    highlight default level13c  guifg=DeepSkyBlue1     ctermfg=093
+    highlight default level14c  guifg=HotPink1         ctermfg=197
+    highlight default level15c  guifg=chartreuse1      ctermfg=129
+    highlight default level16c  guifg=Yellow           ctermfg=003
     let s:rainbow_paren_active = 1
 endfunction
 
