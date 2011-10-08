@@ -338,8 +338,7 @@ nnoremap <F5> :GundoToggle<CR>
 
 " Ack
 Bundle 'mileszs/ack.vim.git'
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-map <leader>a :Ack
+map <leader>a :Ack 
 
 " zencoding {{{2
 Bundle 'vim-scripts/ZenCoding.vim.git'
