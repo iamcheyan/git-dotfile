@@ -238,7 +238,7 @@ alias ren="vim +'Ren'"
 # 查看进程数最多的程序
 alias topnum="ps -e|sort -k4|awk '{print \$4}'|uniq -c|sort -n|tail"
 alias soul="mplayer -really-quiet -nolirc -loop 0 ~/Music/Promise.mp3"
-alias rebootrt="wget --user=vayn --password=admin888 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
+alias rebootrt="wget --user=admin --password=admin888 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
 alias xcp="rsync -aviHK --delete --exclude='*~'"
 alias pm-suspend="dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0"
 
