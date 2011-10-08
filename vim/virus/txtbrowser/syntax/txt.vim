@@ -57,19 +57,6 @@ syn match txtTitle "^\(\d\+\.\)\+\s*[^,。，]\+,"
 syn match txtTitle "^\([一二三四五六七八九十][、.]\)\+\s*[^,。，]\+$"
 syn match txtTitle "^\([一二三四五六七八九十][、.]\)\+\s*[^,。，]\+,"
 
-"txtList: Lines start with space and then '-+*.'
-"列表文本: 任意空格打头, 后跟一个[-+*.]
-syn match txtList    '^\s*\zs[-+*.] [^ ]'me=e-1
-
-"txtList: Lines start with space and then digit
-"列表文本: 任意空格打头, 后跟一个(数字) 或 (字母) 打头的文本行
-syn match txtList    '^\s*\zs(\=\([0-9]\+\|[a-zA-Z]\))'
-
-"txtList: Lines start with space and then digit and '.'
-"列表文本: 至少一个空格打头, [数字.]打头, 但随后不能跟数字(排除把5.5这样的文
-"本当成列表) 
-syn match txtList "^\s\+\zs\d\+\.\d\@!"
-
 "link url
 syn match txtUrl '\<[A-Za-z0-9_.-]\+@\([A-Za-z0-9_-]\+\.\)\+[A-Za-z]\{2,4}\>\(?[A-Za-z0-9%&=+.,@*_-]\+\)\='
 syn match txtUrl   '\<\(\(https\=\|ftp\|news\|telnet\|gopher\|wais\)://\([A-Za-z0-9._-]\+\(:[^ @]*\)\=@\)\=\|\(www[23]\=\.\|ftp\.\)\)[A-Za-z0-9%._/~:,=$@-]\+\>/*\(?[A-Za-z0-9/%&=+.,@*_-]\+\)\=\(#[A-Za-z0-9%._-]\+\)\='
@@ -145,18 +132,14 @@ syn case match
   HiLink txtDebug               Debug
   HiLink txtChangelogs          Keyword
 
-  HiLink txtUrl      Underlined"ModeMsg"Tabline"PmenuSbar
-  HiLink txtTitle      Title"ModeMsg"Tabline"PmenuSbar
-  HiLink txtList         SignColumn"Pmenu"DiffText"Statement
-  HiLink txtComment      Special "Comment
-  HiLink txtReference    DiffAdd "Comment
-  HiLink txtQuotes       MoreMsg"String
-  HiLink txtApostrophe    MoreMsg"Special
-  HiLink txtParentesis   Special "Comment
-  HiLink txtBrackets  Special
-  HiLink txtError  ErrorMsg
-  HiLink txtTodo  Todo
-  HiLink txtEmailMsg     Structure
+  HiLink txtUrl                 Underlined
+  HiLink txtTitle               Title
+  HiLink txtReference           DiffAdd
+  HiLink txtQuotes              MoreMsg
+  HiLink txtApostrophe          MoreMsg
+  HiLink txtParentesis          Special Comment
+  HiLink txtBrackets            Special
+  HiLink txtEmailMsg            Structure
 
   delcommand HiLink
 
