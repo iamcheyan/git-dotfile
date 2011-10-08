@@ -382,6 +382,18 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " 2}}}
 
+" 当前 buffer 居中显示 {{{2
+Bundle 'Vayn/vimroom.git'
+let g:vimroom_navigation_keys = 0
+let g:vimroom_sidebar_height = 0
+if has('gui_running')
+  let g:vimroom_background = '#002b36'
+else
+  let g:vimroom_background = 8
+  highlight LineNr ctermbg=8
+endif
+" 2}}}
+
 " pyflakes
 Bundle 'nvie/vim-pyflakes.git'
 autocmd FileType python map <buffer> <F2> :call Pyflakes()<CR>
