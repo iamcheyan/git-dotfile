@@ -189,6 +189,7 @@ endif
 nnoremap <silent> <CR> :nohl<CR>
 
 " NERDTree插件的快捷键
+Bundle 'scrooloose/nerdtree.git'
 imap <silent> <F7> <esc>:NERDTreeToggle<CR>
 nmap <silent> <F7> :NERDTreeToggle<CR>
 
@@ -342,7 +343,6 @@ Bundle 'nathanaelkane/vim-indent-guides.git'
 Bundle 'pangloss/vim-javascript.git'
 Bundle 'rphillips/vim-zoomwin.git'
 Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'scrooloose/nerdtree.git'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'tpope/vim-pathogen.git'
 Bundle 'tpope/vim-surround.git'
