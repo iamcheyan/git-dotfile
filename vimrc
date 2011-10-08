@@ -1,4 +1,4 @@
-" Last Change: 2011年 10月 08日 星期六 06:52:24 CST
+" Last Change: 2011年 10月 08日 星期六 08:24:56 CST
 scriptencoding utf-8
 
 " 初始化 {{{1
@@ -244,10 +244,6 @@ nmap <C-h> :%s/
 " 把缺省的Ctrl – X + O 改为 F4
 imap <F4> <C-X><C-O>
 
-" 使用 colorpicker 程序获取颜色值(hex/rgba)
-inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
-nmap cac :call Lilydjwg_changeColor()<CR>
-
 " Make selecting inside an HTML tag less dumb
 nnoremap Vit vitVkoj
 nnoremap Vat vatV
@@ -348,6 +344,7 @@ Bundle 'rphillips/vim-zoomwin.git'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'tpope/vim-fugitive.git'
+Bundle 'tpope/vim-pathogen.git'
 Bundle 'tpope/vim-surround.git'
 Bundle 'ujihisa/vimshell-ssh.git'
 Bundle 'vim-scripts/CountJump.git'
@@ -415,9 +412,15 @@ Bundle 'nvie/vim-pep8.git'
 let g:pep8_args = "--ignore=E111"
 autocmd FileType python map <buffer> <F3> :call Pep8()<CR>
 
+" 启动 pathogen 
+call pathogen#infect()
+
 " Rainbows
-Bundle 'Rainbow-Parenthsis'
 nmap <leader>r :RainbowParenthesesToggle<CR>
+
+" 使用 colorpicker 获取颜色值(hex/rgba)
+inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
+nmap cac :call Lilydjwg_changeColor()<CR>
 
 " PHPDoc conform document generator {{{2
 autocmd FileType php runtime plugin/php-doc.vim 
