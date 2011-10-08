@@ -152,8 +152,9 @@ set novisualbell
 set listchars=eol:$,tab:>-,nbsp:~
 " 自动关闭折叠
 set foldclose=all
-" 自动换行
+" 显示窗口末行尽量多的内容
 set display=lastline
+" 自动回绕
 set nolinebreak
 " 启动的时候不显示intro
 set shortmess=atI
