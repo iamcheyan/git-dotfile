@@ -188,20 +188,6 @@ endif
 " 回车取消搜索高亮
 nnoremap <silent> <CR> :nohl<CR>
 
-" NERDTree插件的快捷键
-Bundle 'scrooloose/nerdtree.git'
-imap <silent> <F7> <esc>:NERDTreeToggle<CR>
-nmap <silent> <F7> :NERDTreeToggle<CR>
-
-" QuickBuf 快捷键
-let g:qb_hotkey = "<F8>"
-
-" Tagbar 设置
-imap <silent> <F9> <esc>:TagbarToggle<CR>
-nmap <silent> <F9> :TagbarToggle<CR>
-let g:tagbar_left = 1
-let g:tagbar_width = 30
-
 " 窗口区域切换 ←→↑↓
 imap <silent> `h <esc><C-W><left>
 vmap <silent> `h <esc><C-W><left>
@@ -337,7 +323,6 @@ Bundle 'hail2u/vim-css3-syntax.git'
 Bundle 'hallettj/jslint.vim.git'
 Bundle 'lilydjwg/colorizer.git'
 Bundle 'lilydjwg/lusty.git'
-Bundle 'majutsushi/tagbar.git'
 Bundle 'msanders/snipmate.vim.git'
 Bundle 'nathanaelkane/vim-indent-guides.git'
 Bundle 'pangloss/vim-javascript.git'
@@ -412,6 +397,18 @@ Bundle 'nvie/vim-pep8.git'
 let g:pep8_args = "--ignore=E111"
 autocmd FileType python map <buffer> <F3> :call Pep8()<CR>
 
+" NERDTree插件的快捷键
+Bundle 'scrooloose/nerdtree.git'
+imap <silent> <F7> <esc>:NERDTreeToggle<CR>
+nmap <silent> <F7> :NERDTreeToggle<CR>
+
+" Tagbar 设置
+Bundle 'majutsushi/tagbar.git'
+imap <silent> <F9> <esc>:TagbarToggle<CR>
+nmap <silent> <F9> :TagbarToggle<CR>
+let g:tagbar_left = 1
+let g:tagbar_width = 30
+
 " 启动 pathogen 
 call pathogen#infect()
 
@@ -421,6 +418,9 @@ nmap <leader>r :RainbowParenthesesToggle<CR>
 " 使用 colorpicker 获取颜色值(hex/rgba)
 inoremap <M-c> <C-R>=Lilydjwg_colorpicker()<CR>
 nmap cac :call Lilydjwg_changeColor()<CR>
+
+" QuickBuf 快捷键
+let g:qb_hotkey = "<F8>"
 
 " PHPDoc conform document generator {{{2
 autocmd FileType php runtime plugin/php-doc.vim 
