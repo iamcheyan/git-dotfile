@@ -632,6 +632,5 @@ mytimer = timer({ timeout = 10 })
 mytimer:add_signal("timeout", function() awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr") end)
 mytimer:start()
 awful.util.spawn_with_shell("xsetroot -cursor_name left_ptr")
-awful.util.spawn("ovpnt")
 
 -- vim: set fdm=marker:
