@@ -386,11 +386,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 Bundle 'Vayn/vimroom.git'
 let g:vimroom_navigation_keys = 0
 let g:vimroom_sidebar_height = 0
-if has('gui_running')
-  let g:vimroom_background = '#002b36'
-else
-  let g:vimroom_background = 8
-endif
+let g:vimroom_guibackground = '#002b36'
+let g:vimroom_ctermbackground = 8
+nmap <silent> <leader>v <Plug>VimroomToggle
 " 2}}}
 
 " pyflakes
