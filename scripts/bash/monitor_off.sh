@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#https://bbs.archlinux.org/viewtopic.php?id=66169
 ###################################################
 # Check if X is running or not, turn off monitor, #
 # wait for a key press and turn it on again.      #
