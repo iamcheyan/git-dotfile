@@ -549,6 +549,9 @@ awful.rules.rules = {
 
   { rule = { class = "Empathy" },
     properties = { tag = tags[1][6] } },
+
+{ rule = { instance = "firefox-bin" },
+  properties = { floating = true } },
 }
 
 for k, v in pairs(floating_apps) do
