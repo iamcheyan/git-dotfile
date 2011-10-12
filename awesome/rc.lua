@@ -531,7 +531,8 @@ floating_apps = {
     '文件传输', 'Firefox 首选项', 'htop',
   },
   instance = {
-    'TempTerm', 'Toplevel', -- 火狐的对话框
+    'TempTerm',
+    'Toplevel', 'Browser', -- 火狐的关于对话框
   },
 }
 awful.rules.rules = {
