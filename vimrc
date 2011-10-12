@@ -359,7 +359,7 @@ let g:user_zen_settings = {
  \  'warn' : "warn \"|\";",
  \  }
 \}
-let g:user_zen_expandabbr_key = '<c-y>'  "设置为ctrl+e展开
+let g:user_zen_expandabbr_key = '<c-e>'  "设置为ctrl+e展开
 let g:use_zen_complete_tag = 1
 " 2}}}
 
