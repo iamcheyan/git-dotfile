@@ -587,7 +587,7 @@ client.add_signal("manage", function (c, startup)
     end
   end)
 
-  if c.class and c.class == 'Gimp-2.6' then
+  if c.class and c.class == 'Gimp' then
     raise_client[c] = false
   else
     raise_client[c] = true
