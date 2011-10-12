@@ -550,9 +550,10 @@ awful.rules.rules = {
   { rule = { class = "Empathy" },
     properties = { tag = tags[1][6] } },
 
-{ rule = { instance = "firefox-bin" },
-  properties = { floating = true } },
-}
+  { rule = { instance = "plugin-container" },
+      properties = { floating = true } },
+
+  }
 
 for k, v in pairs(floating_apps) do
   for _, vv in ipairs(v) do
