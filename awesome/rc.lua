@@ -533,6 +533,7 @@ floating_apps = {
   instance = {
     'TempTerm',
     'Toplevel', 'Browser', -- 火狐的关于对话框
+    'plugin-container', 'exe', -- 全屏 flash
   },
 }
 awful.rules.rules = {
@@ -551,10 +552,7 @@ awful.rules.rules = {
   { rule = { class = "Empathy" },
     properties = { tag = tags[1][6] } },
 
-  { rule = { instance = "plugin-container" },
-      properties = { floating = true } },
-
-  }
+}
 
 for k, v in pairs(floating_apps) do
   for _, vv in ipairs(v) do
