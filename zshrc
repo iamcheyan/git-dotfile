@@ -275,6 +275,7 @@ vman () { vim +"set ft=man" +"Man $@" }
 song () { find ~/Music -iname "$1*" }
 mvpc () { mv $1 "`echo $1|ascii2uni -a J`" } # 将以 %HH 表示的文件名改正常
 nocolor () { sed -r "s:\x1b\[[0-9;]*[mK]::g" }
+expandurl() { curl -sIL $1 | sed -n 's/Location:.* //p' }
 if [[ $TERM == screen* ]]; then # {{{2 设置标题
   # 注：不支持中文
   title () { echo -ne "\ek$*\e\\" }
