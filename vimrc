@@ -34,8 +34,8 @@ Bundle 'tpope/vim-surround.git'
 Bundle 'ujihisa/vimshell-ssh.git'
 Bundle 'vim-scripts/CountJump.git'
 Bundle 'vim-scripts/L9.git'
-Bundle 'vim-scripts/ManPageView.git'
 Bundle 'vim-scripts/cscope_macros.vim.git'
+Bundle 'vim-scripts/sudo.vim.git'
 " 3}}}
 " 2}}}
 
