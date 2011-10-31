@@ -148,7 +148,6 @@ if has('gui_running')
   "" 有些终端不能改变大小 http://vayn.de/qF7u2c
   set lines=30      " 终端出现断裂的原因
   set columns=85
-  set cursorline    " 高亮光标所在行
 
   set background=dark
   colorscheme solarized
@@ -158,6 +157,8 @@ else
 endif
 " 2}}}
 
+" 高亮光标所在行
+set cursorline
 " 使用相对行号
 set relativenumber
 " 在终端输出一个相对平滑的更新
@@ -238,6 +239,10 @@ nnoremap k gk
 nnoremap wh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap <BS> d
+
+" 跳转搜索结果时，其所在行居中并闪烁
+nnoremap n nzzzv:call PulseCursorLine()<cr>
+nnoremap N Nzzzv:call PulseCursorLine()<cr>
 
 " ctrl + c
 vmap <C-c> "+y
@@ -333,6 +338,65 @@ if has("win32")
 else
   au FileType php setlocal dict+=~/.vim/dict/php_funclist.txt
 endif
+" 2}}}
+
+" Pulse {{{2
+" 来自 http://vayn.de/tUAYAK
+function! PulseCursorLine()
+  let current_window = winnr()
+
+  windo set nocursorline
+  execute current_window . 'wincmd w'
+
+  setlocal cursorline
+
+  redir => old_hi
+    silent execute 'hi CursorLine'
+  redir END
+  let old_hi = split(old_hi, '\n')[0]
+  let old_hi = substitute(old_hi, 'xxx', '', '')
+
+  hi CursorLine guibg=#2a2a2a
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#333333
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#3a3a3a
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#444444
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#4a4a4a
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#444444
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#3a3a3a
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#333333
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#2a2a2a
+  redraw
+  sleep 20m
+
+  execute 'hi ' . old_hi
+
+  windo set cursorline
+  execute current_window . 'wincmd w'
+endfunction
 " 2}}}
 " 1}}}
 
