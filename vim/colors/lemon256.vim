@@ -163,7 +163,7 @@ if &t_Co > 255
   highlight CursorLine      cterm=none      ctermbg=0
   highlight CursorColumn                    ctermbg=0
   highlight LineNr                          ctermbg=0     ctermfg=10
-  highlight NonText                         ctermbg=0     ctermfg=235
+  highlight NonText                         ctermbg=8     ctermfg=235
 
   highlight LongLineWarning cterm=underline ctermbg=1     ctermfg=0
 end
