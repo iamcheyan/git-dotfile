@@ -97,7 +97,7 @@ set ignorecase
 set hlsearch
 " 当前 buffer 可放在 bg 而不用写入磁盘
 set hidden
-" 禁止在选择补全时打开 privew 窗口显示文档信息。针对 python omnicomplete（太扰
+" 禁止在选择补全时打开 preview 窗口显示文档信息。针对 python omnicomplete（太扰
 " 民了）
 set completeopt-=preview
 
