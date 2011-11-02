@@ -356,41 +356,43 @@ function! PulseCursorLine()
   let old_hi = split(old_hi, '\n')[0]
   let old_hi = substitute(old_hi, 'xxx', '', '')
 
-  hi CursorLine guibg=#2a2a2a
+  hi CursorLine guibg=#2a2a2a ctermbg=233
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#333333
+
+  hi CursorLine guibg=#333333 ctermbg=235
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#3a3a3a
+  hi CursorLine guibg=#3a3a3a ctermbg=239
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#444444
+  hi CursorLine guibg=#444444 ctermbg=240
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#4a4a4a
+  hi CursorLine guibg=#4a4a4a ctermbg=242
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#444444
+  hi CursorLine guibg=#444444 ctermbg=240
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#3a3a3a
+  hi CursorLine guibg=#3a3a3a ctermbg=239
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#333333
+  hi CursorLine guibg=#333333 ctermbg=235
   redraw
   sleep 20m
 
-  hi CursorLine guibg=#2a2a2a
+  hi CursorLine guibg=#2a2a2a ctermbg=233
   redraw
   sleep 20m
+  
 
   execute 'hi ' . old_hi
 
