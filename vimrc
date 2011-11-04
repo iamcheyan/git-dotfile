@@ -20,7 +20,6 @@ Bundle 'c9s/cascading.vim.git'
 Bundle 'fs111/pydoc.vim.git'
 Bundle 'godlygeek/tabular.git'
 Bundle 'hail2u/vim-css3-syntax.git'
-Bundle 'hallettj/jslint.vim.git'
 Bundle 'lilydjwg/colorizer.git'
 Bundle 'lilydjwg/lusty.git'
 Bundle 'mileszs/ack.vim.git'
@@ -289,7 +288,7 @@ nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
 
 " Edit vim stuff.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/bundle/snipmate/snippets/<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e ~/.vim/bundle/snipmate.vim/snippets<cr>
 
 " open a new vertical split and switch over to it
 nnoremap <leader>w <C-w>v<C-w>l
