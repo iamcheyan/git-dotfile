@@ -478,6 +478,27 @@ nmap <silent> <F9> :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_width = 30
 
+" Better RainbowParentheses
+Bundle 'kien/rainbow_parentheses.vim'
+let g:rbpt_colorpairs = [
+      \ [208, 'OrangeRed1'],
+      \ [011, 'LightGoldenRod1'],
+      \ [027, 'DeepSkyBlue1'],
+      \ [211, 'HotPink1'],
+      \ [142, 'chartreuse1'],
+      \ [124, 'OrangeRed1'],
+      \ [184, 'LightGoldenRod1'],
+      \ [024, 'DeepSkyBlue1'],
+      \ [198, 'HotPink1'],
+      \ [129, 'chartreuse1'],
+      \ [196, 'OrangeRed1'],
+      \ [155, 'LightGoldenRod1'],
+      \ [093, 'DeepSkyBlue1'],
+      \ [197, 'HotPink1'],
+      \ [129, 'chartreuse1'],
+      \ [208, 'Yellow'],
+      \ ]
+
 " 启动 pathogen 
 call pathogen#infect('virus')
 
