@@ -120,6 +120,7 @@ star.parentNode.insertBefore($friends, star.nextSibling)
 $friends.addEventListener("click", function() {
   this.classList.add('selected')
 })
+$('#lhn-friends').classList.add('section-minimized')
 
 var $shared = htmlToDomNode('<div id="shared-selector" class="selector"><a href="#stream/user/-/state/com.google/broadcast" class="link"><div class="selector-icon"></div><span class="text">' + shared_text + '</span></a></div>')
 star.parentNode.insertBefore($shared, $friends.nextSibling)
@@ -348,17 +349,23 @@ $list_view_button.addEventListener('click', clickListViewButton)
 
 
 GM_addStyle((<><![CDATA[
+  #lhn-friends {
+    display: block !important;
+    font-weight: 700;
+    max-height: 200px;
+    overflow-y: auto;
+  }
   #lhn-selectors #friends-selector .selector-icon {
-    background-position: -44px -100px
+    background-position: -44px -100px;
   }
   #lhn-selectors #shared-selector .selector-icon {
-    background-position: -64px -122px
+    background-position: -64px -122px;
   }
   #current-entry .broadcast {
-    background-position: -32px -66px
+    background-position: -32px -66px;
   }
   #current-entry .broadcast.shared {
-    background-position: -48px -98px
+    background-position: -48px -98px;
   }
 ]]></>).toString())
 
