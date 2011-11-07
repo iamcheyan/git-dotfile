@@ -24,10 +24,24 @@ function $$(aSelector, aElem) {
    return Array.prototype.slice.call(aElem.querySelectorAll(aSelector))
 }
 
-function htmlToDomNode(aHtml) {
+function htmlToDom(aHtml) {
   var container = document.createElement('div')
   container.innerHTML = aHtml
   return container.firstChild
+}
+
+function toggleClass(aSelector, aClass) {
+  if (aSelector.classList.contains(aClass))
+    aSelector.classList.remove(aClass)
+  else
+    aSelector.classList.add(aClass)
+}
+
+function center(aElem) {
+  aElem.style.top = '50%'
+  aElem.style.left = '50%'
+  aElem.style.marginTop = '-' + (aElem.clientHeight / 2) + 'px'
+  aElem.style.marginLeft = '-' + (aElem.clientWidth / 2) + 'px'
 }
 
 function isChild(aParent, aChild) {
@@ -89,7 +103,6 @@ function insertAfter(aNew, aRef) {
     aRef.parentNode.insertBefore(aNew, aRef.nextSibling)
   else
     aRef.parentNode.appendChild(aNew)
-  return aNew
 }
 
 var scripts = $$('script')
@@ -144,24 +157,26 @@ var url = document.URL
 
 $('#lhn-friends').classList.add('section-minimized')
 
-var $shared = htmlToDomNode('<div id="shared-selector" class="selector"><a href="#stream/user/-/state/com.google/broadcast" class="link"><div class="selector-icon"></div><span class="text">' + shared_text + '</span></a></div>')
-insertAfter($shared, $('#star-selector'))
+var $shared = htmlToDom('<div id="shared-selector" class="selector"><a href="#stream/user/-/state/com.google/broadcast" class="link"><div class="selector-icon"></div><span class="text">' + shared_text + '</span></a></div>')
 $shared.addEventListener('click', function() {
   this.classList.add('selected')
 })
+insertAfter($shared, $('#star-selector'))
 
-var $notes = htmlToDomNode('<div id="notes-selector" class="selector"><a href="#stream/user/-/state/com.google/created" class="link"><div class="selector-icon"></div><span class="text">' + notes_text + '</span></a></div>')
-insertAfter($notes, $shared).addEventListener('click', function() {
-  $notes.classList.add('selected')
+var $notes = htmlToDom('<div id="notes-selector" class="selector"><a href="#stream/user/-/state/com.google/created" class="link"><div class="selector-icon"></div><span class="text">' + notes_text + '</span></a></div>')
+$notes.addEventListener('click', function() {
+  this.classList.add('selected')
 })
+insertAfter($notes, $shared)
 
-var $liked = htmlToDomNode('<div id="like-selector" class="selector"><a href="#stream/user/-/state/com.google/like" class="link"><div class="selector-icon"></div><span class="text">' + liked_text + '</span></a></div>')
-insertAfter($liked, $notes).addEventListener('click', function() {
-  $liked.classList.add('selected')
+var $liked = htmlToDom('<div id="like-selector" class="selector"><a href="#stream/user/-/state/com.google/like" class="link"><div class="selector-icon"></div><span class="text">' + liked_text + '</span></a></div>')
+$liked.addEventListener('click', function() {
+  this.classList.add('selected')
 })
+insertAfter($liked, $notes)
 
 if (/broadcast(?!-friends)/.exec(url))
-  $shared.classList.addC('selected')
+  $shared.classList.add('selected')
 else if (/created/.exec(url))
   $notes.classList.add('selected')
 else if (/like/.exec(url))
@@ -190,28 +205,55 @@ var token_key = null
 
 function check(aEvent) {
   var which = aEvent.which
-  if (aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey && (which == 83 || which == 115)) {
-    share()
+  if (aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey) {
+    if (which == 83 || which == 115)  // shift + s
+      share()
+    else if (which == 68 || which == 100) { // shift + d
+      show_note_dialog()
+      return false
+    }
   }
-  else if (!aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey && (
-    which == 13 ||
-    which == 111 || which == 79 ||
-    which == 110 || which == 78 ||
-    which == 112 || which == 80 ||
-    which == 106 || which == 74 ||
-    which == 107 || which == 75)) {
-    setTimeout(showButton, 0)
+  else if (!aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey) {
+    if (which == 108 || which == 76) // l
+      like()
+    else if (
+      which == 13 ||                  // enter
+      which == 111 || which == 79 ||  // o
+      which == 110 || which == 78 ||  // n
+      which == 112 || which == 80 ||  // p
+      which == 106 || which == 74 ||  // j
+      which == 107 || which == 75     // k
+    )
+      setTimeout(showButton, 0)
   }
 }
-
-var $share_button = htmlToDomNode('<span class="broadcast"><span class="link unselectable">' + share_text + '</span></span>')
 
 function scrollCheck() {
   setTimeout(function () {
-    if (isChild($('#current-entry'), $share_button))
+    if (!isChild($('#current-entry'), $share_button))
       showButton()
   }, 100)
 }
+
+function getCurrentItem() {
+  try {
+    var current_entry = document.getElementById('current-entry')
+    if (!current_entry)
+      return null
+    var className = current_entry.className
+    var match = /entry-(\d+)/.exec(className)
+    var index = parseInt(match[1], 10)
+    return data[key2][key3][index]
+  } catch (e) {
+    return null
+  }
+}
+
+var $like_button = htmlToDom('<span class="like"><span class="link unselectable">' + like_text + '</span></span>')
+
+var $share_button = htmlToDom('<span class="broadcast"><span class="link unselectable">' + share_text + '</span></span>')
+
+var $share_note_button = htmlToDom('<span class="broadcast-with-note"><span class="link unselectable">' + share_note_text + '</span></span>')
 
 function showButton() {
   if (data === null) {
@@ -275,41 +317,49 @@ function showButton() {
     }
   }
 
-  var current_entry = $('#current-entry')
-  if (!current_entry)
+  item = getCurrentItem()
+  if (!item)
     return
 
-  var className = current_entry.className
-  var match = /entry-(\d+)/.exec(className)
-  var index = parseInt(match[1], 10)
-  item = data[key2][key3][index]
-
+  if (item.liked)
+    $like_button.classList.add('liked')
   if (item.shared)
     $share_button.classList.add('shared')
-  else if (item.shared === undefined) {
+
+  if (item.shared === undefined) {
     item.shared = false
     var states = item[state_key]
-    for (var i = 0; i < states.length; ++i) {
+    for (i = 0; i < states.length; ++i) {
       var state = states[i]
-      if (state.userId == user_id && state[state_key2][1] == 'broadcast') {
-        $share_button.classList.add('shared')
-        item.shared = true
-        break
+      if (state.userId == user_id) {
+        var state_key3 = state[state_key2][1]
+        if (state_key3 == 'like') {
+          $like_button.classList.add('liked')
+          item.liked = true
+        }
+        if (state_key3 == 'broadcast') {
+          $share_button.classList.add('shared')
+          item.shared = true
+        }
+        if (item.liked && item.shared)
+          break
       }
     }
   }
-  var sibling = $('#current-entry .item-plusone')
-  sibling.parentNode.insertBefore($share_button, sibling.nextSibling)
+  insertAfter($like_button, $('#current-entry .item-plusone'))
+  insertAfter($share_button, $like_button)
+  insertAfter($share_note_button, $share_button)
 }
 
-var collapsegHandler = clsDelegate(document, 'collapsed', 'click', showButton)
+var collapsedHandler = clsDelegate(document, 'collapsed', 'click', showButton)
 
-function share() {
-  var className = $('#current-entry').className
+function editItem(aState) {
+  var is_like = aState == 'like'
   try {
-    var match = /entry-(\d+)/.exec(className)
-    var index = parseInt(match[1], 10)
-    var item = data[key2][key3][index]
+    var item = getCurrentItem()
+    if (!item)
+      return
+
     var feed_link = decodeURIComponent(
       $('#current-entry a.entry-source-title').getAttribute('href').substring(13))
     var post_data = {
@@ -318,15 +368,22 @@ function share() {
       async: true,
       s: feed_link
     }
-    post_data[item.shared ? 'r' : 'a'] = 'user/-/state/com.google/broadcast'
 
-    function toggle() {
-      item.shared = !item.shared
-      if ($share_button.classList.contains('shared'))
-        $share_button.classList.remove('shared')
-      else
-        $share_button.classList.add('shared')
+    if (is_like) {
+      post_data[item.liked ? 'r' : 'a'] = 'user/-/state/com.google/like'
+      var toggle = function() {
+        item.liked = !item.liked
+        toggleClass($like_button, 'liked')
+      }
     }
+    else {
+      post_data[item.shared ? 'r' : 'a'] = 'user/-/state/com.google/broadcast'
+      var toggle = function() {
+        item.shared = !item.shared
+        toggleClass($share_button, 'shared')
+      }
+    }
+
     GM_xmlhttpRequest({
       method: 'POST',
       url: 'https://www.google.com/reader/api/0/edit-tag?client=scroll',
@@ -334,16 +391,6 @@ function share() {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      //onload: function(response) {
-        //GM_log([response.status,
-               //response.statusText,
-               //response.readyState,
-               //response.responseHeaders,
-               //response.responseText,
-               //response.finalUrl,
-               //response.responseXML
-        //].join("\n"))
-      //},
       onerror: toggle
     })
     toggle()
@@ -351,7 +398,123 @@ function share() {
   }
 }
 
+function like() {
+  editItem('like')
+}
+
+function share() {
+  editItem('share')
+}
+
+function addNote(aOptions) {
+  var post_data = {
+    T: unsafeWindow._COMMAND_TOKEN,
+    linkify: false,
+    share: aOptions.share
+  }
+
+  if (aOptions.content) {
+    post_data.snippet = aOptions.snippet
+    post_data.annotation = aOptions.note
+  }
+  else
+    post_data.snippet = aOptions.note
+
+  if (aOptions.title)
+    post_data.title = aOptions.title
+
+  if (aOptions.url)
+    post_data.url = aOptions.url
+
+  if (aOptions.srcTitle)
+    post_data.srcTitle = aOptions.srcTitle
+
+  if (aOptions.srcUrl)
+    post_data.srcUrl = aOptions.srcUrl
+
+  ajax_options = {
+    method: 'POST',
+    url: 'https://www.google.com/reader/api/0/item/edit?client=scroll',
+    data: serialize(post_data),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  }
+
+  if (aOptions.success)
+    ajax_options.onload = aOptions.success
+
+  if (aOptions.error)
+    ajax_options.onerror = aOptions.error
+
+  GM_xmlhttpRequest(ajax_options)
+}
+
+var posting_note = false
+function postNote() {
+  if (posting_note)
+    return
+  posting_note = true
+  $post_button.textContent = posting_text
+  var options = {
+    share: should_share_checkbox.checked,
+    note: $note_content.value,
+    success: function() {
+      posting_note = false
+      $dialog_background.style.visibility = 'hidden'
+      $note_dialog.style.visibility = 'hidden'
+    },
+    error: function() {
+      $post_button.textContent = post_text
+      posting_note = false
+    }
+  }
+  try {
+    var item = getCurrentItem()
+    if (item) {
+      options.title = item.g;
+      options.content = item.Dd;
+      options.url = item.Vd.alternate[0].uf;
+      options.srcTitle = item.jc.g;
+      options.srcUrl = item.jc.c.streamId.substring(5);
+    }
+    addNote(options)
+  } catch (e) {
+    $post_button.textContent = post_text
+    posting_note = false
+  }
+}
+
+function showNoteDialog() {
+  $note_content.value = ''
+  $post_button.textContent = post_text
+  should_share_checkbox.checked = true
+  $dialog_background.style.visibility = 'visible'
+  $note_dialog.style.visibility = 'visible'
+  center($note_dialog)
+}
+
+var $dialog_background = htmlToDom('<div class="fr-modal-dialog-bg"></div>')
+$dialog_background.style.visibility = 'hidden'
+document.body.appendChild($dialog_background)
+
+var $note_dialog = htmlToDom('<div class="fr-modal-dialog"><div class="fr-modal-dialog-content"><textarea class="note-content"></textarea></div><div class="fr-modal-dialog-buttons"><input type="checkbox" id="should-share"/><label for="should-share">' + add_share_text + '</label><button name="ok" class="goog-buttonset-default">' + post_text + '</button><button name="cancel">' + close_text + '</button></div></div>')
+$note_dialog.style.visibility = 'hidden'
+document.body.appendChild($note_dialog)
+
+var $note_content = $note_dialog.querySelector('textarea.note-content')
+var $post_button = $note_dialog.querySelector('button[name=ok]')
+$post_button.addEventListener('click', postNote)
+var $close_button = $note_dialog.querySelector('button[name=cancel]')
+$close_button.addEventListener('click', function() {
+  $dialog_background.style.visibility = 'hidden'
+  $note_dialog.style.visibility = 'hidden'
+})
+var should_share_checkbox = $note_dialog.querySelector('#should-share')
+
+$like_button.addEventListener('click', like)
 $share_button.addEventListener('click', share)
+$share_note_button.addEventListener('click', showNoteDialog)
 document.addEventListener('keypress', check)
 
 var $view_buttons = $$('#stream-view-options-container>div')
@@ -409,11 +572,25 @@ GM_addStyle((<><![CDATA[
   #current-entry .broadcast-with-note {
     background-position: -96px -194px;
   }
+  .fr-modal-dialog-bg {
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+  }
+  .fr-modal-dialog textarea.note-content {
+    width: 95%;
+    height: 150px;
+    margin: 1em auto 0;
+    display: block;
+  }
   #lhn-friends {
     display: block !important;
     font-weight: 700;
     max-height: 200px;
     overflow-y: auto;
+  }
+  #friends-tree-item-1-main {
+    display: none;
   }
 ]]></>).toString())
 
