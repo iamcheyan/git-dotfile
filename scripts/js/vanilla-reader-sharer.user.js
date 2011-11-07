@@ -8,7 +8,7 @@
 // @include       http://www.google.*/reader/view/*
 // @include       https://google.*/reader/view/*
 // @include       http://google.*/reader/view/*
-// @version       0.2.0
+// @version       0.2.1
 //
 // ==/UserScript==
 
@@ -218,6 +218,7 @@ function check(aEvent) {
       like()
     else if (
       which == 13 ||                  // enter
+      which == 32 ||                  // Space
       which == 111 || which == 79 ||  // o
       which == 110 || which == 78 ||  // n
       which == 112 || which == 80 ||  // p
@@ -386,7 +387,7 @@ function editItem(aState) {
 
     GM_xmlhttpRequest({
       method: 'POST',
-      url: 'https://www.google.com/reader/api/0/edit-tag?client=scroll',
+      url: '//www.google.com/reader/api/0/edit-tag?client=scroll',
       data: serialize(post_data),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -434,7 +435,7 @@ function addNote(aOptions) {
 
   ajax_options = {
     method: 'POST',
-    url: 'https://www.google.com/reader/api/0/item/edit?client=scroll',
+    url: '//www.google.com/reader/api/0/item/edit?client=scroll',
     data: serialize(post_data),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
