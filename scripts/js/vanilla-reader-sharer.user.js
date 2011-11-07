@@ -84,6 +84,14 @@ function clsDelegate(aParent, aChild, aType, aFn) {
   }, false)
 }
 
+function insertAfter(aNew, aRef) {
+  if (aRef.nextSibling !== null)
+    aRef.parentNode.insertBefore(aNew, aRef.nextSibling)
+  else
+    aRef.parentNode.appendChild(aNew)
+  return aNew
+}
+
 var scripts = $$('script')
 var script = scripts[scripts.length-1]
 var match = /id:"display-lang",\s?value:"([^"]+)"/.exec(script.innerHTML)
@@ -93,55 +101,83 @@ if (match)
 else
   lang = 'en'
 
-var follow_text
-var shared_text
-var share_text
+var shared_text, notes_text, share_text, share_note_text, like_text,
+    liked_text, add_share_text, post_text, posting_text, close_text
 if (lang == 'zh-CN') {
-  follow_text = '您关注的对象'
   shared_text = '共享条目'
+  notes_text = '备注'
   share_text = '共享'
+  share_note_text = '共享备注'
+  like_text = '喜欢'
+  liked_text = '您喜欢的条目'
+  add_share_text = '添加到共享条目'
+  post_text = '发布备注'
+  posting_text = '发布备注中…'
+  close_text = '关闭'
 }
 else if (lang == 'zh-TW' || lang == 'zh-HK') {
-  follow_text = '您關注的對象'
   shared_text = '共享條目'
+  notes_text = '備註'
   share_text = '共享'
+  share_note_text = '共享備註'
+  like_text = '喜歡'
+  liked_text = '您喜歡的條目'
+  add_share_text = '添加到共享條目'
+  post_text = '發佈備註'
+  posting_text = '發佈備註中…'
+  close_text = '關閉'
 }
 else {
-  follow_text = 'People you follow'
   shared_text = 'Your shared items'
+  notes_text = 'Notes'
   share_text = 'Share'
+  share_note_text = 'Share with note'
+  like_text = 'Like'
+  liked_text = 'Your liked items'
+  add_share_text = 'Add to shared items'
+  post_text = 'Post item'
+  posting_text = 'Posting item…'
+  close_text = 'Close'
 }
 
 var url = document.URL
-var star = $('#star-selector')
 
-var $friends = htmlToDomNode('<div id="friends-selector" class="selector"><a href="#stream/user/-/state/com.google/broadcast-friends" class="link"><div class="selector-icon"></div><span class="text">' + follow_text + '</span></a></div>')
-star.parentNode.insertBefore($friends, star.nextSibling)
-$friends.addEventListener("click", function() {
-  this.classList.add('selected')
-})
 $('#lhn-friends').classList.add('section-minimized')
 
 var $shared = htmlToDomNode('<div id="shared-selector" class="selector"><a href="#stream/user/-/state/com.google/broadcast" class="link"><div class="selector-icon"></div><span class="text">' + shared_text + '</span></a></div>')
-star.parentNode.insertBefore($shared, $friends.nextSibling)
-$shared.addEventListener("click", function() {
+insertAfter($shared, $('#star-selector'))
+$shared.addEventListener('click', function() {
   this.classList.add('selected')
 })
 
-if (/broadcast-friends/.exec(url))
-  $friends.classList.add('selected')
-else if (/broadcast/.exec(url))
-  $shared.classList.add('selected')
+var $notes = htmlToDomNode('<div id="notes-selector" class="selector"><a href="#stream/user/-/state/com.google/created" class="link"><div class="selector-icon"></div><span class="text">' + notes_text + '</span></a></div>')
+insertAfter($notes, $shared).addEventListener('click', function() {
+  $notes.classList.add('selected')
+})
+
+var $liked = htmlToDomNode('<div id="like-selector" class="selector"><a href="#stream/user/-/state/com.google/like" class="link"><div class="selector-icon"></div><span class="text">' + liked_text + '</span></a></div>')
+insertAfter($liked, $notes).addEventListener('click', function() {
+  $liked.classList.add('selected')
+})
+
+if (/broadcast(?!-friends)/.exec(url))
+  $shared.classList.addC('selected')
+else if (/created/.exec(url))
+  $notes.classList.add('selected')
+else if (/like/.exec(url))
+  $liked.classList.add('selected')
 
 var lhns = $$('#lhn-recommendations, #lhn-subscriptions, \
                #scrollable-sections .selector')
 
 for (var i = 0; i < lhns.length; i++) {
   lhns[i].addEventListener('click', function() {
-    if (this.id != 'friends-selector')
-      $friends.classList.remove('selected')
     if (this.id != 'shared-selector')
       $shared.classList.remove('selected')
+    if (this.id != 'notes-selector')
+      $notes.classList.remove('selected')
+    if (this.id != 'like-selector')
+      $liked.classList.remove('selected')
   })
 }
 
@@ -349,23 +385,35 @@ $list_view_button.addEventListener('click', clickListViewButton)
 
 
 GM_addStyle((<><![CDATA[
-  #lhn-friends {
-    display: block !important;
-    font-weight: 700;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  #lhn-selectors #friends-selector .selector-icon {
-    background-position: -44px -100px;
-  }
   #lhn-selectors #shared-selector .selector-icon {
     background-position: -64px -122px;
+  }
+  #lhn-selectors #notes-selector .selector-icon {
+    background-position: -66px -100px;
+  }
+  #lhn-selectors #like-selector .selector-icon {
+    background-position: -44px -100px;
+  }
+  #current-entry .like {
+    background-position: -128px -256px;
+  }
+  #current-entry .like.liked {
+    background-position: -144px -289px;
   }
   #current-entry .broadcast {
     background-position: -32px -66px;
   }
   #current-entry .broadcast.shared {
     background-position: -48px -98px;
+  }
+  #current-entry .broadcast-with-note {
+    background-position: -96px -194px;
+  }
+  #lhn-friends {
+    display: block !important;
+    font-weight: 700;
+    max-height: 200px;
+    overflow-y: auto;
   }
 ]]></>).toString())
 
