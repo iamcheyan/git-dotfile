@@ -35,6 +35,9 @@ augroup filetypedetect
   " jQuery 语法支持
   au BufNewFile,BufRead jquery.*.js setf javascript syntax=jquery
 
+  " Coffee Script 格式设置
+  au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
   " 高亮显示普通txt文件（需要txt.vim脚本）
   au BufRead,BufNewFile *.txt setlocal ft=txt
 
