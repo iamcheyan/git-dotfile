@@ -8,7 +8,7 @@
 // @include       http://www.google.*/reader/view/*
 // @include       https://google.*/reader/view/*
 // @include       http://google.*/reader/view/*
-// @version       0.2.1
+// @version       0.2.3
 //
 // ==/UserScript==
 
@@ -200,30 +200,31 @@ var user_id = unsafeWindow._USER_ID
 
 var data = null
 var key, key2, state_key, state_key2
-var key3 = 'mf'
+var key3 = 'jf'
 var token_key = null
 
 function check(aEvent) {
   var which = aEvent.which
-  if (aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey) {
-    if (which == 83 || which == 115)  // shift + s
+  if (aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey && !aEvent.metaKey) {
+    if (which == 70 || which == 102)  // Shift + F
       share()
-    else if (which == 68 || which == 100) { // shift + d
+    else if (which == 68 || which == 100) { // Shift + D
       show_note_dialog()
       return false
     }
   }
-  else if (!aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey) {
-    if (which == 108 || which == 76) // l
+  else if (!aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey
+          && !aEvent.metaKey) {
+    if (which == 108 || which == 76) // L
       like()
     else if (
-      which == 13 ||                  // enter
+      which == 13 ||                  // Enter
       which == 32 ||                  // Space
-      which == 111 || which == 79 ||  // o
-      which == 110 || which == 78 ||  // n
-      which == 112 || which == 80 ||  // p
-      which == 106 || which == 74 ||  // j
-      which == 107 || which == 75     // k
+      which == 111 || which == 79 ||  // O
+      which == 110 || which == 78 ||  // N
+      which == 112 || which == 80 ||  // P
+      which == 106 || which == 74 ||  // J
+      which == 107 || which == 75     // K
     )
       setTimeout(showButton, 0)
   }
@@ -474,10 +475,10 @@ function postNote() {
     var item = getCurrentItem()
     if (item) {
       options.title = item.g;
-      options.content = item.Dd;
-      options.url = item.Vd.alternate[0].uf;
-      options.srcTitle = item.jc.g;
-      options.srcUrl = item.jc.c.streamId.substring(5);
+      options.content = item.zd;
+      options.url = item.Rd.alternate[0].rf;
+      options.srcTitle = item.gc.g;
+      options.srcUrl = item.gc.c.streamId.substring(5);
     }
     addNote(options)
   } catch (e) {
