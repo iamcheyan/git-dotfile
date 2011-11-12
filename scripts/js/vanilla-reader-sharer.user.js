@@ -8,7 +8,7 @@
 // @include       http://www.google.*/reader/view/*
 // @include       https://google.*/reader/view/*
 // @include       http://google.*/reader/view/*
-// @version       0.2.3
+// @version       0.2.5
 //
 // ==/UserScript==
 
