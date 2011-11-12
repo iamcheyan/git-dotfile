@@ -12,39 +12,39 @@
 //
 // ==/UserScript==
 
-function $(aSelector, aElem) {
+var $ = function(aSelector, aElem) {
   if (!aElem)
     aElem = document
   return aElem.querySelector(aSelector)
 }
 
-function $$(aSelector, aElem) {
+var $$ = function(aSelector, aElem) {
    if (!aElem)
      aElem = document
    return Array.prototype.slice.call(aElem.querySelectorAll(aSelector))
 }
 
-function htmlToDom(aHtml) {
+var htmlToDom = function(aHtml) {
   var container = document.createElement('div')
   container.innerHTML = aHtml
   return container.firstChild
 }
 
-function toggleClass(aSelector, aClass) {
+var toggleClass = function(aSelector, aClass) {
   if (aSelector.classList.contains(aClass))
     aSelector.classList.remove(aClass)
   else
     aSelector.classList.add(aClass)
 }
 
-function center(aElem) {
+var center = function(aElem) {
   aElem.style.top = '50%'
   aElem.style.left = '50%'
   aElem.style.marginTop = '-' + (aElem.clientHeight / 2) + 'px'
   aElem.style.marginLeft = '-' + (aElem.clientWidth / 2) + 'px'
 }
 
-function isChild(aParent, aChild) {
+var isChild = function(aParent, aChild) {
   var node = aChild.parentNode
   while (node !== null) {
     if (node == aParent)
@@ -52,6 +52,18 @@ function isChild(aParent, aChild) {
     node = node.parentNode
   }
   return false
+}
+
+var parents = function(aElem, aName) {
+  var matched = []
+  var cur = aElem.parentNode
+
+  while (cur && cur.nodeType !== 9) {
+    if (cur.nodeType === 1 && cur.classList.contains(aName))
+      matched.push(cur)
+    cur = cur.parentNode
+  }
+  return matched
 }
 
 var serialize = function(obj) {
@@ -84,7 +96,7 @@ var Listener = (function() {
   }
 })()
 
-function clsDelegate(aParent, aChild, aType, aFn) {
+var clsDelegate = function(aParent, aChild, aType, aFn) {
   return Listener.addListener(aParent, aType, function(e) {
     var node = e.target
     while (node !== null) {
@@ -98,7 +110,7 @@ function clsDelegate(aParent, aChild, aType, aFn) {
   }, false)
 }
 
-function insertAfter(aNew, aRef) {
+var insertAfter = function(aNew, aRef) {
   if (aRef.nextSibling !== null)
     aRef.parentNode.insertBefore(aNew, aRef.nextSibling)
   else
@@ -209,7 +221,7 @@ function check(aEvent) {
     if (which == 70 || which == 102)  // Shift + F
       share()
     else if (which == 68 || which == 100) { // Shift + D
-      show_note_dialog()
+      showNoteDialog()
       return false
     }
   }
@@ -232,17 +244,23 @@ function check(aEvent) {
 
 function scrollCheck() {
   setTimeout(function () {
-    if (!isChild($('#current-entry'), $share_button))
+    if ($$('#current-entry .entry-actions>.like').length === 0)
       showButton()
   }, 100)
 }
 
-function getCurrentItem() {
+function getItem($button) {
+  var $entry, entry
   try {
-    var current_entry = document.getElementById('current-entry')
-    if (!current_entry)
+    if ($button) {
+      $entry = parents($button, 'entry')
+      entry = $entry.length ? $entry[0] : null
+    }
+    else
+      entry = document.getElementById('current-entry')
+    if (!entry)
       return null
-    var className = current_entry.className
+    var className = entry.className
     var match = /entry-(\d+)/.exec(className)
     var index = parseInt(match[1], 10)
     return data[key2][key3][index]
@@ -251,13 +269,16 @@ function getCurrentItem() {
   }
 }
 
-var $like_button = htmlToDom('<span class="like"><span class="link unselectable">' + like_text + '</span></span>')
 
-var $share_button = htmlToDom('<span class="broadcast"><span class="link unselectable">' + share_text + '</span></span>')
+var $like_button = htmlToDom('<span class="like" title="L"><span class="link unselectable">' + like_text + '</span></span>')
 
-var $share_note_button = htmlToDom('<span class="broadcast-with-note"><span class="link unselectable">' + share_note_text + '</span></span>')
+var $share_button = htmlToDom('<span class="broadcast" title="Shift+F"><span class="link unselectable">' + share_text + '</span></span>')
+
+var $share_note_button = htmlToDom('<span class="broadcast-with-note" title="Shift+D"><span class="link unselectable">' + share_note_text + '</span></span>')
 
 function showButton() {
+  if ($$('#current-entry .entry-actions>.like').length)
+    return
   if (data === null) {
     findDataLoop:
     for (key in unsafeWindow) {
@@ -319,14 +340,17 @@ function showButton() {
     }
   }
 
-  item = getCurrentItem()
+  item = getItem()
   if (!item)
     return
 
+  var $like_button_copy = $like_button.cloneNode(true)
+  var $share_button_copy = $share_button.cloneNode(true)
+
   if (item.liked)
-    $like_button.classList.add('liked')
+    $like_button_copy.classList.add('liked')
   if (item.shared)
-    $share_button.classList.add('shared')
+    $share_button_copy.classList.add('shared')
 
   if (item.shared === undefined) {
     item.shared = false
@@ -336,11 +360,11 @@ function showButton() {
       if (state.userId == user_id) {
         var state_key3 = state[state_key2][1]
         if (state_key3 == 'like') {
-          $like_button.classList.add('liked')
+          $like_button_copy.classList.add('liked')
           item.liked = true
         }
         if (state_key3 == 'broadcast') {
-          $share_button.classList.add('shared')
+          $share_button_copy.classList.add('shared')
           item.shared = true
         }
         if (item.liked && item.shared)
@@ -348,17 +372,35 @@ function showButton() {
       }
     }
   }
-  insertAfter($like_button, $('#current-entry .item-plusone'))
-  insertAfter($share_button, $like_button)
-  insertAfter($share_note_button, $share_button)
+
+  try {
+    $like_button_copy.addEventListener('click', function() {
+      editItem('like', $like_button_copy)
+    })
+    var $plus = $('#current-entry .item-plusone')
+    $plus.parentNode.insertBefore($like_button_copy, $plus)
+
+    $share_button_copy.addEventListener('click', function() {
+      editItem('share', $share_button_copy)
+    })
+    insertAfter($share_button_copy, $like_button_copy)
+
+    var $share_note_clone = $share_note_button.cloneNode(true)
+    $share_note_clone.addEventListener('click',function() {
+      showNoteDialog($(this.className))
+    })
+    insertAfter($share_note_clone, $share_button_copy)
+  } catch (e) {
+    /* If current entry is closed, the error could be catched */
+  }
 }
 
 var collapsedHandler = clsDelegate(document, 'collapsed', 'click', showButton)
 
-function editItem(aState) {
+function editItem(aState, $button) {
   var is_like = aState == 'like'
   try {
-    var item = getCurrentItem()
+    var item = getItem($button)
     if (!item)
       return
 
@@ -375,14 +417,28 @@ function editItem(aState) {
       post_data[item.liked ? 'r' : 'a'] = 'user/-/state/com.google/like'
       var toggle = function() {
         item.liked = !item.liked
-        toggleClass($like_button, 'liked')
+        if ($button)
+          toggleClass($button, 'liked')
+        else {
+          var elements = $$('#current-entry .entry-actions>.like')
+          for (var i = 0; i < elements.length; i++) {
+            toggleClass(elements[i], 'liked')
+          }
+        }
       }
     }
     else {
       post_data[item.shared ? 'r' : 'a'] = 'user/-/state/com.google/broadcast'
       var toggle = function() {
         item.shared = !item.shared
-        toggleClass($share_button, 'shared')
+        if ($button)
+          toggleClass($button, 'shared')
+        else {
+          var elements = $$('#current-entry .entry-actions>.broadcast')
+          for (var i = 0; i < elements.length; i++) {
+            toggleClass(elements[i], 'liked')
+          }
+        }
       }
     }
 
@@ -472,7 +528,7 @@ function postNote() {
     }
   }
   try {
-    var item = getCurrentItem()
+    var item = getItem($note_button)
     if (item) {
       options.title = item.g;
       options.content = item.zd;
@@ -487,7 +543,12 @@ function postNote() {
   }
 }
 
-function showNoteDialog() {
+var $note_button = null
+function showNoteDialog($button) {
+  if ($button)
+    $note_button = $button
+  else
+    $note_button = null
   $note_content.value = ''
   $post_button.textContent = post_text
   should_share_checkbox.checked = true
@@ -506,7 +567,7 @@ document.body.appendChild($note_dialog)
 
 var $note_content = $note_dialog.querySelector('textarea.note-content')
 var $post_button = $note_dialog.querySelector('button[name=ok]')
-$post_button.addEventListener('click', postNote)
+$post_button.addEventListener('click', function() { postNote() })
 var $close_button = $note_dialog.querySelector('button[name=cancel]')
 $close_button.addEventListener('click', function() {
   $dialog_background.style.visibility = 'hidden'
@@ -559,19 +620,19 @@ GM_addStyle((<><![CDATA[
   #lhn-selectors #like-selector .selector-icon {
     background-position: -44px -100px;
   }
-  #current-entry .like {
+  #entries .entry .entry-actions .like {
     background-position: -128px -256px;
   }
-  #current-entry .like.liked {
+  #entries .entry .entry-actions .like.liked {
     background-position: -144px -289px;
   }
-  #current-entry .broadcast {
+  #entries .entry .entry-actions .broadcast { 
     background-position: -32px -66px;
   }
-  #current-entry .broadcast.shared {
+  #entries .entry .entry-actions .broadcast.shared { 
     background-position: -48px -98px;
   }
-  #current-entry .broadcast-with-note {
+  #entries .entry .entry-actions .broadcast-with-note { 
     background-position: -96px -194px;
   }
   .fr-modal-dialog-bg {

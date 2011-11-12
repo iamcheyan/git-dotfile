@@ -75,7 +75,7 @@ theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/defau
 
 -- You can use your own command to set your wallpaper
 --theme.wallpaper_cmd = { "feh --bg-scale " .. awful.util.getdir("config") .. "/image/background.png" }
-theme.wallpaper_cmd = { "feh --bg-scale /home/vayn/Pictures/Wallpaper/vim_cheat_sheet_for_programmers_print.png" }
+theme.wallpaper_cmd = { "feh --bg-scale /home/vayn/Pictures/Wallpaper/saturn_1440x900.jpg" }
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"

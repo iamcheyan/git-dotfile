@@ -241,6 +241,7 @@ alias soul="mplayer -really-quiet -nolirc -loop 0 ~/Music/Promise.mp3"
 alias rebootrt="wget --user=admin --password=admin888 'http://192.168.1.1/userRpm/SysRebootRpm.htm?Reboot=%D6%D8%C6%F4%C2%B7%D3%C9%C6%F7' -O /dev/null"
 alias xcp="rsync -aviHK --delete --exclude='*~'"
 alias pm-suspend="dbus-send --system --print-reply --dest=org.freedesktop.Hal /org/freedesktop/Hal/devices/computer org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0"
+alias wsite="wget -t 5 -Q 500m -nH -r -E -l inf -k -p -np"
 
 # 后缀别名 {{{2
 alias -s xsl="vim"
