@@ -59,8 +59,12 @@ var parents = function(aElem, aName) {
   var cur = aElem.parentNode
 
   while (cur && cur.nodeType !== 9) {
-    if (cur.nodeType === 1 && cur.classList.contains(aName))
-      matched.push(cur)
+    if (cur.nodeType === 1) {
+      if (aName !== null && cur.classList.contains(aName))
+        matched.push(cur)
+      else if (aName === null)
+        matched.push(cur)
+    }
     cur = cur.parentNode
   }
   return matched
