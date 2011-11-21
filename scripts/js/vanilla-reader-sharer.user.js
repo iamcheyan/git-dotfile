@@ -8,7 +8,7 @@
 // @include       http://www.google.*/reader/view/*
 // @include       https://google.*/reader/view/*
 // @include       http://google.*/reader/view/*
-// @version       0.2.5
+// @version       0.2.6
 //
 // ==/UserScript==
 
@@ -215,8 +215,7 @@ for (var i = 0; i < lhns.length; i++) {
 var user_id = unsafeWindow._USER_ID
 
 var data = null
-var key, key2, state_key, state_key2
-var key3 = 'jf'
+var key, key2 = '$', key3 = 'hf', state_key, state_key2
 var token_key = null
 
 function check(aEvent) {
@@ -288,18 +287,13 @@ function showButton() {
     for (key in unsafeWindow) {
       if (key.length == 2) {
         var obj = unsafeWindow[key]
-        if (obj && typeof(obj) == 'object' && !('length' in obj)) {
-          for (key2 in obj) {
-            if (key2.length == 2) {
-              var obj2 = obj[key2]
-              if (obj2 && typeof(obj2) == 'object'
-                  && !('length' in obj2) && key3 in obj2) {
-                var obj3 = obj2[key3]
-                if (obj3 && typeof(obj3) == 'object' && 'length' in obj3) {
-                  data = obj
-                  break findDataLoop
-                }
-              }
+        if (obj && typeof(obj) == 'object' && !('length' in obj) && key2 in obj) {
+          var obj2 = obj[key2]
+          if (obj2 && typeof(obj2) == 'object' && !('length' in obj2) && key3 in obj2) {
+            var obj3 = obj2[key3]
+            if (obj3 && typeof(obj3) == 'object' && 'length' in obj3) {
+              data = obj
+              break findDataLoop
             }
           }
         }
