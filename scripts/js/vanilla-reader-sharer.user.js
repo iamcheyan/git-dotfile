@@ -530,9 +530,9 @@ function postNote() {
     if (item) {
       options.title = item.g;
       options.content = item.zd;
-      options.url = item.Rd.alternate[0].rf;
-      options.srcTitle = item.gc.g;
-      options.srcUrl = item.gc.c.streamId.substring(5);
+      options.url = item.Qd.alternate[0].rf;
+      options.srcTitle = item.ec.g;
+      options.srcUrl = item.ec.c.streamId.substring(5);
     }
     addNote(options)
   } catch (e) {
