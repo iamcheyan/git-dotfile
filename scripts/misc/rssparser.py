@@ -21,6 +21,8 @@ class ElementWrapper:
   def __getattr__(self, tag):
     if tag.startswith('__'):
       raise AttributeError(tag)
+    if tag == 'content':
+      tag = '{http://purl.org/rss/1.0/modules/content/}encoded'
     return self._element.findtext(tag)
 
 
@@ -33,11 +35,13 @@ class RssWrapper(ElementWrapper):
   def __getitem__(self, index):
     return ElementWrapper(self._items[index])
 
+
 class NewsItem:
-  def __init__(self, title, body, link=''):
+  def __init__(self, title='', desc='', content='', link=''):
     self.title = title
-    self.body = body
+    self.body = desc if len(desc) > len(content) else content
     self.link = link
+
 
 class FeedSource:
   def __init__(self, url):
