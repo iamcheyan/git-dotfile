@@ -1,10 +1,12 @@
 # vim: set fileencoding=utf-8:
-# @Author: Vayn a.k.a. VT <vayn@vayn.de>
-# @Name: feed.py
-# @Date: 2012-3-21 13:06:26
+# @Name: rssparser.py
 # A simple but versatile RSS parser.
+import sys
 
-from urllib2 import urlopen
+if sys.version_info[0] > 2:
+  from urllib.request import urlopen
+else:
+  from urllib2 import urlopen
 
 try:
   import xml.etree.cElementTree as ET
@@ -39,8 +41,14 @@ class RssWrapper(ElementWrapper):
 class NewsItem:
   def __init__(self, title='', desc='', content='', link=''):
     self.title = title
-    self.body = desc if len(desc) > len(content) else content
+    self.body = self.choose(desc, content)
     self.link = link
+
+  def choose(self, desc, content):
+    if content:
+      return desc if len(desc) > len(content) else content
+    else:
+      return desc
 
 
 class FeedSource:
@@ -56,7 +64,7 @@ class FeedSource:
 
   def getItems(self):
     for item in self.feed:
-      yield NewsItem(item.title, item.description, item.link)
+      yield NewsItem(item.title, item.description, item.content, item.link)
 
 if __name__ == '__main__':
   url = 'http://9.douban.com/rss/culture'
