@@ -70,6 +70,6 @@ if __name__ == '__main__':
   url = 'http://9.douban.com/rss/culture'
   FS = FeedSource(url)
   items = FS.getItems()
-  with open('dc.txt', 'w+') as fh:
+  with open('dc.txt', 'wb') as fh:
     for item in items:
        fh.write(item.body.encode('utf8'))
