@@ -23,7 +23,7 @@ noremap po YP
 noremap <C-l> <C-v><C-l>
 
 " Options
-set toolbars=navigation,bookmarks
+set toolbars=navigation,bookmarks,nomenu
 set scrollbars=true
 set titlestring='Serene Paraselene'
 set popups=resized

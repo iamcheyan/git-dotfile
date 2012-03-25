@@ -8,7 +8,7 @@
 // @include       http://www.google.*/reader/view/*
 // @include       https://google.*/reader/view/*
 // @include       http://google.*/reader/view/*
-// @version       0.2.7
+// @version       0.3.0
 //
 // ==/UserScript==
 
@@ -131,8 +131,10 @@ else
   lang = 'en'
 
 var shared_text, notes_text, share_text, share_note_text, like_text,
-    liked_text, add_share_text, post_text, posting_text, close_text
+    liked_text, add_share_text, post_text, posting_text, close_text,
+    follow_text
 if (lang == 'zh-CN') {
+  follow_text = '您关注的对象'
   shared_text = '共享条目'
   notes_text = '备注'
   share_text = '共享'
@@ -145,6 +147,7 @@ if (lang == 'zh-CN') {
   close_text = '关闭'
 }
 else if (lang == 'zh-TW' || lang == 'zh-HK') {
+  follow_text = '您關注的對象'
   shared_text = '共享條目'
   notes_text = '備註'
   share_text = '共享'
@@ -157,6 +160,7 @@ else if (lang == 'zh-TW' || lang == 'zh-HK') {
   close_text = '關閉'
 }
 else {
+  follow_text = 'People you follow'
   shared_text = 'Your shared items'
   notes_text = 'Notes'
   share_text = 'Share'
@@ -191,7 +195,15 @@ $liked.addEventListener('click', function() {
 })
 insertAfter($liked, $notes)
 
-if (/broadcast(?!-friends)/.exec(url))
+var $friends = htmlToDom('<div id="friends-selector" class="selector"><a href="#stream/user/-/state/com.google/broadcast-friends" class="link"><div class="selector-icon"></div><span class="text">' + follow_text + '</span></a></div>')
+$friends.addEventListener('click', function() {
+  this.classList.add('selected')
+})
+insertAfter($friends, $liked)
+
+if (/broadcast-friends/.exec(url))
+  $friends.classList.add('selected')
+else if (/broadcast/.exec(url))
   $shared.classList.add('selected')
 else if (/created/.exec(url))
   $notes.classList.add('selected')
@@ -209,13 +221,14 @@ for (var i = 0; i < lhns.length; i++) {
       $notes.classList.remove('selected')
     if (this.id != 'like-selector')
       $liked.classList.remove('selected')
+    if (this.id != 'friends-selector')
+      $friends.classList.remove('selected')
   })
 }
 
 var user_id = unsafeWindow._USER_ID
 
-var data = null
-var key, key2 = '$', key3 = 'hf', state_key, state_key2
+var data, key, key2, key3, state_key, state_key2
 var token_key = null
 
 function check(aEvent) {
@@ -229,7 +242,7 @@ function check(aEvent) {
     }
   }
   else if (!aEvent.shiftKey && !aEvent.ctrlKey && !aEvent.altKey
-          && !aEvent.metaKey) {
+           && !aEvent.metaKey) {
     if (which == 108 || which == 76) // L
       like()
     else if (
@@ -282,25 +295,45 @@ var $share_note_button = htmlToDom('<span class="broadcast-with-note" title="Shi
 function showButton() {
   if ($$('#current-entry .entry-actions>.like').length)
     return
-  if (data === null) {
+  if (data === undefined) {
     findDataLoop:
     for (key in unsafeWindow) {
       if (key.length == 2) {
         var obj = unsafeWindow[key]
-        if (obj && typeof(obj) == 'object' && !('length' in obj) && key2 in obj) {
+        if (obj && typeof(obj) == 'object' && !('length' in obj)) {
+          var keys = Object.keys(obj)
+          if (keys.length != 1)
+            continue
+          key2 = keys[0]
           var obj2 = obj[key2]
-          if (obj2 && typeof(obj2) == 'object' && !('length' in obj2) && key3 in obj2) {
-            var obj3 = obj2[key3]
-            if (obj3 && typeof(obj3) == 'object' && 'length' in obj3) {
-              data = obj
-              break findDataLoop
+          if (obj2 && typeof(obj2) == 'object' && !('length' in obj2)
+              && obj2.__proto__ && obj2.__proto__.__proto__
+              && obj2.__proto__.__proto__.__proto__ === null) {
+            data = obj
+            console.log('Reader Sharer: find data.')
+            for (var _key3 in obj2) {
+              var obj3 = obj2[_key3]
+              if (obj3 && typeof(obj3) == 'object' && 'length' in obj3) {
+                if (obj3.length) {
+                  var obj4 = obj3[0]
+                  if (obj4.__proto__ && obj4.__proto__.__proto__
+                      && 'isReadStateLocked' in obj4.__proto__.__proto__) {
+                    key3 = _key3
+                    console.log('Reader Sharer: find all keys.')
+                    break findDataLoop
+                  }
+                }
+              }
             }
+            console.warn('Reader Sharer: unable to find all keys.')
           }
         }
       }
     }
 
-    if (data === null || data[key2][key3].length == 0) {
+    if (data === undefined) {
+      console.error('Reader Sharer: unable to find data.')
+      data = null
       Listener.removeListener(collapsedHandler)
       $('#viewer-entries-container').removeEventListener('scroll', scrollCheck)
       document.removeEventListener('keypress', check)
@@ -308,7 +341,31 @@ function showButton() {
       $list_view_button.removeEventListener('click', clickListViewButton)
       return
     }
+  }
+  if (!data)
+    return
 
+  if (!key3) {
+    for (var _key3 in obj2) {
+      var obj3 = obj2[_key3]
+      if (obj3 && typeof(obj3) == 'object' && 'length' in obj3) {
+        if (obj3.length) {
+          var obj4 = obj3[0]
+          if (obj4.__proto__ && obj4.__proto__.__proto__
+              && 'isReadStateLocked' in obj4.__proto__.__proto__) {
+            key3 = _key3
+            break
+          }
+        }
+      }
+    }
+  }
+
+  if (!key3) {
+    console.error('Reader Sharer: unable to find all keys.')
+    return
+  }
+  else if (!token_key || !state_key) {
     var item = data[key2][key3][0]
     for (key in item) {
       var value = item[key]
@@ -333,8 +390,10 @@ function showButton() {
           }
         }
       }
-      if (token_key && state_key)
+      if (token_key && state_key) {
+        console.log('Reader Sharer: find token key and state key, share function works.')
         break
+      }
     }
   }
 
@@ -442,7 +501,7 @@ function editItem(aState, $button) {
 
     GM_xmlhttpRequest({
       method: 'POST',
-      url: '//www.google.com/reader/api/0/edit-tag?client=scroll',
+      url: '/reader/api/0/edit-tag?client=scroll',
       data: serialize(post_data),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -490,7 +549,7 @@ function addNote(aOptions) {
 
   ajax_options = {
     method: 'POST',
-    url: '//www.google.com/reader/api/0/item/edit?client=scroll',
+    url: '/reader/api/0/item/edit?client=scroll',
     data: serialize(post_data),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -528,14 +587,15 @@ function postNote() {
   try {
     var item = getItem($note_button)
     if (item) {
-      options.title = item.g;
-      options.content = item.zd;
-      options.url = item.Qd.alternate[0].rf;
-      options.srcTitle = item.ec.g;
-      options.srcUrl = item.ec.c.streamId.substring(5);
+      options.title = item.g
+      options.content = item.sd
+      options.url = item.Hd1.alternate[0].kf
+      options.srcTitle = item.Nb.g
+      options.srcUrl = item.Nb.c.streamId.substring(5)
     }
     addNote(options)
   } catch (e) {
+    console.error('Reader Sharer: failed to post node due to:\n', e)
     $post_button.textContent = post_text
     posting_note = false
   }
@@ -616,6 +676,9 @@ GM_addStyle((<><![CDATA[
     background-position: -66px -100px;
   }
   #lhn-selectors #like-selector .selector-icon {
+    background-position: -22px -82px;
+  }
+  #lhn-selectors #friends-selector .selector-icon {
     background-position: -44px -100px;
   }
   #entries .entry .entry-actions .like {
@@ -624,13 +687,13 @@ GM_addStyle((<><![CDATA[
   #entries .entry .entry-actions .like.liked {
     background-position: -144px -289px;
   }
-  #entries .entry .entry-actions .broadcast { 
+  #entries .entry .entry-actions .broadcast {
     background-position: -32px -66px;
   }
-  #entries .entry .entry-actions .broadcast.shared { 
+  #entries .entry .entry-actions .broadcast.shared {
     background-position: -48px -98px;
   }
-  #entries .entry .entry-actions .broadcast-with-note { 
+  #entries .entry .entry-actions .broadcast-with-note {
     background-position: -96px -194px;
   }
   .fr-modal-dialog-bg {
@@ -644,11 +707,11 @@ GM_addStyle((<><![CDATA[
     margin: 1em auto 0;
     display: block;
   }
-  #lhn-friends {
-    display: block !important;
-    font-weight: 700;
-    max-height: 200px;
-    overflow-y: auto;
+  #friends-tree-item-0-link {
+    height: 30px;
+  }
+  #friends-tree-item-0-main {
+    margin: 0;
   }
   #friends-tree-item-1-main {
     display: none;
